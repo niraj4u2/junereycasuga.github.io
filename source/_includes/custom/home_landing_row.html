@@ -1,0 +1,22 @@
+<div id="about-me" class="col-md-offset-3 col-md-6">
+  <div class="hero-avatar">
+    <span>
+      <img src="http://www.gravatar.com/avatar/d8559cdadaf461b4faea5d6feef5db5e?s=160" />
+    </span>
+  </div>
+  <h1 class="hero-title">
+    <a href="{{ site.url }}">Junerey Casuga</a>
+  </h1>
+  <p class="hero-description">{{ site.description }}</p>
+  <div class="social-icon-list">
+  	{% if site.twitter_user %}
+    <a title="Twitter" href="https://twitter.com/{{ site.twitter_user }}"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    {% endif %}
+    {% if site.github_user %}
+    <a title="GitHub" href="https://github.com/{{ site.github_user }}"><img src="/images/glyphicons_social_21_github.png"/></a>
+    {% endif %}
+    {% if site.email %}
+    <a title="E-Mail" href="{{ site.email }}"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    {% endif %}
+  </div>
+</div>
