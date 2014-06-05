@@ -6,8 +6,8 @@ comments: true
 categories: [linux, bash, scripting]
 author: Junerey Casuga
 ---
-{% img /images/bash_scripting/bash-fb.png 800 %}
-{% img /images/bash_scripting/bash-google-plus.png 800 %}
+{% img full-img /images/bash_scripting/bash-fb.png 800 %}
+{% img full-img /images/bash_scripting/bash-google-plus.png 800 %}
 
 In the past few days, some of my friends and colleagues saw my cover photo from my [Facebook](https://facebook.com/kaj26kai) and [Google+](https://plus.google.com/105091722637731618991) and asked me, "What is #!/bin/bash?". That's why I came up to an idea on writing about Bash or Shell scripting. This will talk about how bash will help a typical Linux user. I won't be tackling any programming using bash.
 

@@ -31,7 +31,7 @@ As we can see, initializing a new appliction with Rails is very easy. We just to
 ###The Rails directory structure
 Before we proceed with some coding, we must first know what's inside our Rails app directory.
 
-{% img /images/ruby_on_rails/rails_dir.png %}
+{% img full-img /images/ruby_on_rails/rails_dir.png %}
 
 On the Rails directory, you can see there is the <i>/public</i> folder. This folder contains all static files you need like your <i>404</i> page, <i>robots.txt</i>, and your favicon.
 
@@ -58,7 +58,7 @@ In the directory, we also have this `Gemfile`. The Gemfile is where you put all 
 ###Runing your Rails app
 We've already created our rails app a while ago. So let's try to make it work. First of all, you must know how to run your Rails server. To run your server just run `rails server` or simply `rails s`. Upon raining your Rails server, you can now check your rails app on your browser usng `localhost:3000` as the address. If it runs properly, you should see something like this:
 
-{% img /images/ruby_on_rails/rails_welcome.png %}
+{% img full-img /images/ruby_on_rails/rails_welcome.png %}
 
 
 ###Creating our first Rails app
@@ -73,7 +73,7 @@ To create a model, use this syntax: `rails g model NAME [field[:type]]`. Let's n
 rails g model product title:string description:text price:float
 {% endcodeblock %}
 
-{% img /images/ruby_on_rails/rails_model.png %}
+{% img full-img /images/ruby_on_rails/rails_model.png %}
 
 Now Rails created a model class for us. Not just that, it also made us a migration file. Now let's migrate our database:
 
@@ -87,7 +87,7 @@ rake db:migrate
 
 Alright! We already have our model so let us now create our controller. To create a controller on Rails, just run `rails g controller controller_name [controller_actions]`. So let's make a controller named as <b>products</b>. We're creating a CRUD application so let us make actions for it. Let us run `rails g controller products index new show edit` on your terminal.
 
-{% img /images/ruby_on_rails/rails_controller.png %}
+{% img full-img /images/ruby_on_rails/rails_controller.png %}
 
 What we just did? When we told Rails to generate a controller named as <b>products</b>, it created the controller class itself at `app/controllers/products_controller.rb`. It also created the view files for our controller and the routes for the actions we defined. And it also created test units, helpers, a coffeescript and scss file for the specific controller.
 
@@ -179,11 +179,11 @@ As you see, we defined two different actions. The <i>new </i> action and the <i>
 
 Okay! We now have our view. So let's try to create a product:
 
-{% img /images/ruby_on_rails/rails_create.png %}
+{% img full-img /images/ruby_on_rails/rails_create.png %}
 
 After creating a product, it should redirect you to the products page showing something like this:
 
-{% img /images/ruby_on_rails/rails_index.png %}
+{% img full-img /images/ruby_on_rails/rails_index.png %}
 
 Okay! It worked! We can now add products as much as we want. Let's try adding a link in our `index.html.erb` for viewing a specific product and a link for adding a product.
 
@@ -226,7 +226,7 @@ Next is the view:
 
 Now if we click the title of the product, it should bring you to a page like this: 
 
-{% img /images/ruby_on_rails/rails_show.png %}
+{% img full-img /images/ruby_on_rails/rails_show.png %}
 
 As you can see, we also added a link for editing this specific product. Let's now move on for the editing of specific product. Let us again edit our products controller.
 
@@ -275,7 +275,7 @@ We now have the function, let's make the view for editing:
 
 Yeap! It does look like with our `new.html.erb`. We just removed the `url: products_path` from the form. So if we clicked the <i>Edit</i> link from the show page, it should bring you to the edit page showing the form and you should be able to edit it.
 
-{% img /images/ruby_on_rails/rails_edit.png %}
+{% img full-img /images/ruby_on_rails/rails_edit.png %}
 
 As you can see, we've also added a link for deleting the product. It won't work yet because we haven't added the function for it yet. So let us add it now. Let us edit again our product controller.
 

@@ -7,20 +7,21 @@ categories: [cloud computing, saas, paas, iaas]
 author: Junerey Casuga
 ---
 
-{% img left /images/cloud_services/cloud.jpg 320 %}
+{% img pull-left /images/cloud_services/cloud.jpg 320 %}
 
 A lot of people are still confused about **Cloud Computing**. Cloud computing is something that using services through the "cloud"(the internet) instead of running them into your own PC or machine.
 
 <!--more-->
 
-{% img right /images/cloud_services/cloud_layers.jpg 160 %}
+{% img pull-right /images/cloud_services/cloud_layers.jpg 160 %}
 
 The cloud actually has different services like Software as a Service(SaaS), Platform as a Service(PaaS), and Infrastructure as a Service(IaaS). Now let's take a closer look to these services offered on the cloud.
 
 <br>
 ###SaaS - Software as a Service
 {% img right /images/cloud_services/google_microsoft.jpg 240 %}
-aaS is the topmost layer of the cloud services. It is a software application made for end users that can be used through the internet. You can only access the software itself so it means you don't have the right to change something on the platform and infrastructure. What's good about this service is you don't have to install into your machine which obviously may allocate a lot of disk spaces on your hard drive. The service provider will be the one who will maintain them for you. But of course, since it is on the cloud, there can be security concerns. It is because instead of storing your files into your PC, you are directly putting your data into the Internet and storing  it on to the vendor's servers.
+
+SaaS is the topmost layer of the cloud services. It is a software application made for end users that can be used through the internet. You can only access the software itself so it means you don't have the right to change something on the platform and infrastructure. What's good about this service is you don't have to install into your machine which obviously may allocate a lot of disk spaces on your hard drive. The service provider will be the one who will maintain them for you. But of course, since it is on the cloud, there can be security concerns. It is because instead of storing your files into your PC, you are directly putting your data into the Internet and storing  it on to the vendor's servers.
 
 A great example of this service are Google Apps and Microsoft Office 365 where you can use word and spreadsheet applications online.
 
@@ -29,7 +30,7 @@ IaaS or Infrastructure as a Service is in the bottom layer of the cloud services
 
 IaaS gives you the freedom which database, operating system, and the programming language environments you want to use.
 
-{% img right /images/cloud_services/amazon-web-services.png 240 %}
+{% img pull-right /images/cloud_services/amazon-web-services.png 240 %}
 What's good about this is you don't have to worry maintaining your own hardware but you have the freedom to install everything you need for your applications. But it will require you a lot of work since you'll be the one who will set up your own platform for your applications.
 
 An example of an IaaS provider is the Amazon Web Services.

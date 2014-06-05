@@ -11,5 +11,5 @@ A lot of people(mostly developers) might be asking what is now happening on the 
 <!--more-->
 
 <a href="http://www.scribd.com/doc/171120043/Philippine-Software-Engineering-Review">
-<img src="/images/software_engineering_review/phil_dev_scene_review.jpg" alt="Philippine Software Engineering Review">
+<img src="/images/software_engineering_review/phil_dev_scene_review.jpg" alt="Philippine Software Engineering Review" style="width:100%;">
 </a>

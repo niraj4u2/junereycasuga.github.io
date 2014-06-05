@@ -10,11 +10,11 @@ When I was browsing over the internet, I came across on a post from a web develo
 
 <!--more-->
 
-{% img /images/manilaJS/manilaJS-logo.jpg %}
+{% img full-img /images/manilaJS/manilaJS-logo.jpg %}
 
 [Manila.js](http://manilajs.com) is a JavaScript community here in Metro Manila, Philippines. It was born on February just this year(2013). They organize an event every first friday of the month which is called Manila.js Fridays. It is an event where JavaScript enthusiasts gather and meet together in one place. It's not just a meetup event but you can also learn from this event because there are talks from different speakers invited.
 
-{% img /images/manilaJS/manilaJS-1.jpg Photo by Sophia Lucero %}
+{% img full-img /images/manilaJS/manilaJS-1.jpg Photo by Sophia Lucero %}
 
 Last July 5, 2013, I've attended Manila.js Fridays 004. My first time to attend the event but it's already the fourth time that it will happen. It happened in Paymentwall's office here in Makati. Well, I'm lucky because it is just a few blocks away from my office.
 
@@ -24,8 +24,9 @@ The second topic is about Testing JavaScripts using [Mocha](http://visionmedia.g
 
 And the last topic was about ["Fries"](https://github.com/jaunesarmiento/fries/) by [Joko Sarmiento](http://jaunesarmiento.me/). It is not the fries you're thinking of that you can by from McDonald's or any fast food chains out there. Fries is mobile development framework for Android apps using HTML5, CSS, and JavaScript. Fries was inspired by [Ratchet](http://maker.github.io/ratchet/) which is also a mobile development framework but meant for iOS. The idea was good since there are already a lot of stuff for iOS out there. Other than Fries, Joko is currently working on another project called "Mayo" which is somewhat alike with Ratchet. Well for me, it is better to work on just one project but it has the flexibility for changing some assets depending on the user agent that was used. For example, if the device is an Android device, it should load stuff for Android. Likewise if the device is an iOS device, it should load stuff for iOS. Well, it's just a comment.
 
-{% img /images/manilaJS/manilaJS-2.jpg 450 Photo by Sophia Lucero %}
-{% img /images/manilaJS/manilaJS-3.jpg 450 Photo by Sophia Lucero %}
+{% img full-img /images/manilaJS/manilaJS-2.jpg 450 Photo by Sophia Lucero %}
+
+{% img full-img /images/manilaJS/manilaJS-3.jpg 450 Photo by Sophia Lucero %}
 
 I can say that the event was great. Free snacks, free booze, the venue is comfy and wide. Actually, Paymentwall's office is really a good place. I learned some stuff that I might use someday plus new friends that I met. I'd probably attend the next Manila.js Fridays!
 

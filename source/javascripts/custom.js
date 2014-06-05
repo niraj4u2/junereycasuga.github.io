@@ -1,4 +1,21 @@
 $(function() {
+  $(window).scroll(function() {
+    if($(this).scrollTop() > 200) {
+      $('.home-icon').fadeOut(200);
+      $('.topper').fadeIn(200);
+    } else {
+      $('.home-icon').fadeIn(200);
+      $('.topper').fadeOut(200);
+    }
+  });
+
+  $('.topper').click(function(event) {
+    event.preventDefault();
+    $('html, body').animate({scrollTop: 0}, 300);
+  });
+});
+
+$(function() {
   $window = $(window);
   $body = $("body");
   $bgBlur = $(".bg-blur");
@@ -9,7 +26,6 @@ $(function() {
   var blurWhenReach = 3;
 
   $window.on("scroll", function(event) {
-    console.log(bgBlurHeight);
     var scrollTop = $window.scrollTop();
 
     if(!scrollFlag) {
@@ -23,12 +39,6 @@ $(function() {
       var _alpha = (scrollTop / bgBlurHeight) * blurWhenReach;
       if(_alpha > 1) { _alpha = 1 }
       TweenMax.set($bgBlur, {alpha: _alpha});
-    }
-
-    if(scrollTop > 200) {
-      $('.home-icon').fadeOut(300, "linear");
-    } else {
-      $('.home-icon').fadeIn(300, "linear");
     }
   });
 
