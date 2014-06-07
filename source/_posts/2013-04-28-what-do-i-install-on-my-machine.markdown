@@ -10,7 +10,7 @@ This post is just something that I want to share to you. And this can be also as
 
 <!--more-->
 
-I am a Linux user. I'm currently running Ubuntu 12.10. I will give you my list of programs, tools, and some applications that I install after installing a fresh OS. I will also show you how to install them. So let's get started.
+I am a Linux user. I'm currently running Ubuntu 14.04. I will give you my list of programs, tools, and some applications that I install after installing a fresh OS. I will also show you how to install them. So let's get started.
 
 ###LAMP
 As we all know, LAMP stands for Linux, Apache, MySQL, and PHP. These are open-source softwares used to make your web server running. Since I am running on Ubuntu, which is a Linux distro, we don't have to take care about it. What we should just install is just the Apache, MySQL, and PHP.
@@ -109,6 +109,9 @@ TargetEnvironment=Unity
 
 There you go! You already have Sublime Text 2 on your machine. If you want to install Sublime Text 3, you can get a `.deb` installer from Sublime Text's [website](http://www.sublimetext.com/3).
 
+###Vim
+Other than Subime Text 2, I also use Vim when I develop on Ruby on Rails. Installing Vim is pretty easy, just run `sudo apt-get install vim`
+
 ###Git
 Git is a version control system used to track the changes of your file/code. It can also be used to collaborate with other developers.
 
@@ -129,21 +132,35 @@ Node.js is a platform built on Chrome's JavaScript runtime for easily building f
 
 I install node.js is not just for building powerful applications. But also because of <b>NPM (Node Packaged Modules)</b> which is a package manager for Node. I use NPM for installing tools like <b>Grunt</b> and <b>Bower</b> which I also use for developing applications.
 
-To install Node.js, run these lines of command on your terminal:
+I use NVM (Node Version Manager) when installing Node.js because it provides you an easy way to switch between Node.js versions. To install Node.js using NVM, you must first install NVM itself. There two ways of installing NVM. To install NVM using cURL:
 {% codeblock %}
-sudo apt-get install python-software-properties python g++ make
-sudo add-apt-repository ppa:chris-lea/node.js
-sudo apt-get update
-sudo apt-get install nodejs
+curl https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh
+{% endcodeblock %}
+
+To install NVM using Wget:
+{% codeblock %}
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh
+{% endcodeblock %}
+
+These scripts clones nvm repository to `~/.nvm` and adds the source line to your profile. (`~/.bash_profile` or `~/.profile`)
+
+Once you have installed NVM, you can now use it for installing Node.js. To download, compile and install the latest v0.10.x release of node, do this:
+{% codeblock %}
+nvm install 0.10  
+{% endcodeblock %}
+
+And then you can now use the installed version:
+{% codeblock %}
+nvm use 0.10
 {% endcodeblock %}
 
 ###Ruby
-I install Ruby because it is required by Octopress which I use for this blog. We will use RVM for installing Ruby. Before installing Ruby itself, we must first install RVM by running this command.
+I install Ruby because it is required by Octopress which I use for this blog. And not just that, I'm also a Ruby on Rails developer.  We will use RVM for installing Ruby. Before installing Ruby itself, we must first install RVM by running this command.
 {% codeblock %}
 curl -L https://get.rvm.io | bash -s  stable --ruby
 {% endcodeblock %}
 
-After installing RVM, we can now use it to install Ruby. Since Octopress requires Ruby 1.9.3, we will install the v1.9.3 version.
+After installing RVM, we can now use it to install the latest ruby version.
 {% codeblock %}
 rvm install 1.9.3
 rvm use 1.9.3
@@ -182,7 +199,7 @@ sudo cp modules/mongo.so /path/to/php/extesnion_dir/
 
 Now, we have to create a mongo.ini file which will be stored in /etc/php5/conf.d/ with the line `extension=mongo.so`.
 
-Finally, restart apache by running `sudo /etc/init.d/apache2 restart`
+Finally, restart apache by running `sudo service apache2 restart`
 
 We may also need something like phpMyAdmin for our MongoDB. I use RockMongo. Just download RockMongo from there [website](http://rockmongo.com/downloads) and extract the file to your web server.
 

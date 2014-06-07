@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Developer Rants: Git commit messages"
+description: "Git commit messages are important. Don't mess it around."
 date: 2014-05-15 20:31
 comments: true
 categories: [developer, rant, git, commit, messages, problems]

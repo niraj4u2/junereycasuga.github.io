@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "PWDO MiniFFC #15 - Mini Web Design Conference &amp; Meetup"
+description: "I'm not a designer at all. I just love Ruby on Rails"
 date: 2013-07-25 22:10
 comments: true
 categories: [pwdo, miniffc, web design, ruby on rails, lean coffee]

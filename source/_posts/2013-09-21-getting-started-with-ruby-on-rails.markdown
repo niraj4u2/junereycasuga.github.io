@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Getting Started with Ruby on Rails"
+description: "Ride the rails. It's fun!"
 date: 2013-09-21 00:35
 comments: true
 categories: [ruby, rails, ruby on rails, linux, web development]
@@ -26,7 +27,7 @@ Now that we already have Rails, we can now create a very simple CRUD web applica
 rails new testApp
 {% endcodeblock %}
 
-As we can see, initializing a new appliction with Rails is very easy. We just told Rails to create a new application called <b><i>'testApp'</i></b>. Upon telling Rails to create new application, it also creates the files and directories that you will need for development. After Rails has created your files, it also automatically runs the `bundle install` command to get your app dependencies.
+As you can see, initializing a new appliction with Rails is very easy. We just told Rails to create a new application called <b><i>'testApp'</i></b>. Upon telling Rails to create new application, it also creates the files and directories that you will need for development. After Rails has created your files, it also automatically runs the `bundle install` command to get your app dependencies.
 
 ###The Rails directory structure
 Before we proceed with some coding, we must first know what's inside our Rails app directory.
@@ -53,10 +54,10 @@ Another folder which is very important in your Rails directory is the <i>/app</i
 
 	- This contains the view templates which is basically what the user sees on their screen.
 
-In the directory, we also have this `Gemfile`. The Gemfile is where you put all the dependencies you need for your app.
+In the directory, we also have a `Gemfile`. A Gemfile is where you put all the dependencies you need for your app.
 
 ###Runing your Rails app
-We've already created our rails app a while ago. So let's try to make it work. First of all, you must know how to run your Rails server. To run your server just run `rails server` or simply `rails s`. Upon raining your Rails server, you can now check your rails app on your browser usng `localhost:3000` as the address. If it runs properly, you should see something like this:
+We've already created our rails app a while ago. So let's try to make it work. First of all, you must know how to run your Rails server. To run your server just run `rails server` or simply `rails s`. Upon runningg your Rails server, you can now check your rails app on your browser usng `localhost:3000` as the address. If it runs properly, you should see something like this:
 
 {% img full-img /images/ruby_on_rails/rails_welcome.png %}
 
@@ -85,14 +86,14 @@ rake db:migrate
 
 ####Generating our controller
 
-Alright! We already have our model so let us now create our controller. To create a controller on Rails, just run `rails g controller controller_name [controller_actions]`. So let's make a controller named as <b>products</b>. We're creating a CRUD application so let us make actions for it. Let us run `rails g controller products index new show edit` on your terminal.
+We already have our model so let us now create our controller. To create a controller on Rails, just run `rails g controller controller_name [controller_actions]`. So let's make a controller named as <b>products</b>. We're creating a CRUD application so let us make actions for it. Let us run `rails g controller products index new show edit` on your terminal.
 
 {% img full-img /images/ruby_on_rails/rails_controller.png %}
 
 What we just did? When we told Rails to generate a controller named as <b>products</b>, it created the controller class itself at `app/controllers/products_controller.rb`. It also created the view files for our controller and the routes for the actions we defined. And it also created test units, helpers, a coffeescript and scss file for the specific controller.
 
 ####Routes
-Okay! We already have our controller, so let's go to `localhost:3000/products`. I bet you got an error :P It's because we did not define the <b>products</b> controller on the resource in our routes yet. So let's configure our routes by inserting the below code under `config/routes.rb` file:
+Okay! We already have our controller, so let's go to `localhost:3000/products`. I bet you got an error :P It's because we did not define the <b>products</b> controller on the resource in our routes yet. So let's configure our routes by inserting the code below in `config/routes.rb` file:
 
 {% codeblock Routes - routes.rb %}
 resources :products
@@ -135,7 +136,7 @@ What we did here is we defined our index controller and inside of it, we declare
 </ul>
 {% endcodeblock %}
 
-By default, Rails is using erb as its template engine. That's why that our `index.html` has a `.erb` extension. There are other template engines for Rails like HAML. On our `index.html.erb` file, we looped through each data from the model and displayed it into a list. The `number_to_currency` function converts a number to a currency format.
+By default, Rails is using erb as its templating engine. That's why our `index.html` has a `.erb` extension. There are other template engines for Rails like HAML. On our `index.html.erb` file, we looped through each data from the model and displayed it into a list. The `number_to_currency` function converts a number to a currency format.
 
 After editing our index action an our index view, let us refresh our page. It shows nothing right? Because we don't have any data from our database yet. So let's make a function on the products controller for creating data on our database.
 
@@ -177,7 +178,7 @@ As you see, we defined two different actions. The <i>new </i> action and the <i>
 <% end %>
 {% endcodeblock %}
 
-Okay! We now have our view. So let's try to create a product:
+We now have our view. So let's try to create a product:
 
 {% img full-img /images/ruby_on_rails/rails_create.png %}
 
@@ -202,7 +203,7 @@ Okay! It worked! We can now add products as much as we want. Let's try adding a 
 </ul>
 {% endcodeblock %}
 
-Alright, we now have a link for creating a new product and a link for viewing a specific product. Let us now edit our controller and the `show.html.erb` file for displaying the details of a specific product. We should edit the <i>show</i> action on our controller first:
+We now have a link for creating a new product and a link for viewing a specific product. Let us now edit our controller and the `show.html.erb` file for displaying the details of a specific product. We should edit the <i>show</i> action on our controller first:
 
 {% codeblock products_controller.rb %}
 ...

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Manila.js Fridays 004"
+description: "I love JavaScript. Seriously.js"
 date: 2013-07-09 22:01
 comments: true
 categories: [manila, javascript, meetup]

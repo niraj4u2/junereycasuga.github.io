@@ -6,7 +6,7 @@ comments: true
 categories: [ruby, rails]
 author: Junerey Casuga
 ---
-I used to hack on PHP and I am a newbie on developing something with Ruby on Rails or with Ruby itself. Well, it doesn't mean that a newbie doesn't know anything about a specific topic right? So I will be sharing you what Ruby on Rails is, where it came from, and I will also be sharing to you how I started to learn Ruby/RoR as a newbie. And hopefully I can find time to teach you how to get started with Ruby on Rails development. So watch out for that.
+I used to hack with PHP and I am a newbie on developing something with Ruby on Rails or with Ruby itself. Well, it doesn't mean that a newbie doesn't know anything about a specific topic right? So I will be sharing you what Ruby on Rails is, where it came from, and I will also be sharing to you how I started to learn Ruby/RoR as a newbie. And hopefully I can find time to teach you how to get started with Ruby on Rails development. So watch out for that.
 
 <!--more-->
 

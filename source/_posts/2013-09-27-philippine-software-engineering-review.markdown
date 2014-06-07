@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Philippine Software Engineering Review"
+description: "An important update about the dev scene here in the Philippines"
 date: 2013-09-27 20:19
 comments: true
 categories: [philippines, software, engineering, review, dev scene]
 author: Junerey Casuga
 ---
-A lot of people(mostly developers) might be asking what is now happening on the local dev scene here in the Philippines. Or what are the statistics on the dev scene here in the Philippines. <a href="http://proudcloud.net" target="_blank">ProudCloud</a>'s CTO, <a href="http://twitter.com/jasontorres" target="_blank">Jason Torres</a> initialized a survey that could answer the questions of many people here in the Philippines. He spread the survey to different developer communities and let them answer the survey. And at last, the long wait is over. Here is an infographic showing the result of Jason's survey.
+A lot of people(mostly developers) might be asking what is now happening on the local dev scene here in the Philippines. Or what are the statistics on the dev scene here in the Philippines. <a href="http://proudcloud.net" target="_blank">ProudCloud</a>'s CTO, <a href="http://twitter.com/jasontorres" target="_blank">Jason Torres</a> initialized a survey that could answer the questions of many people here in the Philippines. He made a survey to different developer communities and let them answer the survey. And at last, the long wait is over. Here is an infographic showing the result of Jason's survey.
 
 <!--more-->
 
