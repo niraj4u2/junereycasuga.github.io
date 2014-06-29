@@ -59,10 +59,10 @@ angular
   
   ---
   ])
-  .value('fbURL', https://angularifictest.firebaseio.com/');
+  .value('fbURL', 'https://angularifictest.firebaseio.com/')
   .factory('Person', function (fbURL, $firebase) {
     return $firebase(new Firebase(fbURL));
-  }
+  })
 
 ---
 {% endcodeblock %}
@@ -247,6 +247,6 @@ So, if you'll click the Remove link beside the data, it should delete that speci
 ### Conclusion
 I like how AngularJS works well with Firebase. There's more than just creating a CRUD app with AngularJS and Firebase. And also, maximize the real-timeness of Firebase.
 
-If you wish to see a demo, just click here [http://junereycasuga.github.io/angularfirebase](http://junereycasuga.github.io/angularfirebase/). You can also see the source code on [https://github.com/junereycasuga/angularfirebase](https://github.com/junereycasuga/angularfirebase).
+If you wish to see a demo, just click [here](http://junereycasuga.github.io/angularfirebase/). You can also see the source code on [Github](https://github.com/junereycasuga/angularfirebase).
 
 Cheerio!
