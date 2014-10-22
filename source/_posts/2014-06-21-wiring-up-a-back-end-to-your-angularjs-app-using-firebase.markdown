@@ -9,7 +9,7 @@ categories: [angularjs, firebase, yeoman]
 <img src="/images/angularfirebase/angularjs.jpg" style="width:100%" />
 <img src="/images/angularfirebase/firebase_logo.png" style="width:100%" />
 
-On this post, I will teach you how to create a simple CRUD app using AngularJS and Firebase, and of course, with the help of Yeoman. Let's get started!
+In this post, I will teach you how to create a simple CRUD app using AngularJS and Firebase, and of course, with the help of Yeoman. Let's get started!
 
 ### Generating our AngularJS app using Yeoman
 <img src="/images/angularfirebase/yeoman_toolset_k50sok.png" style="width: 100%;" />
@@ -33,14 +33,14 @@ Once Yeoman is done, you can now check the project through your browser by runni
 <img src="/images/angularfirebase/hello_yo.png" style="width: 100%" />
 
 ### Installing Firebase to our app
-To install Firebase to our app, we will ask Bower to install for us by running `bower install angularfire` on our command line. What this does is it will download the `firebase.js`, `firebase-simple-login.js`, and `angularfire.js`. Once this done, we will now include the javascript files we have to our `index.html`.
+To install Firebase to our app, we will ask Bower to install for us by running `bower install --save angularfire` on our command line. What this does is it will download the `firebase.js`, `firebase-simple-login.js`, and `angularfire.js`. Once this done, we will now include the javascript files we have to our `index.html`.
 
 {% codeblock app/index.html %}
 <!-- bower:js -->
 ---
 
 <script src="bower_components/firebase/firebase.js"></script>
-<script src="bower_components/angularfire/angularfire.js"></script>
+<script src="bower_components/angularfire/dist/angularfire.min.js"></script>
 
 ---
 <!-- endbower-->
@@ -61,7 +61,7 @@ angular
   ])
   .value('fbURL', 'https://angularifictest.firebaseio.com/')
   .factory('Person', function (fbURL, $firebase) {
-    return $firebase(new Firebase(fbURL));
+    return $firebase(new Firebase(fbURL)).$asArray();
   })
 
 ---
@@ -150,9 +150,9 @@ And on our `app/views/main.html`, let's add this code:
     <th>&nbsp;</th>
   </thead>
   <tbody>
-    <tr ng-repeat="name in pesron | orderByPriority">
+    <tr ng-repeat="(id, name) in pesron">
       <td>{{ name.firstName }}</td>
-      <td>{{ name.lastName }}</td>
+      <td>{{name.lastName }}</td>
       <td>
         <a href="#">Edit</a>
       </t>
@@ -163,6 +163,7 @@ And on our `app/views/main.html`, let's add this code:
   </tbody>
 </table>
 {% endcodeblock %}
+<small>Note: Inside the first `<td>` tag, add &#123;&#123; name.firstName &#125;&#125; inside. And on the second `<td>` tag, add &#123;&#123; name.lastName &#125;&#125; inside. It's not just showing on the codeblock plugin :)</small>
 
 In here, we just used the `ng-repeat` directive to loop through the data from Firebase and display them using AngularJS's data binding. You should be seeing something like this:
 
@@ -173,8 +174,8 @@ On editing a data, we will create a different controller. So, we will edit the `
 
 {% codeblock app/scripts/controllers/main.js %}
   .controller('EditCtrl', function ($scope, $location, $routeParams, $firebase, fbURL) {
-    var personURL = fbURL + $routeParams.id;
-    $scope.person = $firebase(new Firebase(personURL));
+    var personURL = new Firebase(fbURL + $routeParams.id);
+    $scope.person = $firebase(personURL).$asObject();
 
     $scope.edit = function() {
       $scope.person.$save();
@@ -226,20 +227,21 @@ And now, we will add the link of our Edit page from the Edit link on our list of
   <a href="#/edit/{{ name.$id }}">Edit</a>
 ---
 {% endcodeblock %}
+<small>Note: The `href` value should be <i>#/edit/&#123;&#123; name.$id &#125;&#125;</i></small>
 
 ### Deleting Data
 Deleting of data is just simple too, we'll just add this line to our `MainCtrl` in `app/scripts/controllers/main.js` file:
 
 {% codeblock app/scripts/controllers/main.js %}
   $scope.remove = function (id) {
-    Names.$remove(id);
+    Person.$remove(id);
   }
 {% endcodeblock %}
 
 Here, we just created a function called `remove()` which accepts an ID parameter and used the `$remove` function to delete that specific ID from our Firebase. We can now use this function on our view by editing the Remove link in our `app/views/main.html' file.
 
 {% codeblock app/views/main.html %}
-  <a href="#" ng-click="remove(name.$id)">Remove</a>
+  <a href="#" ng-click="remove(id)">Remove</a>
 {% endcodeblock %}
 
 So, if you'll click the Remove link beside the data, it should delete that specific data.
