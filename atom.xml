@@ -1,0 +1,1874 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2014-10-22T20:25:04+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Wiring Up a Back-end to Your AngularJS App Using Firebase]]></title>
+    <link href="http://junereycasuga.github.io/blog/2014/06/21/wiring-up-a-back-end-to-your-angularjs-app-using-firebase/"/>
+    <updated>2014-06-21T09:25:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2014/06/21/wiring-up-a-back-end-to-your-angularjs-app-using-firebase</id>
+    <content type="html"><![CDATA[<p><img src="http://junereycasuga.github.io/images/angularfirebase/angularjs.jpg" style="width:100%" />
+<img src="http://junereycasuga.github.io/images/angularfirebase/firebase_logo.png" style="width:100%" /></p>
+
+<p>In this post, I will teach you how to create a simple CRUD app using AngularJS and Firebase, and of course, with the help of Yeoman. Let&rsquo;s get started!</p>
+
+<h3>Generating our AngularJS app using Yeoman</h3>
+
+<p><img src="http://junereycasuga.github.io/images/angularfirebase/yeoman_toolset_k50sok.png" style="width: 100%;" />
+<a href="http://yeoman.io">Yeoman</a> is a scaffolding tool. What it does is it kickstart your project, providing coding best practices and tools to help you out on the project. Yeoman provides different generators. So in our case, we will be using the AngularJS generator. Let&rsquo;s now start generating our app by making a folder then summon Yeoman and ask to generate our AngularJS app in it:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir angularfirebase && cd angularfirebase
+</span><span class='line'>yo angular</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you ask Yeoman to generate your app for you, it will also ask you some questions like, if you need Twitter Bootstrap ready installed, and other things. It will be up to you on what do you need.</p>
+
+<p><img src="http://junereycasuga.github.io/images/angularfirebase/yo_angular.png" style="width: 100%" /></p>
+
+<p>Once you have already answered Yeoman&rsquo;s question, it will now proceed on generating the files needed, getting all the dependencies through Bower, and conducting a pre-build test using Grunt for your app.</p>
+
+<p><img src="http://junereycasuga.github.io/images/angularfirebase/yo_generate.png" style="width: 100%" /></p>
+
+<p>Once Yeoman is done, you can now check the project through your browser by running <code>grunt serve</code> on your command line. This will automatically open the app page for you and the good thing with this is, once you have edited a file within your project, Grunt will automatically refresh the page for you. Which means, you don&rsquo;t need to hit the refresh button or pressing <code>F5</code> or <code>Ctrl + R</code> every time you make changes.</p>
+
+<p><img src="http://junereycasuga.github.io/images/angularfirebase/hello_yo.png" style="width: 100%" /></p>
+
+<h3>Installing Firebase to our app</h3>
+
+<p>To install Firebase to our app, we will ask Bower to install for us by running <code>bower install --save angularfire</code> on our command line. What this does is it will download the <code>firebase.js</code>, <code>firebase-simple-login.js</code>, and <code>angularfire.js</code>. Once this done, we will now include the javascript files we have to our <code>index.html</code>.</p>
+
+<figure class='code'><figcaption><span>app/index.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- bower:js --&gt;</span>
+</span><span class='line'>---
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/firebase/firebase.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/angularfire/dist/angularfire.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'>---
+</span><span class='line'><span class="c">&lt;!-- endbower--&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After this, we can now add Firebase to our AngularJS modules</p>
+
+<figure class='code'><figcaption><span>app/scripts/app.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">---</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">angular</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;angularfirebaseApp&#39;</span><span class="p">,</span> <span class="p">[</span>
+</span><span class='line'>  <span class="o">---</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="s1">&#39;firebase&#39;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">---</span>
+</span><span class='line'>  <span class="p">])</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">value</span><span class="p">(</span><span class="s1">&#39;fbURL&#39;</span><span class="p">,</span> <span class="s1">&#39;https://angularifictest.firebaseio.com/&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;Person&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">fbURL</span><span class="p">,</span> <span class="nx">$firebase</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">$firebase</span><span class="p">(</span><span class="k">new</span> <span class="nx">Firebase</span><span class="p">(</span><span class="nx">fbURL</span><span class="p">)).</span><span class="nx">$asArray</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">---</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Adding data to Firebase</h3>
+
+<p>Of course, before you can save data to Firebase, you must first create an account and your app there.</p>
+
+<p><img src="http://junereycasuga.github.io/images/angularfirebase/firebase.png" style="width: 100%" /></p>
+
+<p>Once you have your Firebase app, it will have its own URL which we will use on development. In my case, I have created an app with a URL  <code>angularifictest.firebaseio.com</code>.</p>
+
+<p>Let&rsquo;s now proceed on developing of creating a data and saving it to Firebase. By default, we have already a controller named as <code>MainCtrl</code> on the <code>app/scripts/controllers/main.js</code> file. We&rsquo;ll just use that to contain our function for saving data to Firebase.</p>
+
+<figure class='code'><figcaption><span>/app/scripts/controllers/main.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">---</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;angularfirebaseApp&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;MainCtrl&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">Person</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">save</span> <span class="o">=</span> <span class="nx">Person</span><span class="p">.</span><span class="nx">$add</span><span class="p">({</span>
+</span><span class='line'>      <span class="nx">firstName</span><span class="o">:</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">firstName</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">lastName</span><span class="o">:</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">lastName</span>
+</span><span class='line'>     <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="nx">$scope</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">$scope</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="k">if</span><span class="p">(</span><span class="nx">save</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;saved successfully&#39;</span><span class="p">);</span>
+</span><span class='line'>     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;something went wrong&#39;</span><span class="p">);</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">---</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What we&rsquo;ve done here is, we created a function called <code>add()</code> function which then passed to the <code>$scope</code> object so we can use it on our view. Inside the <code>add()</code> function, we used the <code>$add</code> function from  the Firebase object  we created on the <code>Person</code> factory to save the data to our Firebase. Inside the <code>$add</code> function, it accepts an array of data which will be saved to our Firebase.</p>
+
+<p>And let&rsquo;s edit <code>/app/views/main.html</code> to create our form for creating data.</p>
+
+<figure class='code'><figcaption><span>/app/views/main.html  </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">ng-submit=</span><span class="s">&quot;add()&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label&gt;</span>First Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;firstName&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label&gt;</span>Last Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;lastName&quot;</span> <span class="na">class=</span><span class="s">&quot;form-conrol&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Save&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On our form, we&rsquo;ve added the <code>add()</code> function we have created which will be triggered once the form is submitted with the help of the <code>ng-submit</code> directive.</p>
+
+<p>Once you&rsquo;re done with this, you&rsquo;ll have a form like this:</p>
+
+<p><img src="http://junereycasuga.github.io/images/angularfirebase/create_form.png" style="width: 100%" /></p>
+
+<p>And if you tried to submit a data, you can check on you Firebase Graphical Debugger if the data is saved.</p>
+
+<p><img src="http://junereycasuga.github.io/images/angularfirebase/firebasedash.png" style="width: 100%" /></p>
+
+<h3>Listing the Data</h3>
+
+<p>Listing the data from Firebase is very simple. Just add this line of code on our <code>MainCtrl</code> in <code>app/scipts/controllers/main.js</code> file:</p>
+
+<figure class='code'><figcaption><span>app/scripts/controllers/main.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">person</span> <span class="o">=</span> <span class="nx">Person</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And on our <code>app/views/main.html</code>, let&rsquo;s add this code:</p>
+
+<figure class='code'><figcaption><span>app/views/main.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;thead&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;th&gt;</span>First Name<span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;th&gt;</span>Last Name<span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;th&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;th&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/thead&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;tbody&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;tr</span> <span class="na">ng-repeat=</span><span class="s">&quot;(id, name) in pesron&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/t&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/tbody&gt;</span>
+</span><span class='line'><span class="nt">&lt;/table&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><small>Note: Inside the first <code>&lt;td&gt;</code> tag, add &#123;&#123; name.firstName &#125;&#125; inside. And on the second <code>&lt;td&gt;</code> tag, add &#123;&#123; name.lastName &#125;&#125; inside. It&rsquo;s not just showing on the codeblock plugin :)</small></p>
+
+<p>In here, we just used the <code>ng-repeat</code> directive to loop through the data from Firebase and display them using AngularJS&rsquo;s data binding. You should be seeing something like this:</p>
+
+<p><img src="http://junereycasuga.github.io/images/angularfirebase/firebaselist.png" style="width: 100%" /></p>
+
+<h3>Editing a Data</h3>
+
+<p>On editing a data, we will create a different controller. So, we will edit the <code>app/scripts/controllers/main.js</code> file and add this code</p>
+
+<figure class='code'><figcaption><span>app/scripts/controllers/main.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;EditCtrl&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$location</span><span class="p">,</span> <span class="nx">$routeParams</span><span class="p">,</span> <span class="nx">$firebase</span><span class="p">,</span> <span class="nx">fbURL</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">personURL</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Firebase</span><span class="p">(</span><span class="nx">fbURL</span> <span class="o">+</span> <span class="nx">$routeParams</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">person</span> <span class="o">=</span> <span class="nx">$firebase</span><span class="p">(</span><span class="nx">personURL</span><span class="p">).</span><span class="nx">$asObject</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">edit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">$save</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">$location</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In here, we declared a variable containing the Firebase object using the URL of the person we will edit. Then we made a function called <code>edit()</code> which saves the changes from the form we will create.</p>
+
+<p>We don&rsquo;t have yet the view file for our edit page so we will create one.</p>
+
+<figure class='code'><figcaption><span>app/views/edit.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">ng-controller=</span><span class="s">&quot;EditCtrl&quot;</span> <span class="na">ng-submit=</span><span class="s">&quot;edit()&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label&gt;</span>First Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;person.firstName&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label&gt;</span>Last Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;person.lastName&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Save&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On our view file, it&rsquo;s almost the same with the form we created for creating data except that we only changed the function called by the <code>ng-submit</code> directive and the controller we&rsquo;re using. Next, we will add the route for our <code>EditCtrl</code></p>
+
+<figure class='code'><figcaption><span>app/scripts/app.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">---</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">config</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$routeProvider</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$routeProvider</span>
+</span><span class='line'>      <span class="o">---</span>
+</span><span class='line'>      <span class="p">.</span><span class="nx">when</span><span class="p">(</span><span class="s1">&#39;/edit/:id&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;views/edit.html&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">controller</span><span class="o">:</span> <span class="s1">&#39;EditCtrl&#39;</span>
+</span><span class='line'>      <span class="p">})</span>
+</span><span class='line'>      <span class="o">---</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="o">---</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And now, we will add the link of our Edit page from the Edit link on our list of data</p>
+
+<figure class='code'><figcaption><span>app/views/main.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>---
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#/edit/&quot;</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>---
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><small>Note: The <code>href</code> value should be <i>#/edit/&#123;&#123; name.$id &#125;&#125;</i></small></p>
+
+<h3>Deleting Data</h3>
+
+<p>Deleting of data is just simple too, we&rsquo;ll just add this line to our <code>MainCtrl</code> in <code>app/scripts/controllers/main.js</code> file:</p>
+
+<figure class='code'><figcaption><span>app/scripts/controllers/main.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">remove</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">Person</span><span class="p">.</span><span class="nx">$remove</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here, we just created a function called <code>remove()</code> which accepts an ID parameter and used the <code>$remove</code> function to delete that specific ID from our Firebase. We can now use this function on our view by editing the Remove link in our `app/views/main.html&#8217; file.</p>
+
+<figure class='code'><figcaption><span>app/views/main.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;remove(id)&quot;</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, if you&rsquo;ll click the Remove link beside the data, it should delete that specific data.</p>
+
+<h3>Conclusion</h3>
+
+<p>I like how AngularJS works well with Firebase. There&rsquo;s more than just creating a CRUD app with AngularJS and Firebase. And also, maximize the real-timeness of Firebase.</p>
+
+<p>If you wish to see a demo, just click <a href="http://junereycasuga.github.io/angularfirebase/">here</a>. You can also see the source code on <a href="https://github.com/junereycasuga/angularfirebase">Github</a>.</p>
+
+<p>Cheerio!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Developer Rants: Git Commit Messages]]></title>
+    <link href="http://junereycasuga.github.io/blog/2014/05/15/developer-rants-git-commit-messages/"/>
+    <updated>2014-05-15T20:31:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2014/05/15/developer-rants-git-commit-messages</id>
+    <content type="html"><![CDATA[<p>This will be my first post for my Developer Rants series. It will be a series of blog posts of me ranting about some issues or problems I encounter while developing some apps.</p>
+
+<!--more-->
+
+
+<p>Okay, obviously on this first post, I will be talking about Git commit messages.</p>
+
+<h3>It&rsquo;s not funny</h3>
+
+<p>My team is currently developing an app for our company. Being the team lead and head of my department, I always check the commits and pushes of my team on our repository. And I suddenly saw a non-sense commit message. And I&rsquo;m like, WTF was that!? When I check the changes on that specific commit, it was just a class added on an HTML element. I got really annoyed with what I saw. Some may see this as a funny commit message, but dude, it&rsquo;s a serious business, so it&rsquo;s not funny. Yea, I admit that I&rsquo;m also doing it before on my personal projects. But for maturity and professionalism&rsquo;s sake, please take commit messages seriously.</p>
+
+<h3>Proper commit message is important</h3>
+
+<p>Proper git commit messages are important. Why?</p>
+
+<ol>
+<li>It speeds up reviewing process.</li>
+<li>To help other developers to understand what changes has been made on a specific commit.</li>
+<li>It is helpful for documenting changes on your project.</li>
+</ol>
+
+
+<blockquote><p>Everybody has terrible commit messages in some point in their life.</p><p>Sometimes every single day.</p><footer><strong>Zac Holman</strong></footer></blockquote>
+
+
+<h3>Making a better Git commit</h3>
+
+<p>If you are reading this. And you feel like you&rsquo;re the one I&rsquo;m referring to, you still have the chance to change this bad habit.</p>
+
+<p>I am annoyed seeing a &lsquo;bug fix&rsquo; commit messages. It&rsquo;s too broad. And I don&rsquo;t even know what bug was fixed and where it was located.</p>
+
+<p>To make it better, try to limit using <code>git commit -m "Some crappy commit message here"</code>. Better to use <code>git commit</code> with no flags. By using a simpler git commit command, it will open up Vim (if it&rsquo;s your default editor) where you can construct a better commit message.</p>
+
+<p>Structure your commit message like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Short summary of changes (50 chars or less and don't put period at the end)
+</span><span class='line'>
+</span><span class='line'>More detailed description of the changes. This will be good place to
+</span><span class='line'>explain what has been changed and why it has been changed. The text
+</span><span class='line'>should be wrapped at 72 chars.</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Conclusion</h3>
+
+<p>Sorry for the rant. It just really annoys me. Anyways, Happy commiting!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Cloud Computing Services: SaaS, PaaS, IaaS]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/10/12/cloud-computing-services-saas/"/>
+    <updated>2013-10-12T12:50:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/10/12/cloud-computing-services-saas</id>
+    <content type="html"><![CDATA[<p><img class="pull-left" src="http://junereycasuga.github.io/images/cloud_services/cloud.jpg" width="320"></p>
+
+<p>A lot of people are still confused about <strong>Cloud Computing</strong>. Cloud computing is something that using services through the &ldquo;cloud&rdquo;(the internet) instead of installing them and running them into your own PC or machine.</p>
+
+<!--more-->
+
+
+<p><img class="pull-right" src="http://junereycasuga.github.io/images/cloud_services/cloud_layers.jpg" width="160"></p>
+
+<p>The cloud actually has different services like Software as a Service(SaaS), Platform as a Service(PaaS), and Infrastructure as a Service(IaaS). Now let&rsquo;s take a closer look to these services offered on the cloud.</p>
+
+<br>
+
+
+<h3>SaaS &ndash; Software as a Service</h3>
+
+<p><img class="right" src="http://junereycasuga.github.io/images/cloud_services/google_microsoft.jpg" width="240"></p>
+
+<p>SaaS is the topmost layer of the cloud services. It is a software application made for end users that can be used through the internet. You can only access the software itself so it means you don&rsquo;t have the right to change something on the platform and infrastructure. What&rsquo;s good about this service is you don&rsquo;t have to install the software into your machine which obviously may allocate a lot of disk space on your hard drive. The service provider will be the one who will maintain them for you. But of course, since it is on the cloud, there can be security concerns. It is because instead of storing your files into your PC, you are directly putting your data into the Internet and storing  it on to the vendor&rsquo;s servers.</p>
+
+<p>A great example of this service are Google Apps and Microsoft Office 365 where you can use word and spreadsheet applications online.</p>
+
+<h3>IaaS &ndash; Infrastructure as a Service</h3>
+
+<p>IaaS or Infrastructure as a Service is in the bottom layer of the cloud services. The name already tells about the service. It provides you the infrastructure whether it is physical or virtual machines. To easily understand this, think of having a computer where you can install everything you want but the computer itself is not physically in front of you.</p>
+
+<p>IaaS gives you the freedom which database, operating system, and the development environments you want to use.</p>
+
+<p><img class="pull-right" src="http://junereycasuga.github.io/images/cloud_services/amazon-web-services.png" width="240">
+What&rsquo;s good about this is you don&rsquo;t have to worry maintaining your own hardware but you have the freedom to install everything you need for your applications. But it will require you a lot of work since you&rsquo;ll be the one who will set up your own platform for your applications.</p>
+
+<p>An example of an IaaS provider is the Amazon Web Services.</p>
+
+<h3>PaaS &ndash; Platform as a Service</h3>
+
+<p>PaaS or Platform as a Service is the middleware since it is sitting in the middle of the cloud service layers. In PaaS, the vendor provides you the underlying infrastructure and the application development platform. With PaaS, you don&rsquo;t have to worry on maintaining your infrastructure and everything is already set up for you &ndash; from automation to deployment, testing and iteration. What you just have to worry is developing your code.</p>
+
+<p>There are a lot of PaaS vendors like Google App Engine, Heroku and Engine Yard.</p>
+
+<p><img src="http://junereycasuga.github.io/images/cloud_services/google_app_engine.jpg" width="240"> <img src="http://junereycasuga.github.io/images/cloud_services/heroku.jpg" width="240"> <img src="http://junereycasuga.github.io/images/cloud_services/Engine-Yard-Logo.png" width="240"></p>
+
+<h3>Conclusion</h3>
+
+<p>As you can see, each layers provide you different services: software applictions, software development platform, and the hardware infrastructure. All of these services are popular. It&rsquo;s just depends on you as a user which one fits for your requirements. Like for example, if you are a Ruby, Python or Node.js developer and you want to deploy your application over the cloud, you would choose Google Cloud Engine, Heroku, or Engine Yard which are PaaS providers. If you are a developer who wants to take control on the development environment, AWS is a good choice for you which is an IaaS.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Philippine Software Engineering Review]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/09/27/philippine-software-engineering-review/"/>
+    <updated>2013-09-27T20:19:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/09/27/philippine-software-engineering-review</id>
+    <content type="html"><![CDATA[<p>A lot of people(mostly developers) might be asking what is now happening on the local dev scene here in the Philippines. Or what are the statistics on the dev scene here in the Philippines. <a href="http://proudcloud.net" target="_blank">ProudCloud</a>&rsquo;s CTO, <a href="http://twitter.com/jasontorres" target="_blank">Jason Torres</a> initialized a survey that could answer the questions of many people here in the Philippines. He made a survey to different developer communities and let them answer the survey. And at last, the long wait is over. Here is an infographic showing the result of Jason&rsquo;s survey.</p>
+
+<!--more-->
+
+
+<p><a href="http://www.scribd.com/doc/171120043/Philippine-Software-Engineering-Review">
+<img src="http://junereycasuga.github.io/images/software_engineering_review/phil_dev_scene_review.jpg" alt="Philippine Software Engineering Review" style="width:100%;">
+</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started With Ruby on Rails]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/09/21/getting-started-with-ruby-on-rails/"/>
+    <updated>2013-09-21T00:35:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/09/21/getting-started-with-ruby-on-rails</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve introduced to you already what Ruby on Rails is and I&rsquo;ve also given you the very basic knowledge on the Ruby language itself. So it&rsquo;s now time to develop something with Rails.</p>
+
+<!--more-->
+
+
+<h3>Installation</h3>
+
+<p>Let&rsquo;s assume that you&rsquo;ve already installed Ruby. If not, you can refer to my previous blog. To install rails, just fire up your terminal and run this command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Alright! We already have Rails so let&rsquo;s move on!</p>
+
+<h3>Creating a WebApp</h3>
+
+<p>Now that we already have Rails, we can now create a very simple CRUD web application using Rails. To initialize your project, enter this command to your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails new testApp</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, initializing a new appliction with Rails is very easy. We just told Rails to create a new application called <b><i>&lsquo;testApp&rsquo;</i></b>. Upon telling Rails to create new application, it also creates the files and directories that you will need for development. After Rails has created your files, it also automatically runs the <code>bundle install</code> command to get your app dependencies.</p>
+
+<h3>The Rails directory structure</h3>
+
+<p>Before we proceed with some coding, we must first know what&rsquo;s inside our Rails app directory.</p>
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/ruby_on_rails/rails_dir.png"></p>
+
+<p>On the Rails directory, you can see there is the <i>/public</i> folder. This folder contains all static files you need like your <i>404</i> page, <i>robots.txt</i>, and your favicon.</p>
+
+<p>Another folder which is very important in your Rails directory is the <i>/app</i> folder. This is where you will consume almost 97% of your development. This folder contains:</p>
+
+<ul>
+<li><p><b><i>app/assets</i></b></p>
+
+<ul>
+<li>The /assets folder contains your images, css, and javascripts.</li>
+</ul>
+</li>
+<li><p><b><i>app/controllers</i></b></p>
+
+<ul>
+<li>This  is where Rails will find all of your controller classes.</li>
+</ul>
+</li>
+<li><p><b><i>app/helpers</i></b></p>
+
+<ul>
+<li>This folder contains the helper classes used to assist the model, view, and controller classes.</li>
+</ul>
+</li>
+<li><p><b><i>app/models</i></b></p>
+
+<ul>
+<li>This contains the model classes for your Rails app.</li>
+</ul>
+</li>
+<li><p><b><i>app/views</i></b></p>
+
+<ul>
+<li>This contains the view templates which is basically what the user sees on their screen.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>In the directory, we also have a <code>Gemfile</code>. A Gemfile is where you put all the dependencies you need for your app.</p>
+
+<h3>Runing your Rails app</h3>
+
+<p>We&rsquo;ve already created our rails app a while ago. So let&rsquo;s try to make it work. First of all, you must know how to run your Rails server. To run your server just run <code>rails server</code> or simply <code>rails s</code>. Upon runningg your Rails server, you can now check your rails app on your browser usng <code>localhost:3000</code> as the address. If it runs properly, you should see something like this:</p>
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/ruby_on_rails/rails_welcome.png"></p>
+
+<h3>Creating our first Rails app</h3>
+
+<p>Alright! We have our Rails app running on our browser. Now what? So let&rsquo;s make our Rails app working. Hmm. Let&rsquo;s make something that works with CRUD. How about an inventory of products? Alright, let&rsquo;s do it!</p>
+
+<h4>Generating our model</h4>
+
+<p>As Rails suggested on our app, we must create a model and controller to get this rolling. I&rsquo;ll assume that you already know the concept of MVC pattern so we can move on to development.</p>
+
+<p>To create a model, use this syntax: <code>rails g model NAME [field[:type]]</code>. Let&rsquo;s now create the model for our app. So a product can have its name, description, price, and category. Let us now generate them.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails g model product title:string description:text price:float</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/ruby_on_rails/rails_model.png"></p>
+
+<p>Now Rails created a model class for us. Not just that, it also made us a migration file. Now let&rsquo;s migrate our database:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<p><small>*By default, Rails is using SQLite3 for database.</small></p>
+
+<h4>Generating our controller</h4>
+
+<p>We already have our model so let us now create our controller. To create a controller on Rails, just run <code>rails g controller controller_name [controller_actions]</code>. So let&rsquo;s make a controller named as <b>products</b>. We&rsquo;re creating a CRUD application so let us make actions for it. Let us run <code>rails g controller products index new show edit</code> on your terminal.</p>
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/ruby_on_rails/rails_controller.png"></p>
+
+<p>What we just did? When we told Rails to generate a controller named as <b>products</b>, it created the controller class itself at <code>app/controllers/products_controller.rb</code>. It also created the view files for our controller and the routes for the actions we defined. And it also created test units, helpers, a coffeescript and scss file for the specific controller.</p>
+
+<h4>Routes</h4>
+
+<p>Okay! We already have our controller, so let&rsquo;s go to <code>localhost:3000/products</code>. I bet you got an error :P It&rsquo;s because we did not define the <b>products</b> controller on the resource in our routes yet. So let&rsquo;s configure our routes by inserting the code below in <code>config/routes.rb</code> file:</p>
+
+<figure class='code'><figcaption><span>Routes - routes.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">resources</span> <span class="ss">:products</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to make the products controller to be the root page, just add this to <code>routes.rb</code> file:</p>
+
+<figure class='code'><figcaption><span>Routes - routes.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">root</span> <span class="s1">&#39;products#index&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So from now on when we access <code>localhost:3000</code>, it automatically uses the products controller and its index action.</p>
+
+<h4>CRUD</h4>
+
+<p>Alright! We now have our controller and our model. Let&rsquo;s move on to get it working.</p>
+
+<p>Let&rsquo;s say we want to display all data from our database on our <i>index</i> action. To do that, let&rsquo;s edit our index action:</p>
+
+<figure class='code'><figcaption><span>Products Controller - products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>      <span class="vi">@products</span> <span class="o">=</span> <span class="no">Product</span><span class="o">.</span><span class="n">all</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What we did here is we defined our index controller and inside of it, we declared a variable that can be accessed by our views which is the <code>@products</code>. Then our <code>@products</code> controller is getting all the data from <code>Product</code> model. After telling our index controller what to do, let us now edit the <code>index.html.erb</code> file from our <code>views/products</code> directory.</p>
+
+<figure class='code'><figcaption><span>index.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;h1&gt;All Products&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;ul&gt;</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%</span> <span class="vi">@products</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;li&gt;</span>
+</span><span class='line'><span class="x">      &lt;h3&gt;</span><span class="cp">&lt;%=</span> <span class="nb">p</span><span class="o">.</span><span class="n">title</span> <span class="cp">%&gt;</span><span class="x">&lt;/h3&gt;</span>
+</span><span class='line'><span class="x">      &lt;small&gt;</span><span class="cp">&lt;%=</span> <span class="n">number_to_currency</span><span class="p">(</span><span class="nb">p</span><span class="o">.</span><span class="n">price</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/small&gt;</span>
+</span><span class='line'><span class="x">      &lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="nb">p</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="x">  &lt;/li&gt;</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By default, Rails is using erb as its templating engine. That&rsquo;s why our <code>index.html</code> has a <code>.erb</code> extension. There are other template engines for Rails like HAML. On our <code>index.html.erb</code> file, we looped through each data from the model and displayed it into a list. The <code>number_to_currency</code> function converts a number to a currency format.</p>
+
+<p>After editing our index action an our index view, let us refresh our page. It shows nothing right? Because we don&rsquo;t have any data from our database yet. So let&rsquo;s make a function on the products controller for creating data on our database.</p>
+
+<figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">new</span>
+</span><span class='line'>      <span class="vi">@product</span> <span class="o">=</span> <span class="no">Product</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>      <span class="vi">@prodct</span> <span class="o">=</span> <span class="no">Product</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:product</span><span class="o">].</span><span class="n">permit</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="ss">:price</span><span class="p">,</span> <span class="ss">:description</span><span class="p">))</span>
+</span><span class='line'>      <span class="vi">@product</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">products_path</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see, we defined two different actions. The <i>new </i> action and the <i>create</i> action. The <i>new</i> action is responsible for returning the HTML form for creating a product. And the <i>create</i> action does the saving of the data and redirects us to the producs_path (products/index) after saving the data. We now have our function, let&rsquo;s create our form on the <code>new.html.erb</code> file from the views.</p>
+
+<figure class='code'><figcaption><span>new.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;h1&gt;Create Product&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">&lt;%=</span> <span class="n">form_for</span> <span class="vi">@product</span><span class="p">,</span> <span class="ss">url</span><span class="p">:</span> <span class="n">products_path</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;p&gt;</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:title</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:title</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/p&gt;</span>
+</span><span class='line'><span class="x">  &lt;p&gt;</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:price</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:price</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/p&gt;</span>
+</span><span class='line'><span class="x">  &lt;p&gt;</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:description</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:description</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/p&gt;</span>
+</span><span class='line'><span class="x">  &lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We now have our view. So let&rsquo;s try to create a product:</p>
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/ruby_on_rails/rails_create.png"></p>
+
+<p>After creating a product, it should redirect you to the products page showing something like this:</p>
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/ruby_on_rails/rails_index.png"></p>
+
+<p>Okay! It worked! We can now add products as much as we want. Let&rsquo;s try adding a link in our <code>index.html.erb</code> for viewing a specific product and a link for adding a product.</p>
+
+<figure class='code'><figcaption><span>index.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;h1&gt;All Products&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Add Prodct&quot;</span><span class="p">,</span> <span class="n">new_product_path</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;ul&gt;</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%</span> <span class="vi">@products</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;li&gt;</span>
+</span><span class='line'><span class="x">      &lt;h3&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="nb">p</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">product_path</span><span class="p">(</span><span class="nb">p</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/h3&gt;</span>
+</span><span class='line'><span class="x">      &lt;small&gt;</span><span class="cp">&lt;%=</span> <span class="n">number_to_currency</span><span class="p">(</span><span class="nb">p</span><span class="o">.</span><span class="n">price</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/small&gt;</span>
+</span><span class='line'><span class="x">      &lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="nb">p</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="x">  &lt;/li&gt;</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We now have a link for creating a new product and a link for viewing a specific product. Let us now edit our controller and the <code>show.html.erb</code> file for displaying the details of a specific product. We should edit the <i>show</i> action on our controller first:</p>
+
+<figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>      <span class="vi">@product</span> <span class="o">=</span> <span class="no">Product</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next is the view:</p>
+
+<figure class='code'><figcaption><span>show.controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="no">Product</span> <span class="no">ID</span> <span class="c1">#&lt;%= @product.id %&gt;&lt;/h1&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sx">%= link_to &quot;Back to Products&quot;, @product_path %&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">&lt;h3&gt;&lt;%=</span> <span class="vi">@product</span><span class="o">.</span><span class="n">title</span> <span class="sx">%&gt;&lt;/h3&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">small</span><span class="o">&gt;&lt;</span><span class="sx">%= number_to_currency(@product.price %&gt;&lt;/small&gt;</span>
+</span><span class='line'><span class="sx">&lt;p&gt;&lt;%=</span> <span class="n">product</span><span class="o">.</span><span class="n">description</span> <span class="sx">%&gt;&lt;/p&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Edit&quot;</span><span class="p">,</span> <span class="n">edit_product_path</span><span class="p">(</span><span class="vi">@product</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now if we click the title of the product, it should bring you to a page like this:</p>
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/ruby_on_rails/rails_show.png"></p>
+
+<p>As you can see, we also added a link for editing this specific product. Let&rsquo;s now move on for the editing of specific product. Let us again edit our products controller.</p>
+
+<figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">edit</span>
+</span><span class='line'>      <span class="vi">@product</span> <span class="o">=</span> <span class="no">Product</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">update</span>
+</span><span class='line'>      <span class="k">if</span> <span class="vi">@product</span> <span class="o">=</span> <span class="no">Product</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>          <span class="vi">@product</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:product</span><span class="o">].</span><span class="n">permit</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="ss">:price</span><span class="p">,</span> <span class="ss">:description</span><span class="p">))</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">products_path</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We now have the function, let&rsquo;s make the view for editing:</p>
+
+<figure class='code'><figcaption><span>edit.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;h1&gt;Edit Product ID #</span><span class="cp">&lt;%=</span> <span class="vi">@prouct</span><span class="o">.</span><span class="n">id</span> <span class="cp">%&gt;</span><span class="x">&lt;/h1&gt;</span>
+</span><span class='line'><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Back to Products&quot;</span><span class="p">,</span> <span class="n">product_path</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">&lt;%=</span> <span class="n">form_for</span> <span class="vi">@product</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;p&gt;</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:title</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:title</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/p&gt;</span>
+</span><span class='line'><span class="x">  &lt;p&gt;</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:price</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:price</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/p&gt;</span>
+</span><span class='line'><span class="x">  &lt;p&gt;</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:description</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">text_field</span> <span class="ss">:description</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/p&gt;</span>
+</span><span class='line'><span class="x">  &lt;p&gt;</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">submit</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Delete&quot;</span><span class="p">,</span> <span class="n">product_path</span><span class="p">(</span><span class="vi">@product</span><span class="p">),</span> <span class="ss">:method</span><span class="o">=&gt;</span><span class="ss">:delete</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/p&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Yeap! It does look like with our <code>new.html.erb</code>. We just removed the <code>url: products_path</code> from the form. So if we clicked the <i>Edit</i> link from the show page, it should bring you to the edit page showing the form and you should be able to edit it.</p>
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/ruby_on_rails/rails_edit.png"></p>
+
+<p>As you can see, we&rsquo;ve also added a link for deleting the product. It won&rsquo;t work yet because we haven&rsquo;t added the function for it yet. So let us add it now. Let us edit again our product controller.</p>
+
+<figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">destroy</span>
+</span><span class='line'>      <span class="k">if</span> <span class="vi">@product</span> <span class="o">=</span> <span class="no">Product</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>          <span class="vi">@product</span><span class="o">.</span><span class="n">delete</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">redirect_to</span> <span class="n">products_path</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Conclusion</h3>
+
+<p>On this article, we&rsquo;ve learned how to create a new Rails app and how to do CRUD using Rails. It&rsquo;s now your turn to do some more experimentation on Rails. Thanks for reading my post.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started With Ruby]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/09/16/getting-started-with-ruby/"/>
+    <updated>2013-09-16T21:26:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/09/16/getting-started-with-ruby</id>
+    <content type="html"><![CDATA[<p>As promised, I will be showing you how to code Ruby. But don&rsquo;t expect too much. I&rsquo;ll just show you the very basic of it. So without further adieu, here it is.</p>
+
+<!--more-->
+
+
+<h3>Ruby Installation</h3>
+
+<p>First of all, you must have Ruby installed on your machine to get started with Ruby development. There are two ways to install Ruby on your machine. It is by using rbenv or rvm. Both of them are used to manage Ruby versions on your machine. But on this article I will show you how to use rvm to install Ruby on a Linux environment. It will be easy and quick.</p>
+
+<p>Let&rsquo;s install first RVM by running this command on your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -L https://get.rvm.io | bash -s  stable --ruby</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What this does is it downloads Ruby and installs the latest stable Ruby version. After installing Ruby on your system, run <code>rvm rubygems latest</code> to get the latest gems.</p>
+
+<p>For installing Ruby on your Windows machine, you can just download the installer from the <a href="https://www.ruby-lang.org/en/">Ruby website</a>. Once you have installed Ruby on your Windows machine, you can check if it is working by tping this command on your command prompt:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ruby -v</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This should show the version of your Ruby.</p>
+
+<h3>The IRB</h3>
+
+<p>IRB or Interactive Ruby is like a command line for Ruby. You can type Ruby command and it will return a value of the line of code you&rsquo;ve entered. To try IRB, you can just type <code>irb</code> on your terminal or command prompt. Once you&rsquo;ve done that, try out some of these lines of codes. <small>Note: The &lsquo;$&rsquo; sign represents the IRB prompt</small></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ 1 + 2
+</span><span class='line'>=> 3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Easy right? Now let&rsquo;s try to output a string value.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ puts "Hello World"
+</span><span class='line'>Hello World
+</span><span class='line'>=> nil</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Cool! It outputs the phrase &ldquo;Hello World&rdquo; and it returned a <i>nil</i> value. <i>nil</i> means null for Ruby. Alright, let&rsquo;s move on. Let&rsquo;s go deeper. How about we write a function?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ def greet
+</span><span class='line'>$   return "Hello World"
+</span><span class='line'>$ end
+</span><span class='line'>=> nil
+</span><span class='line'>$ greet
+</span><span class='line'>=> "Hello World"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, we made a function named as &ldquo;greet&rdquo; which returns the &ldquo;Hello World&rdquo; phrase when it was called.</p>
+
+<h3>Conclusion</h3>
+
+<p>Alright! I won&rsquo;t go deeper with this now. We&rsquo;ve already learned how to install Ruby on your machine and we also learned how to use IRB for exploring Ruby. It&rsquo;s now your time to find out more what Ruby can do. Thanks for reading!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Introduction to Ruby on Rails]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/08/18/introduction-to-ruby-on-rails/"/>
+    <updated>2013-08-18T20:55:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/08/18/introduction-to-ruby-on-rails</id>
+    <content type="html"><![CDATA[<p>I used to hack with PHP and I am a newbie on developing something with Ruby on Rails or with Ruby itself. Well, it doesn&rsquo;t mean that a newbie doesn&rsquo;t know anything about a specific topic right? So I will be sharing you what Ruby on Rails is, where it came from, and I will also be sharing to you how I started to learn Ruby/RoR as a newbie. And hopefully I can find time to teach you how to get started with Ruby on Rails development. So watch out for that.</p>
+
+<!--more-->
+
+
+<h3>What is Ruby on Rails</h3>
+
+<p><img src="http://junereycasuga.github.io/images/ruby_on_rails/rails.jpg"></p>
+
+<p>Ruby on Rails is an open-source web application framework created by David Heinemeier Hansson. Rails is based on the <b>Model-View-Controller</b> architecture that splits your application into three sections:</p>
+
+<ul>
+<li>The <b>Models</b> are the ones which contains the business data and behaviour.</li>
+<li>The <b>Views</b> are templates which renders data from the model to the user. So basically, it is what the user sees from the screen.</li>
+<li>The <b>Controllers</b> process the request from users and it also initiate changes in the models.</li>
+</ul>
+
+
+<p>Many says that Rails is an <b>&ldquo;opinionated software&rdquo;</b> which means it only focuses on one way of doing things. Unlike PHP which gives you different ways to solve one problem. Well, I don&rsquo;t know if that&rsquo;s a good feature of Rails. What do you think?</p>
+
+<p>Anyway, where did RoR came from?</p>
+
+<h3>The Ruby Programming Language</h3>
+
+<p><img src="http://junereycasuga.github.io/images/ruby_on_rails/ruby.jpg"></p>
+
+<p>Yes! The name already tells. It came from a programming language named as &ldquo;Ruby&rdquo;.</p>
+
+<p>Ruby is developed in 1995 by a Japanese programmer named Yukihiro Matsumoto, a.k.a. &ldquo;Matz&rdquo;.</p>
+
+<p>Matz took some elements from his favorite programming languages which are Perl, Smalltalk and Lisp. He combined them all into one language with easy syntax and the Ruby language was born. I&rsquo;ll talk more about the syntax of Ruby and some more important things about it on my next post. So stay tuned.</p>
+
+<h3>Being a Ruby newbie</h3>
+
+<p>As you know, I&rsquo;ve been developing with PHP for many years now. And yeah, I&rsquo;ve been hearing Ruby before. And it was until last month that Ruby touched my heart. Since then, I&rsquo;ve started to learn Ruby. But I struggled on learning it because I don&rsquo;t know where to start. And I hope I can help you (newbies) to start learning Ruby and RoR.</p>
+
+<h4>The core language</h4>
+
+<p>Ruby is the core of everything you&rsquo;ll do on Ruby on Rails. Ruby is the language and Rails is the framework you use to make your development faster and easier.</p>
+
+<p>So study the Ruby programming language first before moving on to studying Rails.</p>
+
+<h4>Where to start?</h4>
+
+<p>To get started with learning Ruby, you can checkout <a href="http://ruby.learncodethehardway.org/book/">Learn Ruby the Hard Way</a>. And if you want an interactive learning, you can go to <a href="http://tryruby.org">http://tryruby.org</a> and <a href="http://rubymonk.com">Ruby Monk</a>.</p>
+
+<p>And for Rails, I am using <a href="http://codeschool.com">Code School</a>&rsquo;s courses for it.</p>
+
+<h3>Conclusion</h3>
+
+<p>I hope I was able to show you a very short introduction on Rails development. On my next post, we will try to install Ruby and Ruby on Rails on your machine and the basics of Ruby and Ruby on Rails.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PWDO MiniFFC #15 - Mini Web Design Conference &amp; Meetup]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/07/25/pwdo-miniffc-number-15-mini-web-design-conference-and-meetup/"/>
+    <updated>2013-07-25T22:10:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/07/25/pwdo-miniffc-number-15-mini-web-design-conference-and-meetup</id>
+    <content type="html"><![CDATA[<p><img src="http://junereycasuga.github.io/images/miniffc15/pwdo.png"></p>
+
+<p><a href="http://www.pwdo.org/">PWDO</a> (Philippine Web Designers Organization) is a community for web designers here in the Philippines. Lately, they organized an event called MiniFFC or Mini Form Function &amp; Class Conference. I&rsquo;m not really a web designer but I got interested to one of the topic which is Ruby on Rails for Designers which me made me attend the MiniFFC.</p>
+
+<!--more-->
+
+
+<p>The topic&rsquo;s speaker was Ken Daganio of <a href="http://ndfy.me">ndfy.me</a>. All I can say is, Ken is really a cool guy. Though I didn&rsquo;t heard much of his talk because I came in late, I still got inspired to learn Ruby on Rails. I&rsquo;m a PHP guy and I want to try something much higher than this that&rsquo;s why I want to learn Rails and use it on my future projects.</p>
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/miniffc15/leancoffee.jpg"></p>
+
+<p>After Ken&rsquo;s talk, there is also a <a href="http://leancoffee.org">Lean Coffee</a> session. On that day, I don&rsquo;t have any idea what Lean Coffee is. For you to know what it is, Lean Coffee is a structured, but agenda-less meeting. Participants will be given a pad where they will write a topic they want to be discussed. After the topics will be collected, each of the participants will vote for a topic and for whoever know or have enough knowledge about it, they will come in front and will discuss about it. It&rsquo;s cool, right? It&rsquo;s really nice to have something like this because every participatn really interact with each other. Asking questions, contributing ideas, more knowledge to gather.</p>
+
+<p>It&rsquo;s really nice to attend such an event like this. I really learned a lot. And one thing that I really got interested is that they will also organize a hackathon for a cause. It&rsquo;s really interesting. I really want to help people by doing what I love, developing some stuff on the web! :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Manila.js Fridays 004]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/07/09/manila-dot-js-fridays-004/"/>
+    <updated>2013-07-09T22:01:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/07/09/manila-dot-js-fridays-004</id>
+    <content type="html"><![CDATA[<p>When I was browsing over the internet, I came across on a post from a web developers&#8217; community that I&rsquo;ve joined. That post was about an event for JavaScript developers called Manila.js Fridays organized by Manila.js.</p>
+
+<!--more-->
+
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/manilaJS/manilaJS-logo.jpg"></p>
+
+<p><a href="http://manilajs.com">Manila.js</a> is a JavaScript community here in Metro Manila, Philippines. It was born on February just this year(2013). They organize an event every first friday of the month which is called Manila.js Fridays. It is an event where JavaScript enthusiasts gather and meet together in one place. It&rsquo;s not just a meetup event but you can also learn from this event because there are talks from different speakers invited.</p>
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/manilaJS/manilaJS-1.jpg" title="Photo by Sophia Lucero" ></p>
+
+<p>Last July 5, 2013, I&rsquo;ve attended Manila.js Fridays 004. My first time to attend the event but it&rsquo;s already the fourth time that it will happen. It happened in Paymentwall&rsquo;s office here in Makati. Well, I&rsquo;m lucky because it is just a few blocks away from my office.</p>
+
+<p>There are three topics tackled on the event. First one is about integrating Paymentwall&rsquo;s payment gateway service for apps by Titony Sarmiento of Paymentwall. The topic was good. What&rsquo;s good about <a href="http://paymentwall.com">Paymentwall</a> is it uses HTML5 widget as a payment solution for your app.</p>
+
+<p>The second topic is about Testing JavaScripts using <a href="http://visionmedia.github.io/mocha/">Mocha</a> by <a href="http://ricostacruz.com">Rico Sta. Cruz</a> of <a href="http://nadarei.co/">Nadarei Inc.</a> and I think he is the one who started Manila.js. Anyways, the talk was good. I only heard about Mocha before as a tool for testing JavaScripts but I never get the chance to use or to learn using it because of busy work. From this topic, checking from the console in your browser dev tool is not enough. When developing an app, it was really essential to test it thoroughly. He also mentioned about <a href="http://chaijs.com">Chai</a> which is an assertion library which is really helpful for testing.</p>
+
+<p>And the last topic was about <a href="https://github.com/jaunesarmiento/fries/">&ldquo;Fries&rdquo;</a> by <a href="http://jaunesarmiento.me/">Joko Sarmiento</a>. It is not the fries you&rsquo;re thinking of that you can by from McDonald&rsquo;s or any fast food chains out there. Fries is mobile development framework for Android apps using HTML5, CSS, and JavaScript. Fries was inspired by <a href="http://maker.github.io/ratchet/">Ratchet</a> which is also a mobile development framework but meant for iOS. The idea was good since there are already a lot of stuff for iOS out there. Other than Fries, Joko is currently working on another project called &ldquo;Mayo&rdquo; which is somewhat alike with Ratchet. Well for me, it is better to work on just one project but it has the flexibility for changing some assets depending on the user agent that was used. For example, if the device is an Android device, it should load stuff for Android. Likewise if the device is an iOS device, it should load stuff for iOS. Well, it&rsquo;s just a comment.</p>
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/manilaJS/manilaJS-2.jpg" width="450" title="Photo by Sophia Lucero" ></p>
+
+<p><img class="full-img" src="http://junereycasuga.github.io/images/manilaJS/manilaJS-3.jpg" width="450" title="Photo by Sophia Lucero" ></p>
+
+<p>I can say that the event was great. Free snacks, free booze, the venue is comfy and wide. Actually, Paymentwall&rsquo;s office is really a good place. I learned some stuff that I might use someday plus new friends that I met. I&rsquo;d probably attend the next Manila.js Fridays!</p>
+
+<p><small>Credits to Sophia Lucero for the photos.</small></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Making Life Easier Through Bash Scripting]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/07/03/making-life-easier-through-bash-scripting/"/>
+    <updated>2013-07-03T23:36:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/07/03/making-life-easier-through-bash-scripting</id>
+    <content type="html"><![CDATA[<p><img class="full-img" src="http://junereycasuga.github.io/images/bash_scripting/bash-fb.png" width="800">
+<img class="full-img" src="http://junereycasuga.github.io/images/bash_scripting/bash-google-plus.png" width="800"></p>
+
+<p>In the past few days, some of my friends and colleagues saw my cover photo from my <a href="https://facebook.com/kaj26kai">Facebook</a> and <a href="https://plus.google.com/105091722637731618991">Google+</a> and asked me, &ldquo;What is #!/bin/bash?&rdquo;. That&rsquo;s why I came up to an idea on writing about Bash or Shell scripting. This will talk about how bash will help a typical Linux user. I won&rsquo;t be tackling any programming using bash.</p>
+
+<!--more-->
+
+
+<p>Shell scripting or Bash scripting is commonly used by Linux users. It is actually useful for making your task easier. Well, not actually easier but faster. In this post, I will show you how bash scripting could help you on speeding up a task do you always do.</p>
+
+<h3>The Problem</h3>
+
+<p>Let&rsquo;s say you got a freshly installed Linux operating system on your machine. And in Linux, we(or is it only me?) usually install programs through the terminal. And since you have a freshly installed OS, there&rsquo;s a lot of command you want to run on your terminal to install softwares or programs. And sometimes, it is annoying that you have to type a specific command every after a software is installed.</p>
+
+<h3>The Solution</h3>
+
+<p>To make your life easier, we can use shell scripting to run all of those commands with just one command on your terminal.</p>
+
+<h3>Shebang</h3>
+
+<blockquote><p>A <b>Shebang</b> is the combination of hash and an exclamation mark : <b>#!</b>. The program loader will look for the shebang on the first line of script and use the interpreter specified in it.</p><footer><strong>NetTuts</strong> <cite><a href='http://net.tutsplus.com/tutorials/other/the-fundamentals-of-bash-scripting/'>net.tutsplus.com/tutorials/&hellip;</a></cite></footer></blockquote>
+
+
+<p>A shebang consists the following syntax:
+<code>#!interpreter [parameters]</code>
+The interpreter is the program used to interpret the language used. For bash scripting, we would use <code>#!/bin/bash</code>.</p>
+
+<h3>Examples</h3>
+
+<p>Let&rsquo;s take the problem above where you are tired of typing a lot of command one after another. So we will use shell scripting to make your task faster. Let&rsquo;s say I had a freshly installed Linux OS on my machine and I want to install programs I usally install on my machine like LAMP. Installing LAMP uses different commands because it will install Apache, MySQL and PHP. Now, let&rsquo;s use bash to run the commands used to install LAMP.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'>sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install apache2 <span class="o">&amp;&amp;</span> sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt <span class="o">&amp;&amp;</span> sudo apt-get install phpmyadmin <span class="o">&amp;&amp;</span> sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql <span class="o">&amp;&amp;</span> sudo mysql_install_db <span class="o">&amp;&amp;</span> sudo /usr/bin/mysql_secure_installation
+</span><span class='line'>
+</span><span class='line'><span class="nb">exit </span>0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And let&rsquo;s save it as <code>install-lamp.sh</code>.</p>
+
+<p>To run this specific shell script, open up your terminal and navigate to the directory where you saved <code>install-lamp.sh</code>. And run <code>bash install-lamp.sh</code>. As you hit enter key, all the commands you&rsquo;ve inserted inside the shell script will be run automatically without you typing everytime on software is done installing.</p>
+
+<h3>Very Short Explanation</h3>
+
+<p>As you can see, the script basically contains the shebang with the interpreter(bash) and a string of terminal commands linked together using <code>&amp;&amp;</code>. This means that we&rsquo;ll run this commands one after another.</p>
+
+<h3>Conclusion</h3>
+
+<p>In fact, you can do more than this. You can do a lot of things through shell scripting. Shell scripting is not only for programmers. In fact, even a typical Linux user can use it for speeding up some task. This could be a big help for finishing a task faster. So I would love to say that <b>I <3 #!/bin/bash</b>. :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started With Node.js]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/06/02/getting-started-with-node-dot-js/"/>
+    <updated>2013-06-02T14:22:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/06/02/getting-started-with-node-dot-js</id>
+    <content type="html"><![CDATA[<p>You may have heard about Node.js but you don&rsquo;t know what exactly it does. To make it short and simple, Node.js allows you to run Javascript code in the backend.</p>
+
+<!--more-->
+
+
+<h3>Installing Node</h3>
+
+<p>Before we start on writing an app, we need to install it first in our machine. For MacOS and Windows, there&rsquo;s a pretty straight forward installers which you can find on <a href="http://nodejs.org">nodejs.org</a>. For Linux, you can run these lines of command on your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install python-software-properties python g++ make
+</span><span class='line'>sudo add-apt-repository ppa:chris-lea/node.js
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install nodejs</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Hello World</h3>
+
+<p>We have node on our machine now. So let&rsquo;s proceed on writing our first node.js app, our ever loving &ldquo;Hello World&rdquo;.</p>
+
+<p>Fire up your favorite text editor and create a file called <i>helloworld.js</i>. Now, we want node to write &ldquo;Hello World&rdquo;. So put these code on <i>helloworld.js</i>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Save it and execute it using Node.js by running this command on your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node helloworld.js</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This should print &ldquo;Hello World&rdquo; on your terminal.</p>
+
+<h3>Write everything</h3>
+
+<p>Unlike PHP, you have Apache that can receive HTTP requests and serve web pages. With node, you also have to implement your own HTTP server.</p>
+
+<p>It may sound difficult, but it&rsquo;s not. Thanks to the modules that came with Node itself. I will show how to write your own HTTP server later.</p>
+
+<h3>Modules</h3>
+
+<p>Node.js has module to make your life (somewhat) easier. Modules are encapsulated piece of codes. Means that a module contains functions related to the subject of the module. Let&rsquo;s just take the &lsquo;http&rsquo; module as an example. This module, obviously, contains functions specific to HTTP. So how do we use these modules? Just use the require function.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other than the module that came along with Node, you can also write your own module and you can include it to your app by:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./yourModule.js&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also install new modules with the help of Node Package Manager(NPM) which came along with Node.js as you install it. To install new modules using NPM, fire up your terminal, navigate to your app directory, and run this command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install module_name</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Writing your HTTP Server</h3>
+
+<p>As I promised, we will write our own HTTP server using Node.js. Create a new JS file named <i>server.js</i> and put this codes inside the file.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span><span class="nx">response</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;Content-type&quot;</span><span class="o">:</span><span class="s2">&quot;tex/plain&quot;</span><span class="p">});</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, run this command using your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node server.js</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Fire up your browser and navigate to <code>http://localhost:888</code>. Your browser should be able to run a page displaying the text &ldquo;Hello World&rdquo;.</p>
+
+<p>Sweet! So let me explain what we have written.</p>
+
+<p>The first line requires the <i>http</i> module that comes with Node.js and makes it accessible throught the <i>http</i> variable.</p>
+
+<p>Then we called one of <i>http</i> module&rsquo;s function which is the createServer function. This function returns an object and this object has a method <i>listen</i>. The <i>listen</i> method accepts a numeric value which indicates the port number the HTTP server is going to listen on.</p>
+
+<p>And inside the function we used the <i>response.writeHead()</i> function to send a HTTP status code(200, means success) and a content-type in the  HTTP response header. The <i>response.write()</i> function sends the &ldquo;Hello World&rdquo; text to the HTTP response body. And the <i>write.end()</i> ends the response.</p>
+
+<h3>Routing</h3>
+
+<p>Now, we also need to handle URL, GET, and POST parameters into our router. We may need to include the <i>url</i> and <i>querystring</i> to able to do this.</p>
+
+<p>The <i>url</i> module allows us to extract different parts of a URL.</p>
+
+<p>The <i>querystring</i> module parses the body of a GET or POST requests.</p>
+
+<p>But we will concentrate on using the <i>url</i> module for now.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">),</span>
+</span><span class='line'>  <span class="nx">url</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">){</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">pathname</span> <span class="o">=</span> <span class="nx">url</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">pathname</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Request for &quot;</span> <span class="o">+</span> <span class="nx">pathname</span> <span class="o">+</span> <span class="s2">&quot; received.&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;Content-type&quot;</span><span class="o">:</span><span class="s2">&quot;text/plain&quot;</span><span class="p">});</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Save it, and run</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node server.js</span></code></pre></td></tr></table></div></figure>
+
+
+<p>. Open up your browser and navigate to <code>http://localhost:8888</code>.</p>
+
+<p>As you run it through the browser, you should be able to see the requested url on your command line.</p>
+
+<p>So, we just included the <i>url</i> module and made it accessible through the <i>url</i> variable. Then we parsed the request and passed it to <i>pathname</i> variable.</p>
+
+<h3>Conclusion</h3>
+
+<p>That&rsquo;s it for now. I&rsquo;m also new to Node.js and this is just what I&rsquo;ve learned over the weekend. I just want to share it to you. Node.js requires extra effort but creating a powerful app with Node.js is worth it.</p>
+
+<p>This is just a preview of what you should know about Node.js. If you want to make your life easier, you might want to pick a framework for Node.js like <a href="http://expressjs.com/">Express</a> and <a href="http://www.partialjs.com/">Partial</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What Do I Install on My Machine?]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/04/28/what-do-i-install-on-my-machine/"/>
+    <updated>2013-04-28T18:36:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/04/28/what-do-i-install-on-my-machine</id>
+    <content type="html"><![CDATA[<p>This post is just something that I want to share to you. And this can be also as a reminder and guide for me when I have a freshly installed OS on my machine.</p>
+
+<!--more-->
+
+
+<p>I am a Linux user. I&rsquo;m currently running Ubuntu 14.04. I will give you my list of programs, tools, and some applications that I install after installing a fresh OS. I will also show you how to install them. So let&rsquo;s get started.</p>
+
+<h3>LAMP</h3>
+
+<p>As we all know, LAMP stands for Linux, Apache, MySQL, and PHP. These are open-source softwares used to make your web server running. Since I am running on Ubuntu, which is a Linux distro, we don&rsquo;t have to take care about it. What we should just install is just the Apache, MySQL, and PHP.</p>
+
+<h4>Apache</h4>
+
+<p>To install Apache, just run this line of command in your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install apache2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it. To check if it works, just open your browser and type in <a href="http://127.0.0.1">http://127.0.0.1</a> or <code>localhost</code>. It should display &ldquo;It works!&rdquo; on the page.</p>
+
+<h4>MySQL</h4>
+
+<p>MySQL is basically a database management system. It is where you store data from your web application and retrieve data that is being displayed on your web application.</p>
+
+<p>To install MySQL, run this line of command in your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After install MySQL, activate it with this command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mysql_install_db</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To finalize the installation, run this command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /usr/bin/mysql_secure_installation</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A prompt message will ask you a lot of questions. Just answer all of them with Yes.</p>
+
+<h4>PHP</h4>
+
+<p>PHP is a server-side scripting language used to build dynamic websites.</p>
+
+<p>To install PHP, run this line of command in your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Installing LAMP won&rsquo;t install phpMyAdmin yet. To install phpMyAdmin, just run this on your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install phpmyadmin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it! As easy as 1-2-3!</p>
+
+<h3>Sublime Text</h3>
+
+<p>Text editors are very essential for all developers. Ubuntu has a pre-installed text editor, Gedit. But I don&rsquo;t like it. That&rsquo;s why I always use Sublime Text as my text text editor.</p>
+
+<p>To install Sublime Text 2, download the <code>.tar.bz2</code> file from Sublime Text&rsquo;s <a href="http://www.sublimetext.com/2">website</a> and extract it by running this command on your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar xf Sublime\ Text\ 2.0.1\ x64.tar.bz2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you got the 32-bit installer, just replace the x64 to x32 on the command.</p>
+
+<p>After extracting, you&rsquo;ll get a &ldquo;Sublime Text 2&rdquo; folder which contains all files that Sublime Text will need. We have to move that folder to &ldquo;/opt&rdquo; folder.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mv Sublime\ Text\ 2 /opt/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to be able to run Sublime Text through the terminal by just typing &ldquo;sublime&rdquo;, we must create a link in &ldquo;/usr/bin&rdquo;.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s /opt/Sublime\ Text\ 2/sublime_text /usr/bin/sublime</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, we also need to have a launcher in Unity. So we will create a .desktop file in &ldquo;usr/share/applications&rdquo;.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo sublime /usr/share/applications/sublime.desktop</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will let Sublime Text 2 open up a blank document named as &ldquo;sublime.desktop&rdquo;. Paste these line of codes in the document:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[Desktop Entry]
+</span><span class='line'>Version=1.0
+</span><span class='line'>Name=Sublime Text 2
+</span><span class='line'># Only KDE 4 seems to use GenericName, so we reuse the KDE strings.
+</span><span class='line'># From Ubuntu's language-pack-kde-XX-base packages, version 9.04-20090413.
+</span><span class='line'>GenericName=Text Editor
+</span><span class='line'>
+</span><span class='line'>Exec=sublime
+</span><span class='line'>Terminal=false
+</span><span class='line'>Icon=/opt/Sublime Text 2/Icon/48x48/sublime_text.png
+</span><span class='line'>Type=Application
+</span><span class='line'>Categories=TextEditor;IDE;Development
+</span><span class='line'>X-Ayatana-Desktop-Shortcuts=NewWindow
+</span><span class='line'>
+</span><span class='line'>[NewWindow Shortcut Group]
+</span><span class='line'>Name=New Window
+</span><span class='line'>Exec=sublime -n
+</span><span class='line'>TargetEnvironment=Unity</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There you go! You already have Sublime Text 2 on your machine. If you want to install Sublime Text 3, you can get a <code>.deb</code> installer from Sublime Text&rsquo;s <a href="http://www.sublimetext.com/3">website</a>.</p>
+
+<h3>Vim</h3>
+
+<p>Other than Subime Text 2, I also use Vim when I develop on Ruby on Rails. Installing Vim is pretty easy, just run <code>sudo apt-get install vim</code></p>
+
+<h3>Git</h3>
+
+<p>Git is a version control system used to track the changes of your file/code. It can also be used to collaborate with other developers.</p>
+
+<p>There are two ways of installing Git. It is by installing from source or through <code>apt-get</code>. I&rsquo;ll just show the easiest way to install Git, which is using <code>apt-get</code>. Just run this command on your terminal to install Git.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you need a merge tool for Git, I am personally using Meld. You can install it by running:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install meld</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Node.js</h3>
+
+<blockquote><p>Node.js is a platform built on Chrome&#8217;s JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.</p><footer><strong>Node.js</strong> <cite><a href='http://nodejs.org/'>nodejs.org/&hellip;</a></cite></footer></blockquote>
+
+
+<p>I install node.js is not just for building powerful applications. But also because of <b>NPM (Node Packaged Modules)</b> which is a package manager for Node. I use NPM for installing tools like <b>Grunt</b> and <b>Bower</b> which I also use for developing applications.</p>
+
+<p>I use NVM (Node Version Manager) when installing Node.js because it provides you an easy way to switch between Node.js versions. To install Node.js using NVM, you must first install NVM itself. There two ways of installing NVM. To install NVM using cURL:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To install NVM using Wget:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>These scripts clones nvm repository to <code>~/.nvm</code> and adds the source line to your profile. (<code>~/.bash_profile</code> or <code>~/.profile</code>)</p>
+
+<p>Once you have installed NVM, you can now use it for installing Node.js. To download, compile and install the latest v0.10.x release of node, do this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nvm install 0.10</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And then you can now use the installed version:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nvm use 0.10</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Ruby</h3>
+
+<p>I install Ruby because it is required by Octopress which I use for this blog. And not just that, I&rsquo;m also a Ruby on Rails developer.  We will use RVM for installing Ruby. Before installing Ruby itself, we must first install RVM by running this command.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -L https://get.rvm.io | bash -s  stable --ruby</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After installing RVM, we can now use it to install the latest ruby version.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm install 1.9.3
+</span><span class='line'>rvm use 1.9.3
+</span><span class='line'>rvm rubygems latest</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>MongoDB</h3>
+
+<p>MongoDB is just another database management system that I use for development. MongoDB is actually a relational database. Your data will be stored in a JSON format.</p>
+
+<p>Now, let&rsquo;s install MongoDB  with PHP support.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install mongodb mongodb-clients php5-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After installing MongoDB, we must also install the MongoDB-PHP driver. To do that, we must first clone the repository from GitHub</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/mongodb/mongo-php-driver.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, go inside the freshly cloned repo and runt these commands:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd mongo-php-driver
+</span><span class='line'>phpize
+</span><span class='line'>./configure
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, we need to copy the driver to php extension directory.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// let's find first the extension directory
+</span><span class='line'>php -i | grep extension_dir
+</span><span class='line'>
+</span><span class='line'>// copy the driver to extension directory
+</span><span class='line'>sudo cp modules/mongo.so /path/to/php/extesnion_dir/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, we have to create a mongo.ini file which will be stored in /etc/php5/conf.d/ with the line <code>extension=mongo.so</code>.</p>
+
+<p>Finally, restart apache by running <code>sudo service apache2 restart</code></p>
+
+<p>We may also need something like phpMyAdmin for our MongoDB. I use RockMongo. Just download RockMongo from there <a href="http://rockmongo.com/downloads">website</a> and extract the file to your web server.</p>
+
+<h3>That&rsquo;s it!</h3>
+
+<p>I think I&rsquo;ve already shared to you all of the important programs and tools that I can&rsquo;t live without :P How about you? What&rsquo;s yours?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript Templating With Hogan.js]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/03/15/javascript-templating-with-hogan-dot-js/"/>
+    <updated>2013-03-15T23:01:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/03/15/javascript-templating-with-hogan-dot-js</id>
+    <content type="html"><![CDATA[<p>Javascript templating is like writing your code in MVC(model-view-controller) pattern which separates the logic from your view. What&rsquo;s good in using templates is it is easy to manage. Imagine your javascript if it looks like this:</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="s1">&#39;&lt;div&gt;</span>
+</span><span class='line'><span class="s1"> &lt;h2&gt;&#39;</span> <span class="o">+</span> <span class="nx">title</span> <span class="o">+</span> <span class="s1">&#39;&lt;/h2&gt;&#39;</span> <span class="o">+</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">names</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> <span class="o">+</span>
+</span><span class='line'>      <span class="s1">&#39;&lt;ul&gt;&lt;li&gt;&#39;</span> <span class="o">+</span> <span class="nx">names</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/ul&gt;&#39;</span> <span class="o">+</span>
+</span><span class='line'>  <span class="p">}</span> <span class="o">+</span>
+</span><span class='line'><span class="s1">&#39;&lt;/div&gt;&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ugly right? And if you write your javascript in that way, it would be hard for you to maintain it. And for me, it is a bad practice to write your javascript in this way. But if you will use a template, your code will look like this:</p>
+
+<p><img src="http://junereycasuga.github.io/images/templating/template.png"></p>
+
+<p>Awesome! Much cleaner and it is much easier to maintain. As you can see, it contains HTML tags with some placeholders. And we can replace these with some data which we can also store in a &lsquo;json&rsquo; format:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Templating Rocks!&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;names&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Juan Dela Cruz&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Maria Clara&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And if you combine the template and the data, the result will look like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h2&gt;</span>Templating Rocks!<span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li&gt;</span>Juan Dela Cruz<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li&gt;</span>Maria Clara<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To perform javascript templating, you must use a javascript templating engine like Hogan.js which I&rsquo;ve used as an example above. Hogan.js is a light-weight templating engine which only has 2.5k file size. It is developed at Twitter and it uses the Mustach templating syntax. Hogan compiles your templates into javascript before use. Which means that it performs faster.</p>
+
+<p>There are more javascript templating engine you can use. But personally, I use Hogan.js because it&rsquo;s minimal and it does not have a lot of features which I would not normally use.</p>
+
+<p>For more information about Hogan.js, just refer to <a href="http://twitter.github.com/hogan.js/">http://twitter.github.com/hogan.js/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript Event Bubbling and Event Capturing]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/03/11/javascript-event-bubbling-and-event-capturing/"/>
+    <updated>2013-03-11T21:10:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/03/11/javascript-event-bubbling-and-event-capturing</id>
+    <content type="html"><![CDATA[<p>You might be surprised when you fire an <code>onClick</code> event on an element, something happens to another element with the same event. Let&rsquo;s site a clearer example. Suppose  you have an element inside an element with the same event handler which is <code>onClick</code>.</p>
+
+<!--more-->
+
+
+<p><img src="http://junereycasuga.github.io/images/event_bubbling/event_bubbling1.png" width="350" height="350"></p>
+
+<p>When you click on <code>element2</code>, it also cause a click event on <code>element1</code>. And that is because of <strong>event bubbling</strong> and <strong>event capturing</strong>.</p>
+
+<h3>Event Bubbling</h3>
+
+<p>In event bubbling, the event handler propagates to the outer DOM(Document Object Model).</p>
+
+<p><img src="http://junereycasuga.github.io/images/event_bubbling/event_bubbling.png" width="350" height="350"></p>
+
+<h3>Event Capturing</h3>
+
+<p>In event capturing, the event handler propagates to the inner DOM.</p>
+
+<p><img src="http://junereycasuga.github.io/images/event_bubbling/event_capturing.png" width="350" height="350"></p>
+
+<h3>How to stop Event  Bubbling?</h3>
+
+<p>Event bubbling is always happening when you trigger an event. But there is also a way to stop it. I know that you also don&rsquo;t want event bubbling cause an interference with each element on your DOM. So how can we stop event bubbling? You can stop it by using the <code>stopPropagation()</code> method.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+</span><span class='line'>  <span class="c1">// do something</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This method allows you to stop the propagation of an event caused by event bubbling. You can also use the <code>.on()</code> function of jQuery to stop the propagation of the event.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;tbody&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s1">&#39;tr&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span><span class='line'>  <span class="c1">// do something</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The scripts simply means that by clicking the <code>tr</code> element, the propagation stops on the <code>tbody</code> element.</p>
+
+<p>That&rsquo;s it for this article. I hope you learned from this. Especially for those who are entering to the front-end development world. Cheers!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging With Octopress]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/03/10/blogging-with-octopress/"/>
+    <updated>2013-03-10T14:01:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/03/10/blogging-with-octopress</id>
+    <content type="html"><![CDATA[<p>Octopress is actually a framework for Jekyll. But before I continue, let me first tell you what Jekyll is. Jekyll is knwon as &ldquo;a simple, blog aware, static site generator&rdquo;. But Jekyll is not a blogging software. It is a parsing engine. It means that Jekyll parses your dynamic components such as templates, partials, markdown/textiles, etc. into a static site.</p>
+
+<!--more-->
+
+
+<p>Moving on. I started blogging using Wordpress and I found it too much for &ldquo;not really a blogger&rdquo; people like me. It is too much for me. And I don&rsquo;t want to be writing inside a big database. That&rsquo;s why I&rsquo;ve decided to write my blog using Jekyll since it is light-weight and you can write your post using your favorite text editor. But I had a hard time using because you need to build everything for your blog site. You have to write your own HTML template, CSS, JavaScripts and set up your own configurations.</p>
+
+<p>Then the time came that I&rsquo;ve encountered Octopress. As I&rsquo;ve said, it is a framework for Jekyll. In Octopress, you don&rsquo;t have to write your own HTML templates, CSS and JavaScripts becuase Octopress already have them all for you. I&rsquo;ll walk you through how to start blogging using Octopress.</p>
+
+<p>Before you start using Octopress, you must first install these:</p>
+
+<ol>
+<li>Git</li>
+<li>Ruby 1.9.3</li>
+</ol>
+
+
+<h3>Setting up Octopress</h3>
+
+<p>First of all you must clone Octopress from GitHub. Just run this command.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next is to install the dependencies.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
+</span><span class='line'>gem install bundler
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Installing the default Octopress theme.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After performing these steps, you can configure your blog by editing some files. Here are the list of files for configuring Octopress:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>_config.yml    # Main config
+</span><span class='line'>Rakefile       # Config for deployment
+</span><span class='line'>config.rb      # Compass config
+</span><span class='line'>config.ru      # Rack config</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To create a new post, just run this on your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["title"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By running this command, Rake(Ruby Make) will generate a markdown file that will be saved in the <code>source/_posts</code> and you can use that file for writing your article.</p>
+
+<p>For more documentations about posting new article and creating a new page, please refer to Octopress documentation at <a href="http://octopress.org/docs/blogging/">http://octopress.org/docs/blogging/</a>.</p>
+
+<p>There you go! I hope I was able to help you to set up your blog using Octopress. Enjoy blogging!</p>
+
+<h3>Resources:</h3>
+
+<p><a href="http://jekyllbootstrap.com/lessons/jekyll-introduction.html">http://jekyllbootstrap.com/lessons/jekyll-introduction.html</a></p>
+
+<p><a href="http://octopress.org/">http://octopress.org/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

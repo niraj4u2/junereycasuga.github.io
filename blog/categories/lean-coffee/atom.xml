@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Lean Coffee | Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/blog/categories/lean-coffee/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2014-10-22T20:25:04+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PWDO MiniFFC #15 - Mini Web Design Conference &amp; Meetup]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/07/25/pwdo-miniffc-number-15-mini-web-design-conference-and-meetup/"/>
+    <updated>2013-07-25T22:10:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/07/25/pwdo-miniffc-number-15-mini-web-design-conference-and-meetup</id>
+    <content type="html"><![CDATA[<p><img src="/images/miniffc15/pwdo.png"></p>
+
+<p><a href="http://www.pwdo.org/">PWDO</a> (Philippine Web Designers Organization) is a community for web designers here in the Philippines. Lately, they organized an event called MiniFFC or Mini Form Function &amp; Class Conference. I&rsquo;m not really a web designer but I got interested to one of the topic which is Ruby on Rails for Designers which me made me attend the MiniFFC.</p>
+
+<!--more-->
+
+
+<p>The topic&rsquo;s speaker was Ken Daganio of <a href="http://ndfy.me">ndfy.me</a>. All I can say is, Ken is really a cool guy. Though I didn&rsquo;t heard much of his talk because I came in late, I still got inspired to learn Ruby on Rails. I&rsquo;m a PHP guy and I want to try something much higher than this that&rsquo;s why I want to learn Rails and use it on my future projects.</p>
+
+<p><img class="full-img" src="/images/miniffc15/leancoffee.jpg"></p>
+
+<p>After Ken&rsquo;s talk, there is also a <a href="http://leancoffee.org">Lean Coffee</a> session. On that day, I don&rsquo;t have any idea what Lean Coffee is. For you to know what it is, Lean Coffee is a structured, but agenda-less meeting. Participants will be given a pad where they will write a topic they want to be discussed. After the topics will be collected, each of the participants will vote for a topic and for whoever know or have enough knowledge about it, they will come in front and will discuss about it. It&rsquo;s cool, right? It&rsquo;s really nice to have something like this because every participatn really interact with each other. Asking questions, contributing ideas, more knowledge to gather.</p>
+
+<p>It&rsquo;s really nice to attend such an event like this. I really learned a lot. And one thing that I really got interested is that they will also organize a hackathon for a cause. It&rsquo;s really interesting. I really want to help people by doing what I love, developing some stuff on the web! :)</p>
+]]></content>
+  </entry>
+  
+</feed>

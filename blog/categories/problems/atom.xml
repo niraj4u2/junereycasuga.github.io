@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Problems | Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/blog/categories/problems/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2014-10-22T20:25:04+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Developer Rants: Git Commit Messages]]></title>
+    <link href="http://junereycasuga.github.io/blog/2014/05/15/developer-rants-git-commit-messages/"/>
+    <updated>2014-05-15T20:31:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2014/05/15/developer-rants-git-commit-messages</id>
+    <content type="html"><![CDATA[<p>This will be my first post for my Developer Rants series. It will be a series of blog posts of me ranting about some issues or problems I encounter while developing some apps.</p>
+
+<!--more-->
+
+
+<p>Okay, obviously on this first post, I will be talking about Git commit messages.</p>
+
+<h3>It&rsquo;s not funny</h3>
+
+<p>My team is currently developing an app for our company. Being the team lead and head of my department, I always check the commits and pushes of my team on our repository. And I suddenly saw a non-sense commit message. And I&rsquo;m like, WTF was that!? When I check the changes on that specific commit, it was just a class added on an HTML element. I got really annoyed with what I saw. Some may see this as a funny commit message, but dude, it&rsquo;s a serious business, so it&rsquo;s not funny. Yea, I admit that I&rsquo;m also doing it before on my personal projects. But for maturity and professionalism&rsquo;s sake, please take commit messages seriously.</p>
+
+<h3>Proper commit message is important</h3>
+
+<p>Proper git commit messages are important. Why?</p>
+
+<ol>
+<li>It speeds up reviewing process.</li>
+<li>To help other developers to understand what changes has been made on a specific commit.</li>
+<li>It is helpful for documenting changes on your project.</li>
+</ol>
+
+
+<p><blockquote><p>Everybody has terrible commit messages in some point in their life.</p></p><p><p>Sometimes every single day.</p><footer><strong>Zac Holman</strong></footer></blockquote></p>
+
+<h3>Making a better Git commit</h3>
+
+<p>If you are reading this. And you feel like you&rsquo;re the one I&rsquo;m referring to, you still have the chance to change this bad habit.</p>
+
+<p>I am annoyed seeing a &lsquo;bug fix&rsquo; commit messages. It&rsquo;s too broad. And I don&rsquo;t even know what bug was fixed and where it was located.</p>
+
+<p>To make it better, try to limit using <code>git commit -m "Some crappy commit message here"</code>. Better to use <code>git commit</code> with no flags. By using a simpler git commit command, it will open up Vim (if it&rsquo;s your default editor) where you can construct a better commit message.</p>
+
+<p>Structure your commit message like this:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Short summary of changes (50 chars or less and don&rsquo;t put period at the end)&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>More detailed description of the changes. This will be good place to
+</span><span class='line'>explain what has been changed and why it has been changed. The text
+</span><span class='line'>should be wrapped at 72 chars.</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Conclusion</h3>
+
+<p>Sorry for the rant. It just really annoys me. Anyways, Happy commiting!</p>
+]]></content>
+  </entry>
+  
+</feed>

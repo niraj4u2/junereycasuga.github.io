@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Software | Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/blog/categories/software/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2014-10-22T20:25:04+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Philippine Software Engineering Review]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/09/27/philippine-software-engineering-review/"/>
+    <updated>2013-09-27T20:19:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/09/27/philippine-software-engineering-review</id>
+    <content type="html"><![CDATA[<p>A lot of people(mostly developers) might be asking what is now happening on the local dev scene here in the Philippines. Or what are the statistics on the dev scene here in the Philippines. <a href="http://proudcloud.net" target="_blank">ProudCloud</a>&rsquo;s CTO, <a href="http://twitter.com/jasontorres" target="_blank">Jason Torres</a> initialized a survey that could answer the questions of many people here in the Philippines. He made a survey to different developer communities and let them answer the survey. And at last, the long wait is over. Here is an infographic showing the result of Jason&rsquo;s survey.</p>
+
+<!--more-->
+
+
+<p><a href="http://www.scribd.com/doc/171120043/Philippine-Software-Engineering-Review">
+<img src="http://junereycasuga.github.io/images/software_engineering_review/phil_dev_scene_review.jpg" alt="Philippine Software Engineering Review" style="width:100%;">
+</a></p>
+]]></content>
+  </entry>
+  
+</feed>

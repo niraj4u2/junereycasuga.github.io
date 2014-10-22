@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Saas | Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/blog/categories/saas/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2014-10-22T20:25:04+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Cloud Computing Services: SaaS, PaaS, IaaS]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/10/12/cloud-computing-services-saas/"/>
+    <updated>2013-10-12T12:50:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/10/12/cloud-computing-services-saas</id>
+    <content type="html"><![CDATA[<p><img class="pull-left" src="/images/cloud_services/cloud.jpg" width="320"></p>
+
+<p>A lot of people are still confused about <strong>Cloud Computing</strong>. Cloud computing is something that using services through the &ldquo;cloud&rdquo;(the internet) instead of installing them and running them into your own PC or machine.</p>
+
+<!--more-->
+
+
+<p><img class="pull-right" src="/images/cloud_services/cloud_layers.jpg" width="160"></p>
+
+<p>The cloud actually has different services like Software as a Service(SaaS), Platform as a Service(PaaS), and Infrastructure as a Service(IaaS). Now let&rsquo;s take a closer look to these services offered on the cloud.</p>
+
+<br>
+
+
+<h3>SaaS &ndash; Software as a Service</h3>
+
+<p><img class="right" src="/images/cloud_services/google_microsoft.jpg" width="240"></p>
+
+<p>SaaS is the topmost layer of the cloud services. It is a software application made for end users that can be used through the internet. You can only access the software itself so it means you don&rsquo;t have the right to change something on the platform and infrastructure. What&rsquo;s good about this service is you don&rsquo;t have to install the software into your machine which obviously may allocate a lot of disk space on your hard drive. The service provider will be the one who will maintain them for you. But of course, since it is on the cloud, there can be security concerns. It is because instead of storing your files into your PC, you are directly putting your data into the Internet and storing  it on to the vendor&rsquo;s servers.</p>
+
+<p>A great example of this service are Google Apps and Microsoft Office 365 where you can use word and spreadsheet applications online.</p>
+
+<h3>IaaS &ndash; Infrastructure as a Service</h3>
+
+<p>IaaS or Infrastructure as a Service is in the bottom layer of the cloud services. The name already tells about the service. It provides you the infrastructure whether it is physical or virtual machines. To easily understand this, think of having a computer where you can install everything you want but the computer itself is not physically in front of you.</p>
+
+<p>IaaS gives you the freedom which database, operating system, and the development environments you want to use.</p>
+
+<p><img class="pull-right" src="/images/cloud_services/amazon-web-services.png" width="240">
+What&rsquo;s good about this is you don&rsquo;t have to worry maintaining your own hardware but you have the freedom to install everything you need for your applications. But it will require you a lot of work since you&rsquo;ll be the one who will set up your own platform for your applications.</p>
+
+<p>An example of an IaaS provider is the Amazon Web Services.</p>
+
+<h3>PaaS &ndash; Platform as a Service</h3>
+
+<p>PaaS or Platform as a Service is the middleware since it is sitting in the middle of the cloud service layers. In PaaS, the vendor provides you the underlying infrastructure and the application development platform. With PaaS, you don&rsquo;t have to worry on maintaining your infrastructure and everything is already set up for you &ndash; from automation to deployment, testing and iteration. What you just have to worry is developing your code.</p>
+
+<p>There are a lot of PaaS vendors like Google App Engine, Heroku and Engine Yard.</p>
+
+<p><img src="/images/cloud_services/google_app_engine.jpg" width="240"> <img src="/images/cloud_services/heroku.jpg" width="240"> <img src="/images/cloud_services/Engine-Yard-Logo.png" width="240"></p>
+
+<h3>Conclusion</h3>
+
+<p>As you can see, each layers provide you different services: software applictions, software development platform, and the hardware infrastructure. All of these services are popular. It&rsquo;s just depends on you as a user which one fits for your requirements. Like for example, if you are a Ruby, Python or Node.js developer and you want to deploy your application over the cloud, you would choose Google Cloud Engine, Heroku, or Engine Yard which are PaaS providers. If you are a developer who wants to take control on the development environment, AWS is a good choice for you which is an IaaS.</p>
+]]></content>
+  </entry>
+  
+</feed>

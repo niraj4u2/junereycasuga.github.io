@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Getting Started With Node.js - Junerey Casuga</title>
+  <meta name="author" content="Junerey Casuga">
+
+  
+  <meta name="description" content="Getting Started With Node.js Junerey Casuga in backend, javascript, node You may have heard about Node.js but you don&rsquo;t know what exactly it &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://junereycasuga.github.io/blog/2013/06/02/getting-started-with-node-dot-js">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Junerey Casuga" type="application/atom+xml">
+  <link href="/stylesheets/font-awesome.css" rel="stylesheet">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  <script src="/javascripts/custom.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36469018-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Getting Started With Node.js</h1>
+        <div class="meta">
+          Junerey Casuga
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/backend/'>backend</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/node/'>node</a>
+  
+</span>
+
+
+        </div>
+        <p>You may have heard about Node.js but you don&rsquo;t know what exactly it does. To make it short and simple, Node.js allows you to run Javascript code in the backend.</p>
+
+<!--more-->
+
+
+<h3>Installing Node</h3>
+
+<p>Before we start on writing an app, we need to install it first in our machine. For MacOS and Windows, there&rsquo;s a pretty straight forward installers which you can find on <a href="http://nodejs.org">nodejs.org</a>. For Linux, you can run these lines of command on your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install python-software-properties python g++ make
+</span><span class='line'>sudo add-apt-repository ppa:chris-lea/node.js
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install nodejs</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Hello World</h3>
+
+<p>We have node on our machine now. So let&rsquo;s proceed on writing our first node.js app, our ever loving &ldquo;Hello World&rdquo;.</p>
+
+<p>Fire up your favorite text editor and create a file called <i>helloworld.js</i>. Now, we want node to write &ldquo;Hello World&rdquo;. So put these code on <i>helloworld.js</i>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Save it and execute it using Node.js by running this command on your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node helloworld.js</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This should print &ldquo;Hello World&rdquo; on your terminal.</p>
+
+<h3>Write everything</h3>
+
+<p>Unlike PHP, you have Apache that can receive HTTP requests and serve web pages. With node, you also have to implement your own HTTP server.</p>
+
+<p>It may sound difficult, but it&rsquo;s not. Thanks to the modules that came with Node itself. I will show how to write your own HTTP server later.</p>
+
+<h3>Modules</h3>
+
+<p>Node.js has module to make your life (somewhat) easier. Modules are encapsulated piece of codes. Means that a module contains functions related to the subject of the module. Let&rsquo;s just take the &lsquo;http&rsquo; module as an example. This module, obviously, contains functions specific to HTTP. So how do we use these modules? Just use the require function.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Other than the module that came along with Node, you can also write your own module and you can include it to your app by:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./yourModule.js&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also install new modules with the help of Node Package Manager(NPM) which came along with Node.js as you install it. To install new modules using NPM, fire up your terminal, navigate to your app directory, and run this command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install module_name</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Writing your HTTP Server</h3>
+
+<p>As I promised, we will write our own HTTP server using Node.js. Create a new JS file named <i>server.js</i> and put this codes inside the file.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span><span class="nx">response</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;Content-type&quot;</span><span class="o">:</span><span class="s2">&quot;tex/plain&quot;</span><span class="p">});</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, run this command using your terminal:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node server.js</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Fire up your browser and navigate to <code>http://localhost:888</code>. Your browser should be able to run a page displaying the text &ldquo;Hello World&rdquo;.</p>
+
+<p>Sweet! So let me explain what we have written.</p>
+
+<p>The first line requires the <i>http</i> module that comes with Node.js and makes it accessible throught the <i>http</i> variable.</p>
+
+<p>Then we called one of <i>http</i> module&rsquo;s function which is the createServer function. This function returns an object and this object has a method <i>listen</i>. The <i>listen</i> method accepts a numeric value which indicates the port number the HTTP server is going to listen on.</p>
+
+<p>And inside the function we used the <i>response.writeHead()</i> function to send a HTTP status code(200, means success) and a content-type in the  HTTP response header. The <i>response.write()</i> function sends the &ldquo;Hello World&rdquo; text to the HTTP response body. And the <i>write.end()</i> ends the response.</p>
+
+<h3>Routing</h3>
+
+<p>Now, we also need to handle URL, GET, and POST parameters into our router. We may need to include the <i>url</i> and <i>querystring</i> to able to do this.</p>
+
+<p>The <i>url</i> module allows us to extract different parts of a URL.</p>
+
+<p>The <i>querystring</i> module parses the body of a GET or POST requests.</p>
+
+<p>But we will concentrate on using the <i>url</i> module for now.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">),</span>
+</span><span class='line'>  <span class="nx">url</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">){</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">pathname</span> <span class="o">=</span> <span class="nx">url</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">pathname</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Request for &quot;</span> <span class="o">+</span> <span class="nx">pathname</span> <span class="o">+</span> <span class="s2">&quot; received.&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;Content-type&quot;</span><span class="o">:</span><span class="s2">&quot;text/plain&quot;</span><span class="p">});</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Save it, and run</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node server.js</span></code></pre></td></tr></table></div></figure>
+
+
+<p>. Open up your browser and navigate to <code>http://localhost:8888</code>.</p>
+
+<p>As you run it through the browser, you should be able to see the requested url on your command line.</p>
+
+<p>So, we just included the <i>url</i> module and made it accessible through the <i>url</i> variable. Then we parsed the request and passed it to <i>pathname</i> variable.</p>
+
+<h3>Conclusion</h3>
+
+<p>That&rsquo;s it for now. I&rsquo;m also new to Node.js and this is just what I&rsquo;ve learned over the weekend. I just want to share it to you. Node.js requires extra effort but creating a powerful app with Node.js is worth it.</p>
+
+<p>This is just a preview of what you should know about Node.js. If you want to make your life easier, you might want to pick a framework for Node.js like <a href="http://expressjs.com/">Express</a> and <a href="http://www.partialjs.com/">Partial</a>.</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2" id="disqus_thread">
+    </div>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'junereycasuga';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://junereycasuga.github.io/blog/2013/06/02/getting-started-with-node-dot-js/';
+        var disqus_url = 'http://junereycasuga.github.io/blog/2013/06/02/getting-started-with-node-dot-js/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = "true";
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      console.log(dsq);
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+  </div>
+</div>
+
+<br>
+<br>
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2013/04/28/what-do-i-install-on-my-machine/" title="Previous Post: What do I install on my machine?">&laquo; Previous: What do I install on my machine?</a>
+        
+
+        
+          <a class="pull-right" href="/blog/2013/07/03/making-life-easier-through-bash-scripting/" title="Next Post: Making life easier through Bash scripting">Next: Making life easier through Bash scripting &raquo;</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <a href="#">
+  <i class="topper hidden-phone hidden-tablet fa fa-angle-double-up"></i>
+</a>
+
+<footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/junereytionX"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+    <a href="https://github.com/junereycasuga"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+    <a href="mailto:junerey.casuga@gmail.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Copyright &copy; 2014 - Junerey Casuga</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

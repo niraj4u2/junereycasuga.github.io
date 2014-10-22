@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Javascript Templating With Hogan.js - Junerey Casuga</title>
+  <meta name="author" content="Junerey Casuga">
+
+  
+  <meta name="description" content="Javascript Templating With Hogan.js Junerey Casuga in hoganjs, html, javascript, templating Javascript templating is like writing your code in MVC( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://junereycasuga.github.io/blog/2013/03/15/javascript-templating-with-hogan-dot-js">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Junerey Casuga" type="application/atom+xml">
+  <link href="/stylesheets/font-awesome.css" rel="stylesheet">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  <script src="/javascripts/custom.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36469018-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Javascript Templating With Hogan.js</h1>
+        <div class="meta">
+          Junerey Casuga
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/hoganjs/'>hoganjs</a>, <a class='category' href='/blog/categories/html/'>html</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/templating/'>templating</a>
+  
+</span>
+
+
+        </div>
+        <p>Javascript templating is like writing your code in MVC(model-view-controller) pattern which separates the logic from your view. What&rsquo;s good in using templates is it is easy to manage. Imagine your javascript if it looks like this:</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="s1">&#39;&lt;div&gt;</span>
+</span><span class='line'><span class="s1"> &lt;h2&gt;&#39;</span> <span class="o">+</span> <span class="nx">title</span> <span class="o">+</span> <span class="s1">&#39;&lt;/h2&gt;&#39;</span> <span class="o">+</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">names</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> <span class="o">+</span>
+</span><span class='line'>      <span class="s1">&#39;&lt;ul&gt;&lt;li&gt;&#39;</span> <span class="o">+</span> <span class="nx">names</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/ul&gt;&#39;</span> <span class="o">+</span>
+</span><span class='line'>  <span class="p">}</span> <span class="o">+</span>
+</span><span class='line'><span class="s1">&#39;&lt;/div&gt;&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ugly right? And if you write your javascript in that way, it would be hard for you to maintain it. And for me, it is a bad practice to write your javascript in this way. But if you will use a template, your code will look like this:</p>
+
+<p><img src="/images/templating/template.png"></p>
+
+<p>Awesome! Much cleaner and it is much easier to maintain. As you can see, it contains HTML tags with some placeholders. And we can replace these with some data which we can also store in a &lsquo;json&rsquo; format:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Templating Rocks!&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nt">&quot;names&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Juan Dela Cruz&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Maria Clara&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And if you combine the template and the data, the result will look like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;h2&gt;</span>Templating Rocks!<span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li&gt;</span>Juan Dela Cruz<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li&gt;</span>Maria Clara<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To perform javascript templating, you must use a javascript templating engine like Hogan.js which I&rsquo;ve used as an example above. Hogan.js is a light-weight templating engine which only has 2.5k file size. It is developed at Twitter and it uses the Mustach templating syntax. Hogan compiles your templates into javascript before use. Which means that it performs faster.</p>
+
+<p>There are more javascript templating engine you can use. But personally, I use Hogan.js because it&rsquo;s minimal and it does not have a lot of features which I would not normally use.</p>
+
+<p>For more information about Hogan.js, just refer to <a href="http://twitter.github.com/hogan.js/">http://twitter.github.com/hogan.js/</a></p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2" id="disqus_thread">
+    </div>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'junereycasuga';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://junereycasuga.github.io/blog/2013/03/15/javascript-templating-with-hogan-dot-js/';
+        var disqus_url = 'http://junereycasuga.github.io/blog/2013/03/15/javascript-templating-with-hogan-dot-js/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = "true";
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      console.log(dsq);
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+  </div>
+</div>
+
+<br>
+<br>
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2013/03/11/javascript-event-bubbling-and-event-capturing/" title="Previous Post: Javascript Event Bubbling and Event Capturing">&laquo; Previous: Javascript Event Bubbling and Event Capturing</a>
+        
+
+        
+          <a class="pull-right" href="/blog/2013/04/28/what-do-i-install-on-my-machine/" title="Next Post: What do I install on my machine?">Next: What do I install on my machine? &raquo;</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <a href="#">
+  <i class="topper hidden-phone hidden-tablet fa fa-angle-double-up"></i>
+</a>
+
+<footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/junereytionX"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+    <a href="https://github.com/junereycasuga"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+    <a href="mailto:junerey.casuga@gmail.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Copyright &copy; 2014 - Junerey Casuga</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Javascript Event Bubbling and Event Capturing - Junerey Casuga</title>
+  <meta name="author" content="Junerey Casuga">
+
+  
+  <meta name="description" content="Javascript Event Bubbling and Event Capturing Junerey Casuga in bubbling, javascript, jquery You might be surprised when you fire an onClick event &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://junereycasuga.github.io/blog/2013/03/11/javascript-event-bubbling-and-event-capturing">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Junerey Casuga" type="application/atom+xml">
+  <link href="/stylesheets/font-awesome.css" rel="stylesheet">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  <script src="/javascripts/custom.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36469018-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Javascript Event Bubbling and Event Capturing</h1>
+        <div class="meta">
+          Junerey Casuga
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bubbling/'>bubbling</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/jquery/'>jquery</a>
+  
+</span>
+
+
+        </div>
+        <p>You might be surprised when you fire an <code>onClick</code> event on an element, something happens to another element with the same event. Let&rsquo;s site a clearer example. Suppose  you have an element inside an element with the same event handler which is <code>onClick</code>.</p>
+
+<!--more-->
+
+
+<p><img src="/images/event_bubbling/event_bubbling1.png" width="350" height="350"></p>
+
+<p>When you click on <code>element2</code>, it also cause a click event on <code>element1</code>. And that is because of <strong>event bubbling</strong> and <strong>event capturing</strong>.</p>
+
+<h3>Event Bubbling</h3>
+
+<p>In event bubbling, the event handler propagates to the outer DOM(Document Object Model).</p>
+
+<p><img src="/images/event_bubbling/event_bubbling.png" width="350" height="350"></p>
+
+<h3>Event Capturing</h3>
+
+<p>In event capturing, the event handler propagates to the inner DOM.</p>
+
+<p><img src="/images/event_bubbling/event_capturing.png" width="350" height="350"></p>
+
+<h3>How to stop Event  Bubbling?</h3>
+
+<p>Event bubbling is always happening when you trigger an event. But there is also a way to stop it. I know that you also don&rsquo;t want event bubbling cause an interference with each element on your DOM. So how can we stop event bubbling? You can stop it by using the <code>stopPropagation()</code> method.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+</span><span class='line'>  <span class="c1">// do something</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This method allows you to stop the propagation of an event caused by event bubbling. You can also use the <code>.on()</code> function of jQuery to stop the propagation of the event.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;tbody&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s1">&#39;tr&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span><span class='line'>  <span class="c1">// do something</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The scripts simply means that by clicking the <code>tr</code> element, the propagation stops on the <code>tbody</code> element.</p>
+
+<p>That&rsquo;s it for this article. I hope you learned from this. Especially for those who are entering to the front-end development world. Cheers!</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2" id="disqus_thread">
+    </div>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'junereycasuga';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://junereycasuga.github.io/blog/2013/03/11/javascript-event-bubbling-and-event-capturing/';
+        var disqus_url = 'http://junereycasuga.github.io/blog/2013/03/11/javascript-event-bubbling-and-event-capturing/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = "true";
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      console.log(dsq);
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+  </div>
+</div>
+
+<br>
+<br>
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2013/03/10/blogging-with-octopress/" title="Previous Post: Blogging with Octopress">&laquo; Previous: Blogging with Octopress</a>
+        
+
+        
+          <a class="pull-right" href="/blog/2013/03/15/javascript-templating-with-hogan-dot-js/" title="Next Post: Javascript Templating with Hogan.js">Next: Javascript Templating with Hogan.js &raquo;</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <a href="#">
+  <i class="topper hidden-phone hidden-tablet fa fa-angle-double-up"></i>
+</a>
+
+<footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/junereytionX"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+    <a href="https://github.com/junereycasuga"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+    <a href="mailto:junerey.casuga@gmail.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Copyright &copy; 2014 - Junerey Casuga</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

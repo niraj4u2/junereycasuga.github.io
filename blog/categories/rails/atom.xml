@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rails | Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2014-10-22T20:25:04+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started With Ruby on Rails]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/09/21/getting-started-with-ruby-on-rails/"/>
+    <updated>2013-09-21T00:35:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/09/21/getting-started-with-ruby-on-rails</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve introduced to you already what Ruby on Rails is and I&rsquo;ve also given you the very basic knowledge on the Ruby language itself. So it&rsquo;s now time to develop something with Rails.</p>
+
+<!--more-->
+
+
+<h3>Installation</h3>
+
+<p>Let&rsquo;s assume that you&rsquo;ve already installed Ruby. If not, you can refer to my previous blog. To install rails, just fire up your terminal and run this command:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Alright! We already have Rails so let&rsquo;s move on!</p>
+
+<h3>Creating a WebApp</h3>
+
+<p>Now that we already have Rails, we can now create a very simple CRUD web application using Rails. To initialize your project, enter this command to your terminal:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails new testApp</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>As you can see, initializing a new appliction with Rails is very easy. We just told Rails to create a new application called <b><i>&lsquo;testApp&rsquo;</i></b>. Upon telling Rails to create new application, it also creates the files and directories that you will need for development. After Rails has created your files, it also automatically runs the <code>bundle install</code> command to get your app dependencies.</p>
+
+<h3>The Rails directory structure</h3>
+
+<p>Before we proceed with some coding, we must first know what&rsquo;s inside our Rails app directory.</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_dir.png"></p>
+
+<p>On the Rails directory, you can see there is the <i>/public</i> folder. This folder contains all static files you need like your <i>404</i> page, <i>robots.txt</i>, and your favicon.</p>
+
+<p>Another folder which is very important in your Rails directory is the <i>/app</i> folder. This is where you will consume almost 97% of your development. This folder contains:</p>
+
+<ul>
+<li><p><b><i>app/assets</i></b></p>
+
+<ul>
+<li>The /assets folder contains your images, css, and javascripts.</li>
+</ul>
+</li>
+<li><p><b><i>app/controllers</i></b></p>
+
+<ul>
+<li>This  is where Rails will find all of your controller classes.</li>
+</ul>
+</li>
+<li><p><b><i>app/helpers</i></b></p>
+
+<ul>
+<li>This folder contains the helper classes used to assist the model, view, and controller classes.</li>
+</ul>
+</li>
+<li><p><b><i>app/models</i></b></p>
+
+<ul>
+<li>This contains the model classes for your Rails app.</li>
+</ul>
+</li>
+<li><p><b><i>app/views</i></b></p>
+
+<ul>
+<li>This contains the view templates which is basically what the user sees on their screen.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>In the directory, we also have a <code>Gemfile</code>. A Gemfile is where you put all the dependencies you need for your app.</p>
+
+<h3>Runing your Rails app</h3>
+
+<p>We&rsquo;ve already created our rails app a while ago. So let&rsquo;s try to make it work. First of all, you must know how to run your Rails server. To run your server just run <code>rails server</code> or simply <code>rails s</code>. Upon runningg your Rails server, you can now check your rails app on your browser usng <code>localhost:3000</code> as the address. If it runs properly, you should see something like this:</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_welcome.png"></p>
+
+<h3>Creating our first Rails app</h3>
+
+<p>Alright! We have our Rails app running on our browser. Now what? So let&rsquo;s make our Rails app working. Hmm. Let&rsquo;s make something that works with CRUD. How about an inventory of products? Alright, let&rsquo;s do it!</p>
+
+<h4>Generating our model</h4>
+
+<p>As Rails suggested on our app, we must create a model and controller to get this rolling. I&rsquo;ll assume that you already know the concept of MVC pattern so we can move on to development.</p>
+
+<p>To create a model, use this syntax: <code>rails g model NAME [field[:type]]</code>. Let&rsquo;s now create the model for our app. So a product can have its name, description, price, and category. Let us now generate them.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails g model product title:string description:text price:float</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_model.png"></p>
+
+<p>Now Rails created a model class for us. Not just that, it also made us a migration file. Now let&rsquo;s migrate our database:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><small>*By default, Rails is using SQLite3 for database.</small></p>
+
+<h4>Generating our controller</h4>
+
+<p>We already have our model so let us now create our controller. To create a controller on Rails, just run <code>rails g controller controller_name [controller_actions]</code>. So let&rsquo;s make a controller named as <b>products</b>. We&rsquo;re creating a CRUD application so let us make actions for it. Let us run <code>rails g controller products index new show edit</code> on your terminal.</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_controller.png"></p>
+
+<p>What we just did? When we told Rails to generate a controller named as <b>products</b>, it created the controller class itself at <code>app/controllers/products_controller.rb</code>. It also created the view files for our controller and the routes for the actions we defined. And it also created test units, helpers, a coffeescript and scss file for the specific controller.</p>
+
+<h4>Routes</h4>
+
+<p>Okay! We already have our controller, so let&rsquo;s go to <code>localhost:3000/products</code>. I bet you got an error :P It&rsquo;s because we did not define the <b>products</b> controller on the resource in our routes yet. So let&rsquo;s configure our routes by inserting the code below in <code>config/routes.rb</code> file:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Routes &ndash; routes.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">resources</span> <span class="ss">:products</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If you want to make the products controller to be the root page, just add this to <code>routes.rb</code> file:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Routes &ndash; routes.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">root</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">products</span><span class="c1">#index&amp;rsquo;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>So from now on when we access <code>localhost:3000</code>, it automatically uses the products controller and its index action.</p>
+
+<h4>CRUD</h4>
+
+<p>Alright! We now have our controller and our model. Let&rsquo;s move on to get it working.</p>
+
+<p>Let&rsquo;s say we want to display all data from our database on our <i>index</i> action. To do that, let&rsquo;s edit our index action:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Products Controller &ndash; products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def index</span>
+</span><span class='line'><span class="sr">    @products = Product.all</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>What we did here is we defined our index controller and inside of it, we declared a variable that can be accessed by our views which is the <code>@products</code>. Then our <code>@products</code> controller is getting all the data from <code>Product</code> model. After telling our index controller what to do, let us now edit the <code>index.html.erb</code> file from our <code>views/products</code> directory.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>index.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;h1&gt;All Products&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;ul&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="vi">@products</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">    &lt;li&gt;</span>
+</span><span class='line'><span class="x">        &lt;h3&gt;</span><span class="cp">&lt;%=</span> <span class="nb">p</span><span class="o">.</span><span class="n">title</span> <span class="cp">%&gt;</span><span class="x">&lt;/h3&gt;</span>
+</span><span class='line'><span class="x">        &lt;small&gt;</span><span class="cp">&lt;%=</span> <span class="n">number_to_currency</span><span class="p">(</span><span class="nb">p</span><span class="o">.</span><span class="n">price</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/small&gt;</span>
+</span><span class='line'><span class="x">        &lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="nb">p</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="x">    &lt;/li&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/ul&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>By default, Rails is using erb as its templating engine. That&rsquo;s why our <code>index.html</code> has a <code>.erb</code> extension. There are other template engines for Rails like HAML. On our <code>index.html.erb</code> file, we looped through each data from the model and displayed it into a list. The <code>number_to_currency</code> function converts a number to a currency format.</p>
+
+<p>After editing our index action an our index view, let us refresh our page. It shows nothing right? Because we don&rsquo;t have any data from our database yet. So let&rsquo;s make a function on the products controller for creating data on our database.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def new</span>
+</span><span class='line'><span class="sr">    @product = Product.new</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def create</span>
+</span><span class='line'><span class="sr">    @prodct = Product.new(params[:product].permit(:title, :price, :description))</span>
+</span><span class='line'><span class="sr">    @product.save</span>
+</span><span class='line'><span class="sr">    redirect_to products_path</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>As you see, we defined two different actions. The <i>new </i> action and the <i>create</i> action. The <i>new</i> action is responsible for returning the HTML form for creating a product. And the <i>create</i> action does the saving of the data and redirects us to the producs_path (products/index) after saving the data. We now have our function, let&rsquo;s create our form on the <code>new.html.erb</code> file from the views.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>new.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;h1&gt;Create Product&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;&amp;lt;%= form_for @product, url: products_path do |f| </span><span class="err">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;pre&gt;&lt;code&gt;&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :title %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :title %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :price %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :price %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :description %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :description %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;&amp;lt;%= f.submit %&amp;gt;&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;&amp;lt;% end </span><span class="err">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We now have our view. So let&rsquo;s try to create a product:</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_create.png"></p>
+
+<p>After creating a product, it should redirect you to the products page showing something like this:</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_index.png"></p>
+
+<p>Okay! It worked! We can now add products as much as we want. Let&rsquo;s try adding a link in our <code>index.html.erb</code> for viewing a specific product and a link for adding a product.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>index.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;h1&gt;All Products&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;&amp;lt;%= link_to &amp;ldquo;Add Prodct&amp;rdquo;, new_product_path </span><span class="err">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;ul&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="vi">@products</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">    &lt;li&gt;</span>
+</span><span class='line'><span class="x">        &lt;h3&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="nb">p</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">product_path</span><span class="p">(</span><span class="nb">p</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/h3&gt;</span>
+</span><span class='line'><span class="x">        &lt;small&gt;</span><span class="cp">&lt;%=</span> <span class="n">number_to_currency</span><span class="p">(</span><span class="nb">p</span><span class="o">.</span><span class="n">price</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/small&gt;</span>
+</span><span class='line'><span class="x">        &lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="nb">p</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="x">    &lt;/li&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/ul&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We now have a link for creating a new product and a link for viewing a specific product. Let us now edit our controller and the <code>show.html.erb</code> file for displaying the details of a specific product. We should edit the <i>show</i> action on our controller first:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def show</span>
+</span><span class='line'><span class="sr">    @product = Product.find(params[:id])</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Next is the view:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>show.controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;Product ID #&lt;%= @product.id %&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= link_to &amp;ldquo;Back to Products&amp;rdquo;, @product_path %&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">&lt;h3&gt;&lt;%=</span> <span class="vi">@product</span><span class="o">.</span><span class="n">title</span> <span class="sx">%&gt;&lt;/h3&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&lt;</span><span class="n">small</span><span class="o">&gt;&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= number_to_currency(@product.price %&gt;&lt;/small&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">&lt;p&gt;&lt;p&gt;&amp;lt;%=</span> <span class="n">product</span><span class="o">.</span><span class="n">description</span> <span class="sx">%&gt;&lt;/p&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">%=</span> <span class="n">link_to</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">Edit</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="n">edit_product_path</span><span class="p">(</span><span class="vi">@product</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now if we click the title of the product, it should bring you to a page like this:</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_show.png"></p>
+
+<p>As you can see, we also added a link for editing this specific product. Let&rsquo;s now move on for the editing of specific product. Let us again edit our products controller.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def edit</span>
+</span><span class='line'><span class="sr">    @product = Product.find(params[:id])</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def update</span>
+</span><span class='line'><span class="sr">    if @product = Product.find(params[:id])</span>
+</span><span class='line'><span class="sr">        @product.update_attributes(params[:product].permit(:title, :price, :description))</span>
+</span><span class='line'><span class="sr">    end</span>
+</span><span class='line'><span class="sr">    redirect_to products_path</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We now have the function, let&rsquo;s make the view for editing:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>edit.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;h1&gt;Edit Product ID #&amp;lt;%= @prouct.id </span><span class="err">%&gt;</span><span class="x">&lt;/h1&gt;</span>
+</span><span class='line'><span class="x">&amp;lt;%= link_to &amp;ldquo;Back to Products&amp;rdquo;, product_path </span><span class="err">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;&amp;lt;%= form_for @product do |f| </span><span class="err">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;pre&gt;&lt;code&gt;&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :title %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :title %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :price %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :price %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :description %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :description %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.submit %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= link_to &quot;Delete&quot;, product_path(@product), :method=&amp;gt;:delete %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;&amp;lt;% end </span><span class="err">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Yeap! It does look like with our <code>new.html.erb</code>. We just removed the <code>url: products_path</code> from the form. So if we clicked the <i>Edit</i> link from the show page, it should bring you to the edit page showing the form and you should be able to edit it.</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_edit.png"></p>
+
+<p>As you can see, we&rsquo;ve also added a link for deleting the product. It won&rsquo;t work yet because we haven&rsquo;t added the function for it yet. So let us add it now. Let us edit again our product controller.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def destroy</span>
+</span><span class='line'><span class="sr">    if @product = Product.find(params[:id])</span>
+</span><span class='line'><span class="sr">        @product.delete</span>
+</span><span class='line'><span class="sr">    end</span>
+</span><span class='line'><span class="sr">    redirect_to products_path</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Conclusion</h3>
+
+<p>On this article, we&rsquo;ve learned how to create a new Rails app and how to do CRUD using Rails. It&rsquo;s now your turn to do some more experimentation on Rails. Thanks for reading my post.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Introduction to Ruby on Rails]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/08/18/introduction-to-ruby-on-rails/"/>
+    <updated>2013-08-18T20:55:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/08/18/introduction-to-ruby-on-rails</id>
+    <content type="html"><![CDATA[<p>I used to hack with PHP and I am a newbie on developing something with Ruby on Rails or with Ruby itself. Well, it doesn&rsquo;t mean that a newbie doesn&rsquo;t know anything about a specific topic right? So I will be sharing you what Ruby on Rails is, where it came from, and I will also be sharing to you how I started to learn Ruby/RoR as a newbie. And hopefully I can find time to teach you how to get started with Ruby on Rails development. So watch out for that.</p>
+
+<!--more-->
+
+
+<h3>What is Ruby on Rails</h3>
+
+<p><img src="/images/ruby_on_rails/rails.jpg"></p>
+
+<p>Ruby on Rails is an open-source web application framework created by David Heinemeier Hansson. Rails is based on the <b>Model-View-Controller</b> architecture that splits your application into three sections:</p>
+
+<ul>
+<li>The <b>Models</b> are the ones which contains the business data and behaviour.</li>
+<li>The <b>Views</b> are templates which renders data from the model to the user. So basically, it is what the user sees from the screen.</li>
+<li>The <b>Controllers</b> process the request from users and it also initiate changes in the models.</li>
+</ul>
+
+
+<p>Many says that Rails is an <b>&ldquo;opinionated software&rdquo;</b> which means it only focuses on one way of doing things. Unlike PHP which gives you different ways to solve one problem. Well, I don&rsquo;t know if that&rsquo;s a good feature of Rails. What do you think?</p>
+
+<p>Anyway, where did RoR came from?</p>
+
+<h3>The Ruby Programming Language</h3>
+
+<p><img src="/images/ruby_on_rails/ruby.jpg"></p>
+
+<p>Yes! The name already tells. It came from a programming language named as &ldquo;Ruby&rdquo;.</p>
+
+<p>Ruby is developed in 1995 by a Japanese programmer named Yukihiro Matsumoto, a.k.a. &ldquo;Matz&rdquo;.</p>
+
+<p>Matz took some elements from his favorite programming languages which are Perl, Smalltalk and Lisp. He combined them all into one language with easy syntax and the Ruby language was born. I&rsquo;ll talk more about the syntax of Ruby and some more important things about it on my next post. So stay tuned.</p>
+
+<h3>Being a Ruby newbie</h3>
+
+<p>As you know, I&rsquo;ve been developing with PHP for many years now. And yeah, I&rsquo;ve been hearing Ruby before. And it was until last month that Ruby touched my heart. Since then, I&rsquo;ve started to learn Ruby. But I struggled on learning it because I don&rsquo;t know where to start. And I hope I can help you (newbies) to start learning Ruby and RoR.</p>
+
+<h4>The core language</h4>
+
+<p>Ruby is the core of everything you&rsquo;ll do on Ruby on Rails. Ruby is the language and Rails is the framework you use to make your development faster and easier.</p>
+
+<p>So study the Ruby programming language first before moving on to studying Rails.</p>
+
+<h4>Where to start?</h4>
+
+<p>To get started with learning Ruby, you can checkout <a href="http://ruby.learncodethehardway.org/book/">Learn Ruby the Hard Way</a>. And if you want an interactive learning, you can go to <a href="http://tryruby.org">http://tryruby.org</a> and <a href="http://rubymonk.com">Ruby Monk</a>.</p>
+
+<p>And for Rails, I am using <a href="http://codeschool.com">Code School</a>&rsquo;s courses for it.</p>
+
+<h3>Conclusion</h3>
+
+<p>I hope I was able to show you a very short introduction on Rails development. On my next post, we will try to install Ruby and Ruby on Rails on your machine and the basics of Ruby and Ruby on Rails.</p>
+]]></content>
+  </entry>
+  
+</feed>
