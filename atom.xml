@@ -4,7 +4,7 @@
   <title><![CDATA[Junerey Casuga]]></title>
   <link href="http://junereycasuga.github.io/atom.xml" rel="self"/>
   <link href="http://junereycasuga.github.io/"/>
-  <updated>2014-10-22T20:25:04+08:00</updated>
+  <updated>2014-11-19T21:19:47+08:00</updated>
   <id>http://junereycasuga.github.io/</id>
   <author>
     <name><![CDATA[Junerey Casuga]]></name>
@@ -12,6 +12,79 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Install Yeoman]]></title>
+    <link href="http://junereycasuga.github.io/blog/2014/11/19/how-to-install-yeoman/"/>
+    <updated>2014-11-19T20:42:06+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2014/11/19/how-to-install-yeoman</id>
+    <content type="html"><![CDATA[<p>We used Yeoman from the previous blog I wrote on working with AngularJS. But the problem is, I haven&rsquo;t included there how to install Yeoman. So this is the post you need to read in order to install Yeoman.</p>
+
+<h2>Node.js</h2>
+
+<p>To install Yeoman, you must first have Node.js installed on your machine. For Windows users, you can download the installer from <a href="http://nodejs.org/download/">here</a>. And for those who are using Mac OS X or Linux, I prefer using NVM (Node Version Manager). Why? Because it lets you switch from different versions of Node.js at ease. There are 2 ways on how to install NVM, through cURL or through Wget.</p>
+
+<p>To install NVM through cURL:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To isntall NVM through Wget:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>These scripts clones the NVM repository from Github to <code>/.nvm</code> directory and adds the source line to your profile (<code>/.bash_profile</code> or <code>/.profile</code>).</p>
+
+<p>Once you have installed NVM, you can now use it for installing Node.js. To download, compile and install the latest 0.10.x version of Node.js, do this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nvm install 0.10</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And you can now use the Node.js version you just installed by running:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nvm use 0.10</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Yeoman</h2>
+
+<p>Now that we have Node.js installed on our machine, we are now ready to install Yeoman. Yeoman is using 3 core tools. These core tools are composed by Yo, Grunt, and Bower. So we will install them one by one through NPM (Node Packaged Modules) which came with Node.js when we installed it.</p>
+
+<h3>Yo</h3>
+
+<p>Yo is the tool to use for running Yeoman generators. To install it, just run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g yo</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Grunt</h3>
+
+<p>Grunt is the task-manager. To install it, just run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g grunt-cli</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Bower</h3>
+
+<p>Bower is a package manager. To install it, just run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g bower</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Conclsion</h2>
+
+<p>We now have the core tools needed for Yeoman to work, but there is one more thing we need to do. That is to install the generator we want to use. If you want to create a basic webapp, you just need to run <code>npm install -g generator-webapp</code> or if you want to work on AngularJS, just run <code>npm install -g generator-angular</code>.</p>
+
+<p>We now have all the things needed, and you can now kickstart your project by running <code>yo webapp</code> or <code>yo angular</code>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Wiring Up a Back-end to Your AngularJS App Using Firebase]]></title>
