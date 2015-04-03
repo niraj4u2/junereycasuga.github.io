@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How to Install Yeoman - Junerey Casuga</title>
+  <meta name="author" content="Junerey Casuga">
+
+  
+  <meta name="description" content="How to Install Yeoman Junerey Casuga in yeoman We used Yeoman from the previous blog I wrote on working with AngularJS. But the problem is, I haven& &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://junereycasuga.github.io/blog/2014/11/19/how-to-install-yeoman">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Junerey Casuga" type="application/atom+xml">
+  <link href="/stylesheets/font-awesome.css" rel="stylesheet">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  <script src="/javascripts/custom.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36469018-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>How to Install Yeoman</h1>
+        <div class="meta">
+          Junerey Casuga
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/yeoman/'>yeoman</a>
+  
+</span>
+
+
+        </div>
+        <p>We used Yeoman from the previous blog I wrote on working with AngularJS. But the problem is, I haven&rsquo;t included there how to install Yeoman. So this is the post you need to read in order to install Yeoman.</p>
+
+<h2>Node.js</h2>
+
+<p>To install Yeoman, you must first have Node.js installed on your machine. For Windows users, you can download the installer from <a href="http://nodejs.org/download/">here</a>. And for those who are using Mac OS X or Linux, I prefer using NVM (Node Version Manager). Why? Because it lets you switch from different versions of Node.js at ease. There are 2 ways on how to install NVM, through cURL or through Wget.</p>
+
+<p>To install NVM through cURL:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To isntall NVM through Wget:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>These scripts clones the NVM repository from Github to <code>/.nvm</code> directory and adds the source line to your profile (<code>/.bash_profile</code> or <code>/.profile</code>).</p>
+
+<p>Once you have installed NVM, you can now use it for installing Node.js. To download, compile and install the latest 0.10.x version of Node.js, do this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nvm install 0.10</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And you can now use the Node.js version you just installed by running:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nvm use 0.10</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Yeoman</h2>
+
+<p>Now that we have Node.js installed on our machine, we are now ready to install Yeoman. Yeoman is using 3 core tools. These core tools are composed by Yo, Grunt, and Bower. So we will install them one by one through NPM (Node Packaged Modules) which came with Node.js when we installed it.</p>
+
+<h3>Yo</h3>
+
+<p>Yo is the tool to use for running Yeoman generators. To install it, just run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g yo</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Grunt</h3>
+
+<p>Grunt is the task-manager. To install it, just run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g grunt-cli</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Bower</h3>
+
+<p>Bower is a package manager. To install it, just run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g bower</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Conclsion</h2>
+
+<p>We now have the core tools needed for Yeoman to work, but there is one more thing we need to do. That is to install the generator we want to use. If you want to create a basic webapp, you just need to run <code>npm install -g generator-webapp</code> or if you want to work on AngularJS, just run <code>npm install -g generator-angular</code>.</p>
+
+<p>We now have all the things needed, and you can now kickstart your project by running <code>yo webapp</code> or <code>yo angular</code>.</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2" id="disqus_thread">
+    </div>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'junereycasuga';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://junereycasuga.github.io/blog/2014/11/19/how-to-install-yeoman/';
+        var disqus_url = 'http://junereycasuga.github.io/blog/2014/11/19/how-to-install-yeoman/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = "true";
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      console.log(dsq);
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+  </div>
+</div>
+
+<br>
+<br>
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2014/06/21/wiring-up-a-back-end-to-your-angularjs-app-using-firebase/" title="Previous Post: Wiring up a back-end to your AngularJS app using Firebase">&laquo; Previous: Wiring up a back-end to your AngularJS app using Firebase</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <a href="#">
+  <i class="topper hidden-phone hidden-tablet fa fa-angle-double-up"></i>
+</a>
+
+<footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/junereytionX"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+    <a href="https://github.com/junereycasuga"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+    <a href="mailto:junerey.casuga@gmail.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Copyright &copy; 2015 - Junerey Casuga</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+<div id="bookr" data-key="TpHquJviMhXZ0XWrGvb1"></div><script src="http://dweberb81jcpk.cloudfront.net/widget/widget.js"></script>
+  </body>
+</html>

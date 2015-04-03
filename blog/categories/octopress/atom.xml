@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2015-04-03T11:48:55+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Blogging With Octopress]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/03/10/blogging-with-octopress/"/>
+    <updated>2013-03-10T14:01:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/03/10/blogging-with-octopress</id>
+    <content type="html"><![CDATA[<p>Octopress is actually a framework for Jekyll. But before I continue, let me first tell you what Jekyll is. Jekyll is knwon as &ldquo;a simple, blog aware, static site generator&rdquo;. But Jekyll is not a blogging software. It is a parsing engine. It means that Jekyll parses your dynamic components such as templates, partials, markdown/textiles, etc. into a static site.</p>
+
+<!--more-->
+
+
+<p>Moving on. I started blogging using Wordpress and I found it too much for &ldquo;not really a blogger&rdquo; people like me. It is too much for me. And I don&rsquo;t want to be writing inside a big database. That&rsquo;s why I&rsquo;ve decided to write my blog using Jekyll since it is light-weight and you can write your post using your favorite text editor. But I had a hard time using because you need to build everything for your blog site. You have to write your own HTML template, CSS, JavaScripts and set up your own configurations.</p>
+
+<p>Then the time came that I&rsquo;ve encountered Octopress. As I&rsquo;ve said, it is a framework for Jekyll. In Octopress, you don&rsquo;t have to write your own HTML templates, CSS and JavaScripts becuase Octopress already have them all for you. I&rsquo;ll walk you through how to start blogging using Octopress.</p>
+
+<p>Before you start using Octopress, you must first install these:</p>
+
+<ol>
+<li>Git</li>
+<li>Ruby 1.9.3</li>
+</ol>
+
+
+<h3>Setting up Octopress</h3>
+
+<p>First of all you must clone Octopress from GitHub. Just run this command.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Next is to install the dependencies.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
+</span><span class='line'>gem install bundler
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Installing the default Octopress theme.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>After performing these steps, you can configure your blog by editing some files. Here are the list of files for configuring Octopress:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>_config.yml    # Main config
+</span><span class='line'>Rakefile       # Config for deployment
+</span><span class='line'>config.rb      # Compass config
+</span><span class='line'>config.ru      # Rack config</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>To create a new post, just run this on your terminal:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post[&ldquo;title&rdquo;]</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>By running this command, Rake(Ruby Make) will generate a markdown file that will be saved in the <code>source/_posts</code> and you can use that file for writing your article.</p>
+
+<p>For more documentations about posting new article and creating a new page, please refer to Octopress documentation at <a href="http://octopress.org/docs/blogging/">http://octopress.org/docs/blogging/</a>.</p>
+
+<p>There you go! I hope I was able to help you to set up your blog using Octopress. Enjoy blogging!</p>
+
+<h3>Resources:</h3>
+
+<p><a href="http://jekyllbootstrap.com/lessons/jekyll-introduction.html">http://jekyllbootstrap.com/lessons/jekyll-introduction.html</a></p>
+
+<p><a href="http://octopress.org/">http://octopress.org/</a></p>
+]]></content>
+  </entry>
+  
+</feed>

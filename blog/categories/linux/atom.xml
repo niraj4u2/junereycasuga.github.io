@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux | Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2015-04-03T11:48:55+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started With Ruby on Rails]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/09/21/getting-started-with-ruby-on-rails/"/>
+    <updated>2013-09-21T00:35:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/09/21/getting-started-with-ruby-on-rails</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve introduced to you already what Ruby on Rails is and I&rsquo;ve also given you the very basic knowledge on the Ruby language itself. So it&rsquo;s now time to develop something with Rails.</p>
+
+<!--more-->
+
+
+<h3>Installation</h3>
+
+<p>Let&rsquo;s assume that you&rsquo;ve already installed Ruby. If not, you can refer to my previous blog. To install rails, just fire up your terminal and run this command:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install rails</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Alright! We already have Rails so let&rsquo;s move on!</p>
+
+<h3>Creating a WebApp</h3>
+
+<p>Now that we already have Rails, we can now create a very simple CRUD web application using Rails. To initialize your project, enter this command to your terminal:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails new testApp</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>As you can see, initializing a new appliction with Rails is very easy. We just told Rails to create a new application called <b><i>&lsquo;testApp&rsquo;</i></b>. Upon telling Rails to create new application, it also creates the files and directories that you will need for development. After Rails has created your files, it also automatically runs the <code>bundle install</code> command to get your app dependencies.</p>
+
+<h3>The Rails directory structure</h3>
+
+<p>Before we proceed with some coding, we must first know what&rsquo;s inside our Rails app directory.</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_dir.png"></p>
+
+<p>On the Rails directory, you can see there is the <i>/public</i> folder. This folder contains all static files you need like your <i>404</i> page, <i>robots.txt</i>, and your favicon.</p>
+
+<p>Another folder which is very important in your Rails directory is the <i>/app</i> folder. This is where you will consume almost 97% of your development. This folder contains:</p>
+
+<ul>
+<li><p><b><i>app/assets</i></b></p>
+
+<ul>
+<li>The /assets folder contains your images, css, and javascripts.</li>
+</ul>
+</li>
+<li><p><b><i>app/controllers</i></b></p>
+
+<ul>
+<li>This  is where Rails will find all of your controller classes.</li>
+</ul>
+</li>
+<li><p><b><i>app/helpers</i></b></p>
+
+<ul>
+<li>This folder contains the helper classes used to assist the model, view, and controller classes.</li>
+</ul>
+</li>
+<li><p><b><i>app/models</i></b></p>
+
+<ul>
+<li>This contains the model classes for your Rails app.</li>
+</ul>
+</li>
+<li><p><b><i>app/views</i></b></p>
+
+<ul>
+<li>This contains the view templates which is basically what the user sees on their screen.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>In the directory, we also have a <code>Gemfile</code>. A Gemfile is where you put all the dependencies you need for your app.</p>
+
+<h3>Runing your Rails app</h3>
+
+<p>We&rsquo;ve already created our rails app a while ago. So let&rsquo;s try to make it work. First of all, you must know how to run your Rails server. To run your server just run <code>rails server</code> or simply <code>rails s</code>. Upon runningg your Rails server, you can now check your rails app on your browser usng <code>localhost:3000</code> as the address. If it runs properly, you should see something like this:</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_welcome.png"></p>
+
+<h3>Creating our first Rails app</h3>
+
+<p>Alright! We have our Rails app running on our browser. Now what? So let&rsquo;s make our Rails app working. Hmm. Let&rsquo;s make something that works with CRUD. How about an inventory of products? Alright, let&rsquo;s do it!</p>
+
+<h4>Generating our model</h4>
+
+<p>As Rails suggested on our app, we must create a model and controller to get this rolling. I&rsquo;ll assume that you already know the concept of MVC pattern so we can move on to development.</p>
+
+<p>To create a model, use this syntax: <code>rails g model NAME [field[:type]]</code>. Let&rsquo;s now create the model for our app. So a product can have its name, description, price, and category. Let us now generate them.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails g model product title:string description:text price:float</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_model.png"></p>
+
+<p>Now Rails created a model class for us. Not just that, it also made us a migration file. Now let&rsquo;s migrate our database:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><small>*By default, Rails is using SQLite3 for database.</small></p>
+
+<h4>Generating our controller</h4>
+
+<p>We already have our model so let us now create our controller. To create a controller on Rails, just run <code>rails g controller controller_name [controller_actions]</code>. So let&rsquo;s make a controller named as <b>products</b>. We&rsquo;re creating a CRUD application so let us make actions for it. Let us run <code>rails g controller products index new show edit</code> on your terminal.</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_controller.png"></p>
+
+<p>What we just did? When we told Rails to generate a controller named as <b>products</b>, it created the controller class itself at <code>app/controllers/products_controller.rb</code>. It also created the view files for our controller and the routes for the actions we defined. And it also created test units, helpers, a coffeescript and scss file for the specific controller.</p>
+
+<h4>Routes</h4>
+
+<p>Okay! We already have our controller, so let&rsquo;s go to <code>localhost:3000/products</code>. I bet you got an error :P It&rsquo;s because we did not define the <b>products</b> controller on the resource in our routes yet. So let&rsquo;s configure our routes by inserting the code below in <code>config/routes.rb</code> file:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Routes &ndash; routes.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">resources</span> <span class="ss">:products</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If you want to make the products controller to be the root page, just add this to <code>routes.rb</code> file:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Routes &ndash; routes.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">root</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">products</span><span class="c1">#index&amp;rsquo;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>So from now on when we access <code>localhost:3000</code>, it automatically uses the products controller and its index action.</p>
+
+<h4>CRUD</h4>
+
+<p>Alright! We now have our controller and our model. Let&rsquo;s move on to get it working.</p>
+
+<p>Let&rsquo;s say we want to display all data from our database on our <i>index</i> action. To do that, let&rsquo;s edit our index action:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Products Controller &ndash; products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def index</span>
+</span><span class='line'><span class="sr">    @products = Product.all</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>What we did here is we defined our index controller and inside of it, we declared a variable that can be accessed by our views which is the <code>@products</code>. Then our <code>@products</code> controller is getting all the data from <code>Product</code> model. After telling our index controller what to do, let us now edit the <code>index.html.erb</code> file from our <code>views/products</code> directory.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>index.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;h1&gt;All Products&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;ul&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="vi">@products</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">    &lt;li&gt;</span>
+</span><span class='line'><span class="x">        &lt;h3&gt;</span><span class="cp">&lt;%=</span> <span class="nb">p</span><span class="o">.</span><span class="n">title</span> <span class="cp">%&gt;</span><span class="x">&lt;/h3&gt;</span>
+</span><span class='line'><span class="x">        &lt;small&gt;</span><span class="cp">&lt;%=</span> <span class="n">number_to_currency</span><span class="p">(</span><span class="nb">p</span><span class="o">.</span><span class="n">price</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/small&gt;</span>
+</span><span class='line'><span class="x">        &lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="nb">p</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="x">    &lt;/li&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/ul&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>By default, Rails is using erb as its templating engine. That&rsquo;s why our <code>index.html</code> has a <code>.erb</code> extension. There are other template engines for Rails like HAML. On our <code>index.html.erb</code> file, we looped through each data from the model and displayed it into a list. The <code>number_to_currency</code> function converts a number to a currency format.</p>
+
+<p>After editing our index action an our index view, let us refresh our page. It shows nothing right? Because we don&rsquo;t have any data from our database yet. So let&rsquo;s make a function on the products controller for creating data on our database.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def new</span>
+</span><span class='line'><span class="sr">    @product = Product.new</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def create</span>
+</span><span class='line'><span class="sr">    @prodct = Product.new(params[:product].permit(:title, :price, :description))</span>
+</span><span class='line'><span class="sr">    @product.save</span>
+</span><span class='line'><span class="sr">    redirect_to products_path</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>As you see, we defined two different actions. The <i>new </i> action and the <i>create</i> action. The <i>new</i> action is responsible for returning the HTML form for creating a product. And the <i>create</i> action does the saving of the data and redirects us to the producs_path (products/index) after saving the data. We now have our function, let&rsquo;s create our form on the <code>new.html.erb</code> file from the views.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>new.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;h1&gt;Create Product&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;&amp;lt;%= form_for @product, url: products_path do |f| </span><span class="err">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;pre&gt;&lt;code&gt;&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :title %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :title %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :price %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :price %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :description %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :description %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;&amp;lt;%= f.submit %&amp;gt;&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;&amp;lt;% end </span><span class="err">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We now have our view. So let&rsquo;s try to create a product:</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_create.png"></p>
+
+<p>After creating a product, it should redirect you to the products page showing something like this:</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_index.png"></p>
+
+<p>Okay! It worked! We can now add products as much as we want. Let&rsquo;s try adding a link in our <code>index.html.erb</code> for viewing a specific product and a link for adding a product.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>index.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;h1&gt;All Products&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;&amp;lt;%= link_to &amp;ldquo;Add Prodct&amp;rdquo;, new_product_path </span><span class="err">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;ul&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="vi">@products</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">    &lt;li&gt;</span>
+</span><span class='line'><span class="x">        &lt;h3&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="nb">p</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">product_path</span><span class="p">(</span><span class="nb">p</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/h3&gt;</span>
+</span><span class='line'><span class="x">        &lt;small&gt;</span><span class="cp">&lt;%=</span> <span class="n">number_to_currency</span><span class="p">(</span><span class="nb">p</span><span class="o">.</span><span class="n">price</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/small&gt;</span>
+</span><span class='line'><span class="x">        &lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="nb">p</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="x">    &lt;/li&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/ul&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We now have a link for creating a new product and a link for viewing a specific product. Let us now edit our controller and the <code>show.html.erb</code> file for displaying the details of a specific product. We should edit the <i>show</i> action on our controller first:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def show</span>
+</span><span class='line'><span class="sr">    @product = Product.find(params[:id])</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Next is the view:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>show.controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;Product ID #&lt;%= @product.id %&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= link_to &amp;ldquo;Back to Products&amp;rdquo;, @product_path %&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">&lt;h3&gt;&lt;%=</span> <span class="vi">@product</span><span class="o">.</span><span class="n">title</span> <span class="sx">%&gt;&lt;/h3&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&lt;</span><span class="n">small</span><span class="o">&gt;&amp;</span><span class="n">lt</span><span class="p">;</span><span class="sx">%= number_to_currency(@product.price %&gt;&lt;/small&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">&lt;p&gt;&lt;p&gt;&amp;lt;%=</span> <span class="n">product</span><span class="o">.</span><span class="n">description</span> <span class="sx">%&gt;&lt;/p&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">%=</span> <span class="n">link_to</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">Edit</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="n">edit_product_path</span><span class="p">(</span><span class="vi">@product</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now if we click the title of the product, it should bring you to a page like this:</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_show.png"></p>
+
+<p>As you can see, we also added a link for editing this specific product. Let&rsquo;s now move on for the editing of specific product. Let us again edit our products controller.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def edit</span>
+</span><span class='line'><span class="sr">    @product = Product.find(params[:id])</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def update</span>
+</span><span class='line'><span class="sr">    if @product = Product.find(params[:id])</span>
+</span><span class='line'><span class="sr">        @product.update_attributes(params[:product].permit(:title, :price, :description))</span>
+</span><span class='line'><span class="sr">    end</span>
+</span><span class='line'><span class="sr">    redirect_to products_path</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We now have the function, let&rsquo;s make the view for editing:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>edit.html.erb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;h1&gt;Edit Product ID #&amp;lt;%= @prouct.id </span><span class="err">%&gt;</span><span class="x">&lt;/h1&gt;</span>
+</span><span class='line'><span class="x">&amp;lt;%= link_to &amp;ldquo;Back to Products&amp;rdquo;, product_path </span><span class="err">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;&amp;lt;%= form_for @product do |f| </span><span class="err">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;pre&gt;&lt;code&gt;&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :title %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :title %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :price %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :price %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.label :description %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.text_field :description %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;p&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= f.submit %&amp;gt;</span>
+</span><span class='line'><span class="x">    &amp;lt;%= link_to &quot;Delete&quot;, product_path(@product), :method=&amp;gt;:delete %&amp;gt;</span>
+</span><span class='line'><span class="x">&amp;lt;/p&amp;gt;</span>
+</span><span class='line'><span class="x">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;&amp;lt;% end </span><span class="err">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Yeap! It does look like with our <code>new.html.erb</code>. We just removed the <code>url: products_path</code> from the form. So if we clicked the <i>Edit</i> link from the show page, it should bring you to the edit page showing the form and you should be able to edit it.</p>
+
+<p><img class="full-img" src="/images/ruby_on_rails/rails_edit.png"></p>
+
+<p>As you can see, we&rsquo;ve also added a link for deleting the product. It won&rsquo;t work yet because we haven&rsquo;t added the function for it yet. So let us add it now. Let us edit again our product controller.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>products_controller.rb </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;def destroy</span>
+</span><span class='line'><span class="sr">    if @product = Product.find(params[:id])</span>
+</span><span class='line'><span class="sr">        @product.delete</span>
+</span><span class='line'><span class="sr">    end</span>
+</span><span class='line'><span class="sr">    redirect_to products_path</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;&amp;hellip;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Conclusion</h3>
+
+<p>On this article, we&rsquo;ve learned how to create a new Rails app and how to do CRUD using Rails. It&rsquo;s now your turn to do some more experimentation on Rails. Thanks for reading my post.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Making Life Easier Through Bash Scripting]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/07/03/making-life-easier-through-bash-scripting/"/>
+    <updated>2013-07-03T23:36:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/07/03/making-life-easier-through-bash-scripting</id>
+    <content type="html"><![CDATA[<p><img class="full-img" src="/images/bash_scripting/bash-fb.png" width="800">
+<img class="full-img" src="/images/bash_scripting/bash-google-plus.png" width="800"></p>
+
+<p>In the past few days, some of my friends and colleagues saw my cover photo from my <a href="https://facebook.com/kaj26kai">Facebook</a> and <a href="https://plus.google.com/105091722637731618991">Google+</a> and asked me, &ldquo;What is #!/bin/bash?&rdquo;. That&rsquo;s why I came up to an idea on writing about Bash or Shell scripting. This will talk about how bash will help a typical Linux user. I won&rsquo;t be tackling any programming using bash.</p>
+
+<!--more-->
+
+
+<p>Shell scripting or Bash scripting is commonly used by Linux users. It is actually useful for making your task easier. Well, not actually easier but faster. In this post, I will show you how bash scripting could help you on speeding up a task do you always do.</p>
+
+<h3>The Problem</h3>
+
+<p>Let&rsquo;s say you got a freshly installed Linux operating system on your machine. And in Linux, we(or is it only me?) usually install programs through the terminal. And since you have a freshly installed OS, there&rsquo;s a lot of command you want to run on your terminal to install softwares or programs. And sometimes, it is annoying that you have to type a specific command every after a software is installed.</p>
+
+<h3>The Solution</h3>
+
+<p>To make your life easier, we can use shell scripting to run all of those commands with just one command on your terminal.</p>
+
+<h3>Shebang</h3>
+
+<p><blockquote><p>A <b>Shebang</b> is the combination of hash and an exclamation mark : <b>#!</b>. The program loader will look for the shebang on the first line of script and use the interpreter specified in it.</p><footer><strong>NetTuts <a href="http://net.tutsplus.com/tutorials/other/the-fundamentals-of-bash-scripting/">http://net.tutsplus.com/tutorials/other/the-fundamentals-of-bash-scripting/</a></strong></footer></blockquote></p>
+
+<p>A shebang consists the following syntax:
+<code>#!interpreter [parameters]</code>
+The interpreter is the program used to interpret the language used. For bash scripting, we would use <code>#!/bin/bash</code>.</p>
+
+<h3>Examples</h3>
+
+<p>Let&rsquo;s take the problem above where you are tired of typing a lot of command one after another. So we will use shell scripting to make your task faster. Let&rsquo;s say I had a freshly installed Linux OS on my machine and I want to install programs I usally install on my machine like LAMP. Installing LAMP uses different commands because it will install Apache, MySQL and PHP. Now, let&rsquo;s use bash to run the commands used to install LAMP.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;!/bin/bash&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install apache2 &amp;amp;&amp;amp; sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt &amp;amp;&amp;amp; sudo apt-get install phpmyadmin &amp;amp;&amp;amp; sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql &amp;amp;&amp;amp; sudo mysql_install_db &amp;amp;&amp;amp; sudo /usr/bin/mysql_secure_installation&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;exit 0
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>And let&rsquo;s save it as <code>install-lamp.sh</code>.</p>
+
+<p>To run this specific shell script, open up your terminal and navigate to the directory where you saved <code>install-lamp.sh</code>. And run <code>bash install-lamp.sh</code>. As you hit enter key, all the commands you&rsquo;ve inserted inside the shell script will be run automatically without you typing everytime on software is done installing.</p>
+
+<h3>Very Short Explanation</h3>
+
+<p>As you can see, the script basically contains the shebang with the interpreter(bash) and a string of terminal commands linked together using <code>&amp;&amp;</code>. This means that we&rsquo;ll run this commands one after another.</p>
+
+<h3>Conclusion</h3>
+
+<p>In fact, you can do more than this. You can do a lot of things through shell scripting. Shell scripting is not only for programmers. In fact, even a typical Linux user can use it for speeding up some task. This could be a big help for finishing a task faster. So I would love to say that <b>I <3 #!/bin/bash</b>. :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What Do I Install on My Machine?]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/04/28/what-do-i-install-on-my-machine/"/>
+    <updated>2013-04-28T18:36:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/04/28/what-do-i-install-on-my-machine</id>
+    <content type="html"><![CDATA[<p>This post is just something that I want to share to you. And this can be also as a reminder and guide for me when I have a freshly installed OS on my machine.</p>
+
+<!--more-->
+
+
+<p>I am a Linux user. I&rsquo;m currently running Ubuntu 14.04. I will give you my list of programs, tools, and some applications that I install after installing a fresh OS. I will also show you how to install them. So let&rsquo;s get started.</p>
+
+<h3>LAMP</h3>
+
+<p>As we all know, LAMP stands for Linux, Apache, MySQL, and PHP. These are open-source softwares used to make your web server running. Since I am running on Ubuntu, which is a Linux distro, we don&rsquo;t have to take care about it. What we should just install is just the Apache, MySQL, and PHP.</p>
+
+<h4>Apache</h4>
+
+<p>To install Apache, just run this line of command in your terminal:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install apache2</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>That&rsquo;s it. To check if it works, just open your browser and type in <a href="http://127.0.0.1">http://127.0.0.1</a> or <code>localhost</code>. It should display &ldquo;It works!&rdquo; on the page.</p>
+
+<h4>MySQL</h4>
+
+<p>MySQL is basically a database management system. It is where you store data from your web application and retrieve data that is being displayed on your web application.</p>
+
+<p>To install MySQL, run this line of command in your terminal:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>After install MySQL, activate it with this command:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mysql_install_db</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>To finalize the installation, run this command:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /usr/bin/mysql_secure_installation</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>A prompt message will ask you a lot of questions. Just answer all of them with Yes.</p>
+
+<h4>PHP</h4>
+
+<p>PHP is a server-side scripting language used to build dynamic websites.</p>
+
+<p>To install PHP, run this line of command in your terminal:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Installing LAMP won&rsquo;t install phpMyAdmin yet. To install phpMyAdmin, just run this on your terminal:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install phpmyadmin</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>That&rsquo;s it! As easy as 1-2-3!</p>
+
+<h3>Sublime Text</h3>
+
+<p>Text editors are very essential for all developers. Ubuntu has a pre-installed text editor, Gedit. But I don&rsquo;t like it. That&rsquo;s why I always use Sublime Text as my text text editor.</p>
+
+<p>To install Sublime Text 2, download the <code>.tar.bz2</code> file from Sublime Text&rsquo;s <a href="http://www.sublimetext.com/2">website</a> and extract it by running this command on your terminal:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar xf Sublime\ Text\ 2.0.1\ x64.tar.bz2</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If you got the 32-bit installer, just replace the x64 to x32 on the command.</p>
+
+<p>After extracting, you&rsquo;ll get a &ldquo;Sublime Text 2&rdquo; folder which contains all files that Sublime Text will need. We have to move that folder to &ldquo;/opt&rdquo; folder.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mv Sublime\ Text\ 2 /opt/</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If you want to be able to run Sublime Text through the terminal by just typing &ldquo;sublime&rdquo;, we must create a link in &ldquo;/usr/bin&rdquo;.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s /opt/Sublime\ Text\ 2/sublime_text /usr/bin/sublime</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now, we also need to have a launcher in Unity. So we will create a .desktop file in &ldquo;usr/share/applications&rdquo;.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo sublime /usr/share/applications/sublime.desktop</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>This will let Sublime Text 2 open up a blank document named as &ldquo;sublime.desktop&rdquo;. Paste these line of codes in the document:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[Desktop Entry]
+</span><span class='line'>Version=1.0
+</span><span class='line'>Name=Sublime Text 2&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>Only KDE 4 seems to use GenericName, so we reuse the KDE strings.&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>From Ubuntu&rsquo;s language-pack-kde-XX-base packages, version 9.04-20090413.&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>GenericName=Text Editor&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>Exec=sublime
+</span><span class='line'>Terminal=false
+</span><span class='line'>Icon=/opt/Sublime Text 2/Icon/48x48/sublime_text.png
+</span><span class='line'>Type=Application
+</span><span class='line'>Categories=TextEditor;IDE;Development
+</span><span class='line'>X-Ayatana-Desktop-Shortcuts=NewWindow&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>[NewWindow Shortcut Group]
+</span><span class='line'>Name=New Window
+</span><span class='line'>Exec=sublime -n
+</span><span class='line'>TargetEnvironment=Unity</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>There you go! You already have Sublime Text 2 on your machine. If you want to install Sublime Text 3, you can get a <code>.deb</code> installer from Sublime Text&rsquo;s <a href="http://www.sublimetext.com/3">website</a>.</p>
+
+<h3>Vim</h3>
+
+<p>Other than Subime Text 2, I also use Vim when I develop on Ruby on Rails. Installing Vim is pretty easy, just run <code>sudo apt-get install vim</code></p>
+
+<h3>Git</h3>
+
+<p>Git is a version control system used to track the changes of your file/code. It can also be used to collaborate with other developers.</p>
+
+<p>There are two ways of installing Git. It is by installing from source or through <code>apt-get</code>. I&rsquo;ll just show the easiest way to install Git, which is using <code>apt-get</code>. Just run this command on your terminal to install Git.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If you need a merge tool for Git, I am personally using Meld. You can install it by running:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install meld</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Node.js</h3>
+
+<p><blockquote><p>Node.js is a platform built on Chrome&rsquo;s JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.</p><footer><strong>Node.js <a href="http://nodejs.org/">http://nodejs.org/</a></strong></footer></blockquote></p>
+
+<p>I install node.js is not just for building powerful applications. But also because of <b>NPM (Node Packaged Modules)</b> which is a package manager for Node. I use NPM for installing tools like <b>Grunt</b> and <b>Bower</b> which I also use for developing applications.</p>
+
+<p>I use NVM (Node Version Manager) when installing Node.js because it provides you an easy way to switch between Node.js versions. To install Node.js using NVM, you must first install NVM itself. There two ways of installing NVM. To install NVM using cURL:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl &lt;a href="https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh">https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh&lt;/a> | sh</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>To install NVM using Wget:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -qO- &lt;a href="https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh">https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh&lt;/a> | sh</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>These scripts clones nvm repository to <code>~/.nvm</code> and adds the source line to your profile. (<code>~/.bash_profile</code> or <code>~/.profile</code>)</p>
+
+<p>Once you have installed NVM, you can now use it for installing Node.js. To download, compile and install the latest v0.10.x release of node, do this:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nvm install 0.10&lt;br/></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>And then you can now use the installed version:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nvm use 0.10</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Ruby</h3>
+
+<p>I install Ruby because it is required by Octopress which I use for this blog. And not just that, I&rsquo;m also a Ruby on Rails developer.  We will use RVM for installing Ruby. Before installing Ruby itself, we must first install RVM by running this command.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -L &lt;a href="https://get.rvm.io">https://get.rvm.io&lt;/a> | bash -s  stable &mdash;ruby</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>After installing RVM, we can now use it to install the latest ruby version.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm install 1.9.3
+</span><span class='line'>rvm use 1.9.3
+</span><span class='line'>rvm rubygems latest</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>MongoDB</h3>
+
+<p>MongoDB is just another database management system that I use for development. MongoDB is actually a relational database. Your data will be stored in a JSON format.</p>
+
+<p>Now, let&rsquo;s install MongoDB  with PHP support.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install mongodb mongodb-clients php5-dev</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>After installing MongoDB, we must also install the MongoDB-PHP driver. To do that, we must first clone the repository from GitHub
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone &lt;a href="https://github.com/mongodb/mongo-php-driver.git">https://github.com/mongodb/mongo-php-driver.git&lt;/a></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now, go inside the freshly cloned repo and runt these commands:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd mongo-php-driver
+</span><span class='line'>phpize
+</span><span class='line'>./configure
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now, we need to copy the driver to php extension directory.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// let&rsquo;s find first the extension directory
+</span><span class='line'>php -i | grep extension_dir&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// copy the driver to extension directory
+</span><span class='line'>sudo cp modules/mongo.so /path/to/php/extesnion_dir/</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now, we have to create a mongo.ini file which will be stored in /etc/php5/conf.d/ with the line <code>extension=mongo.so</code>.</p>
+
+<p>Finally, restart apache by running <code>sudo service apache2 restart</code></p>
+
+<p>We may also need something like phpMyAdmin for our MongoDB. I use RockMongo. Just download RockMongo from there <a href="http://rockmongo.com/downloads">website</a> and extract the file to your web server.</p>
+
+<h3>That&rsquo;s it!</h3>
+
+<p>I think I&rsquo;ve already shared to you all of the important programs and tools that I can&rsquo;t live without :P How about you? What&rsquo;s yours?</p>
+]]></content>
+  </entry>
+  
+</feed>

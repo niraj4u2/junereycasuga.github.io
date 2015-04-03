@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Javascript | Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2015-04-03T11:48:55+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Manila.js Fridays 004]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/07/09/manila-dot-js-fridays-004/"/>
+    <updated>2013-07-09T22:01:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/07/09/manila-dot-js-fridays-004</id>
+    <content type="html"><![CDATA[<p>When I was browsing over the internet, I came across on a post from a web developers' community that I&rsquo;ve joined. That post was about an event for JavaScript developers called Manila.js Fridays organized by Manila.js.</p>
+
+<!--more-->
+
+
+<p><img class="full-img" src="/images/manilaJS/manilaJS-logo.jpg"></p>
+
+<p><a href="http://manilajs.com">Manila.js</a> is a JavaScript community here in Metro Manila, Philippines. It was born on February just this year(2013). They organize an event every first friday of the month which is called Manila.js Fridays. It is an event where JavaScript enthusiasts gather and meet together in one place. It&rsquo;s not just a meetup event but you can also learn from this event because there are talks from different speakers invited.</p>
+
+<p><img class="full-img" src="/images/manilaJS/manilaJS-1.jpg" title="Photo by Sophia Lucero" ></p>
+
+<p>Last July 5, 2013, I&rsquo;ve attended Manila.js Fridays 004. My first time to attend the event but it&rsquo;s already the fourth time that it will happen. It happened in Paymentwall&rsquo;s office here in Makati. Well, I&rsquo;m lucky because it is just a few blocks away from my office.</p>
+
+<p>There are three topics tackled on the event. First one is about integrating Paymentwall&rsquo;s payment gateway service for apps by Titony Sarmiento of Paymentwall. The topic was good. What&rsquo;s good about <a href="http://paymentwall.com">Paymentwall</a> is it uses HTML5 widget as a payment solution for your app.</p>
+
+<p>The second topic is about Testing JavaScripts using <a href="http://visionmedia.github.io/mocha/">Mocha</a> by <a href="http://ricostacruz.com">Rico Sta. Cruz</a> of <a href="http://nadarei.co/">Nadarei Inc.</a> and I think he is the one who started Manila.js. Anyways, the talk was good. I only heard about Mocha before as a tool for testing JavaScripts but I never get the chance to use or to learn using it because of busy work. From this topic, checking from the console in your browser dev tool is not enough. When developing an app, it was really essential to test it thoroughly. He also mentioned about <a href="http://chaijs.com">Chai</a> which is an assertion library which is really helpful for testing.</p>
+
+<p>And the last topic was about <a href="https://github.com/jaunesarmiento/fries/">&ldquo;Fries&rdquo;</a> by <a href="http://jaunesarmiento.me/">Joko Sarmiento</a>. It is not the fries you&rsquo;re thinking of that you can by from McDonald&rsquo;s or any fast food chains out there. Fries is mobile development framework for Android apps using HTML5, CSS, and JavaScript. Fries was inspired by <a href="http://maker.github.io/ratchet/">Ratchet</a> which is also a mobile development framework but meant for iOS. The idea was good since there are already a lot of stuff for iOS out there. Other than Fries, Joko is currently working on another project called &ldquo;Mayo&rdquo; which is somewhat alike with Ratchet. Well for me, it is better to work on just one project but it has the flexibility for changing some assets depending on the user agent that was used. For example, if the device is an Android device, it should load stuff for Android. Likewise if the device is an iOS device, it should load stuff for iOS. Well, it&rsquo;s just a comment.</p>
+
+<p><img class="full-img" src="/images/manilaJS/manilaJS-2.jpg" width="450" title="Photo by Sophia Lucero" ></p>
+
+<p><img class="full-img" src="/images/manilaJS/manilaJS-3.jpg" width="450" title="Photo by Sophia Lucero" ></p>
+
+<p>I can say that the event was great. Free snacks, free booze, the venue is comfy and wide. Actually, Paymentwall&rsquo;s office is really a good place. I learned some stuff that I might use someday plus new friends that I met. I&rsquo;d probably attend the next Manila.js Fridays!</p>
+
+<p><small>Credits to Sophia Lucero for the photos.</small></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started With Node.js]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/06/02/getting-started-with-node-dot-js/"/>
+    <updated>2013-06-02T14:22:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/06/02/getting-started-with-node-dot-js</id>
+    <content type="html"><![CDATA[<p>You may have heard about Node.js but you don&rsquo;t know what exactly it does. To make it short and simple, Node.js allows you to run Javascript code in the backend.</p>
+
+<!--more-->
+
+
+<h3>Installing Node</h3>
+
+<p>Before we start on writing an app, we need to install it first in our machine. For MacOS and Windows, there&rsquo;s a pretty straight forward installers which you can find on <a href="http://nodejs.org">nodejs.org</a>. For Linux, you can run these lines of command on your terminal:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install python-software-properties python g++ make
+</span><span class='line'>sudo add-apt-repository ppa:chris-lea/node.js
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install nodejs</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Hello World</h3>
+
+<p>We have node on our machine now. So let&rsquo;s proceed on writing our first node.js app, our ever loving &ldquo;Hello World&rdquo;.</p>
+
+<p>Fire up your favorite text editor and create a file called <i>helloworld.js</i>. Now, we want node to write &ldquo;Hello World&rdquo;. So put these code on <i>helloworld.js</i>:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">Hello</span> <span class="nx">World</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Save it and execute it using Node.js by running this command on your terminal:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node helloworld.js</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>This should print &ldquo;Hello World&rdquo; on your terminal.</p>
+
+<h3>Write everything</h3>
+
+<p>Unlike PHP, you have Apache that can receive HTTP requests and serve web pages. With node, you also have to implement your own HTTP server.</p>
+
+<p>It may sound difficult, but it&rsquo;s not. Thanks to the modules that came with Node itself. I will show how to write your own HTTP server later.</p>
+
+<h3>Modules</h3>
+
+<p>Node.js has module to make your life (somewhat) easier. Modules are encapsulated piece of codes. Means that a module contains functions related to the subject of the module. Let&rsquo;s just take the &lsquo;http&rsquo; module as an example. This module, obviously, contains functions specific to HTTP. So how do we use these modules? Just use the require function.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">http</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Other than the module that came along with Node, you can also write your own module and you can include it to your app by:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;.</span><span class="o">/</span><span class="nx">yourModule</span><span class="p">.</span><span class="nx">js</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>You can also install new modules with the help of Node Package Manager(NPM) which came along with Node.js as you install it. To install new modules using NPM, fire up your terminal, navigate to your app directory, and run this command:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install module_name</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Writing your HTTP Server</h3>
+
+<p>As I promised, we will write our own HTTP server using Node.js. Create a new JS file named <i>server.js</i> and put this codes inside the file.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">http</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;);</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span><span class="nx">response</span><span class="p">){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;Content-type&quot;</span><span class="o">:</span><span class="s2">&quot;tex/plain&quot;</span><span class="p">});</span>
+</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now, run this command using your terminal:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node server.js</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Fire up your browser and navigate to <code>http://localhost:888</code>. Your browser should be able to run a page displaying the text &ldquo;Hello World&rdquo;.</p>
+
+<p>Sweet! So let me explain what we have written.</p>
+
+<p>The first line requires the <i>http</i> module that comes with Node.js and makes it accessible throught the <i>http</i> variable.</p>
+
+<p>Then we called one of <i>http</i> module&rsquo;s function which is the createServer function. This function returns an object and this object has a method <i>listen</i>. The <i>listen</i> method accepts a numeric value which indicates the port number the HTTP server is going to listen on.</p>
+
+<p>And inside the function we used the <i>response.writeHead()</i> function to send a HTTP status code(200, means success) and a content-type in the  HTTP response header. The <i>response.write()</i> function sends the &ldquo;Hello World&rdquo; text to the HTTP response body. And the <i>write.end()</i> ends the response.</p>
+
+<h3>Routing</h3>
+
+<p>Now, we also need to handle URL, GET, and POST parameters into our router. We may need to include the <i>url</i> and <i>querystring</i> to able to do this.</p>
+
+<p>The <i>url</i> module allows us to extract different parts of a URL.</p>
+
+<p>The <i>querystring</i> module parses the body of a GET or POST requests.</p>
+
+<p>But we will concentrate on using the <i>url</i> module for now.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">http</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;),</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">url</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">pathname</span> <span class="o">=</span> <span class="nx">url</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">pathname</span><span class="p">;</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Request for &quot;</span> <span class="o">+</span> <span class="nx">pathname</span> <span class="o">+</span> <span class="s2">&quot; received.&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;Content-type&quot;</span><span class="o">:</span><span class="s2">&quot;text/plain&quot;</span><span class="p">});</span>
+</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">8888</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Save it, and run <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node server.js</span></code></pre></td></tr></table></div></figure></notextile></div>. Open up your browser and navigate to <code>http://localhost:8888</code>.</p>
+
+<p>As you run it through the browser, you should be able to see the requested url on your command line.</p>
+
+<p>So, we just included the <i>url</i> module and made it accessible through the <i>url</i> variable. Then we parsed the request and passed it to <i>pathname</i> variable.</p>
+
+<h3>Conclusion</h3>
+
+<p>That&rsquo;s it for now. I&rsquo;m also new to Node.js and this is just what I&rsquo;ve learned over the weekend. I just want to share it to you. Node.js requires extra effort but creating a powerful app with Node.js is worth it.</p>
+
+<p>This is just a preview of what you should know about Node.js. If you want to make your life easier, you might want to pick a framework for Node.js like <a href="http://expressjs.com/">Express</a> and <a href="http://www.partialjs.com/">Partial</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript Templating With Hogan.js]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/03/15/javascript-templating-with-hogan-dot-js/"/>
+    <updated>2013-03-15T23:01:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/03/15/javascript-templating-with-hogan-dot-js</id>
+    <content type="html"><![CDATA[<p>Javascript templating is like writing your code in MVC(model-view-controller) pattern which separates the logic from your view. What&rsquo;s good in using templates is it is easy to manage. Imagine your javascript if it looks like this:</p>
+
+<!--more-->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">h2</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span><span class="s1">&#39; + title + &#39;</span><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="err">/h2&amp;gt;&#39; + </span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">names</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> <span class="o">+</span>
+</span><span class='line'>    <span class="s1">&#39;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&#39;</span> <span class="o">+</span> <span class="nx">names</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&amp;lt;/ul&amp;gt;&#39;</span> <span class="o">+</span>
+</span><span class='line'><span class="p">}</span> <span class="o">+</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="o">&lt;</span><span class="err">/div&gt;&amp;rsquo;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Ugly right? And if you write your javascript in that way, it would be hard for you to maintain it. And for me, it is a bad practice to write your javascript in this way. But if you will use a template, your code will look like this:</p>
+
+<p><img src="/images/templating/template.png"></p>
+
+<p>Awesome! Much cleaner and it is much easier to maintain. As you can see, it contains HTML tags with some placeholders. And we can replace these with some data which we can also store in a &lsquo;json&rsquo; format:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span><span class="err">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;pre&gt;&lt;code&gt;</span><span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Templating Rocks!&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="nt">&quot;names&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Juan Dela Cruz&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Maria Clara&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="err">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;p&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>And if you combine the template and the data, the result will look like this:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;h2&gt;</span>Templating Rocks!<span class="nt">&lt;/h2&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;li&gt;</span>Juan Dela Cruz<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;li&gt;</span>Maria Clara<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>To perform javascript templating, you must use a javascript templating engine like Hogan.js which I&rsquo;ve used as an example above. Hogan.js is a light-weight templating engine which only has 2.5k file size. It is developed at Twitter and it uses the Mustach templating syntax. Hogan compiles your templates into javascript before use. Which means that it performs faster.</p>
+
+<p>There are more javascript templating engine you can use. But personally, I use Hogan.js because it&rsquo;s minimal and it does not have a lot of features which I would not normally use.</p>
+
+<p>For more information about Hogan.js, just refer to <a href="http://twitter.github.com/hogan.js/">http://twitter.github.com/hogan.js/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript Event Bubbling and Event Capturing]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/03/11/javascript-event-bubbling-and-event-capturing/"/>
+    <updated>2013-03-11T21:10:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/03/11/javascript-event-bubbling-and-event-capturing</id>
+    <content type="html"><![CDATA[<p>You might be surprised when you fire an <code>onClick</code> event on an element, something happens to another element with the same event. Let&rsquo;s site a clearer example. Suppose  you have an element inside an element with the same event handler which is <code>onClick</code>.</p>
+
+<!--more-->
+
+
+<p><img src="/images/event_bubbling/event_bubbling1.png" width="350" height="350"></p>
+
+<p>When you click on <code>element2</code>, it also cause a click event on <code>element1</code>. And that is because of <strong>event bubbling</strong> and <strong>event capturing</strong>.</p>
+
+<h3>Event Bubbling</h3>
+
+<p>In event bubbling, the event handler propagates to the outer DOM(Document Object Model).</p>
+
+<p><img src="/images/event_bubbling/event_bubbling.png" width="350" height="350"></p>
+
+<h3>Event Capturing</h3>
+
+<p>In event capturing, the event handler propagates to the inner DOM.</p>
+
+<p><img src="/images/event_bubbling/event_capturing.png" width="350" height="350"></p>
+
+<h3>How to stop Event  Bubbling?</h3>
+
+<p>Event bubbling is always happening when you trigger an event. But there is also a way to stop it. I know that you also don&rsquo;t want event bubbling cause an interference with each element on your DOM. So how can we stop event bubbling? You can stop it by using the <code>stopPropagation()</code> method.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">p</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+</span><span class='line'><span class="c1">// do something</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>This method allows you to stop the propagation of an event caused by event bubbling. You can also use the <code>.on()</code> function of jQuery to stop the propagation of the event.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">tbody</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;).</span><span class="nx">on</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">click</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">tr</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// do something</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The scripts simply means that by clicking the <code>tr</code> element, the propagation stops on the <code>tbody</code> element.</p>
+
+<p>That&rsquo;s it for this article. I hope you learned from this. Especially for those who are entering to the front-end development world. Cheers!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Wiring Up a Back-end to Your AngularJS App Using Firebase - Junerey Casuga</title>
+  <meta name="author" content="Junerey Casuga">
+
+  
+  <meta name="description" content="Simple CRUD app using AngularJS + Firebase with the help of Yeoman">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://junereycasuga.github.io/blog/2014/06/21/wiring-up-a-back-end-to-your-angularjs-app-using-firebase">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Junerey Casuga" type="application/atom+xml">
+  <link href="/stylesheets/font-awesome.css" rel="stylesheet">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  <script src="/javascripts/custom.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36469018-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Wiring Up a Back-end to Your AngularJS App Using Firebase</h1>
+        <div class="meta">
+          Junerey Casuga
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/angularjs/'>angularjs</a>, <a class='category' href='/blog/categories/firebase/'>firebase</a>, <a class='category' href='/blog/categories/yeoman/'>yeoman</a>
+  
+</span>
+
+
+        </div>
+        <p><img src="/images/angularfirebase/angularjs.jpg" style="width:100%" />
+<img src="/images/angularfirebase/firebase_logo.png" style="width:100%" /></p>
+
+<p>In this post, I will teach you how to create a simple CRUD app using AngularJS and Firebase, and of course, with the help of Yeoman. Let&rsquo;s get started!</p>
+
+<h3>Generating our AngularJS app using Yeoman</h3>
+
+<p><img src="/images/angularfirebase/yeoman_toolset_k50sok.png" style="width: 100%;" />
+<a href="http://yeoman.io">Yeoman</a> is a scaffolding tool. What it does is it kickstart your project, providing coding best practices and tools to help you out on the project. Yeoman provides different generators. So in our case, we will be using the AngularJS generator. Let&rsquo;s now start generating our app by making a folder then summon Yeoman and ask to generate our AngularJS app in it:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir angularfirebase && cd angularfirebase
+</span><span class='line'>yo angular</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you ask Yeoman to generate your app for you, it will also ask you some questions like, if you need Twitter Bootstrap ready installed, and other things. It will be up to you on what do you need.</p>
+
+<p><img src="/images/angularfirebase/yo_angular.png" style="width: 100%" /></p>
+
+<p>Once you have already answered Yeoman&rsquo;s question, it will now proceed on generating the files needed, getting all the dependencies through Bower, and conducting a pre-build test using Grunt for your app.</p>
+
+<p><img src="/images/angularfirebase/yo_generate.png" style="width: 100%" /></p>
+
+<p>Once Yeoman is done, you can now check the project through your browser by running <code>grunt serve</code> on your command line. This will automatically open the app page for you and the good thing with this is, once you have edited a file within your project, Grunt will automatically refresh the page for you. Which means, you don&rsquo;t need to hit the refresh button or pressing <code>F5</code> or <code>Ctrl + R</code> every time you make changes.</p>
+
+<p><img src="/images/angularfirebase/hello_yo.png" style="width: 100%" /></p>
+
+<h3>Installing Firebase to our app</h3>
+
+<p>To install Firebase to our app, we will ask Bower to install for us by running <code>bower install --save angularfire</code> on our command line. What this does is it will download the <code>firebase.js</code>, <code>firebase-simple-login.js</code>, and <code>angularfire.js</code>. Once this done, we will now include the javascript files we have to our <code>index.html</code>.</p>
+
+<figure class='code'><figcaption><span>app/index.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- bower:js --&gt;</span>
+</span><span class='line'>---
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/firebase/firebase.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;bower_components/angularfire/dist/angularfire.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>
+</span><span class='line'>---
+</span><span class='line'><span class="c">&lt;!-- endbower--&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After this, we can now add Firebase to our AngularJS modules</p>
+
+<figure class='code'><figcaption><span>app/scripts/app.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">---</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">angular</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;angularfirebaseApp&#39;</span><span class="p">,</span> <span class="p">[</span>
+</span><span class='line'>  <span class="o">---</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="s1">&#39;firebase&#39;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">---</span>
+</span><span class='line'>  <span class="p">])</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">value</span><span class="p">(</span><span class="s1">&#39;fbURL&#39;</span><span class="p">,</span> <span class="s1">&#39;https://angularifictest.firebaseio.com/&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;Person&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">fbURL</span><span class="p">,</span> <span class="nx">$firebase</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">$firebase</span><span class="p">(</span><span class="k">new</span> <span class="nx">Firebase</span><span class="p">(</span><span class="nx">fbURL</span><span class="p">)).</span><span class="nx">$asArray</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">---</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Adding data to Firebase</h3>
+
+<p>Of course, before you can save data to Firebase, you must first create an account and your app there.</p>
+
+<p><img src="/images/angularfirebase/firebase.png" style="width: 100%" /></p>
+
+<p>Once you have your Firebase app, it will have its own URL which we will use on development. In my case, I have created an app with a URL  <code>angularifictest.firebaseio.com</code>.</p>
+
+<p>Let&rsquo;s now proceed on developing of creating a data and saving it to Firebase. By default, we have already a controller named as <code>MainCtrl</code> on the <code>app/scripts/controllers/main.js</code> file. We&rsquo;ll just use that to contain our function for saving data to Firebase.</p>
+
+<figure class='code'><figcaption><span>/app/scripts/controllers/main.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">---</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;angularfirebaseApp&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;MainCtrl&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">Person</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">save</span> <span class="o">=</span> <span class="nx">Person</span><span class="p">.</span><span class="nx">$add</span><span class="p">({</span>
+</span><span class='line'>      <span class="nx">firstName</span><span class="o">:</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">firstName</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">lastName</span><span class="o">:</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">lastName</span>
+</span><span class='line'>     <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="nx">$scope</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>     <span class="nx">$scope</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="k">if</span><span class="p">(</span><span class="nx">save</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;saved successfully&#39;</span><span class="p">);</span>
+</span><span class='line'>     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;something went wrong&#39;</span><span class="p">);</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">---</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What we&rsquo;ve done here is, we created a function called <code>add()</code> function which then passed to the <code>$scope</code> object so we can use it on our view. Inside the <code>add()</code> function, we used the <code>$add</code> function from  the Firebase object  we created on the <code>Person</code> factory to save the data to our Firebase. Inside the <code>$add</code> function, it accepts an array of data which will be saved to our Firebase.</p>
+
+<p>And let&rsquo;s edit <code>/app/views/main.html</code> to create our form for creating data.</p>
+
+<figure class='code'><figcaption><span>/app/views/main.html  </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">ng-submit=</span><span class="s">&quot;add()&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label&gt;</span>First Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;firstName&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label&gt;</span>Last Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;lastName&quot;</span> <span class="na">class=</span><span class="s">&quot;form-conrol&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Save&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On our form, we&rsquo;ve added the <code>add()</code> function we have created which will be triggered once the form is submitted with the help of the <code>ng-submit</code> directive.</p>
+
+<p>Once you&rsquo;re done with this, you&rsquo;ll have a form like this:</p>
+
+<p><img src="/images/angularfirebase/create_form.png" style="width: 100%" /></p>
+
+<p>And if you tried to submit a data, you can check on you Firebase Graphical Debugger if the data is saved.</p>
+
+<p><img src="/images/angularfirebase/firebasedash.png" style="width: 100%" /></p>
+
+<h3>Listing the Data</h3>
+
+<p>Listing the data from Firebase is very simple. Just add this line of code on our <code>MainCtrl</code> in <code>app/scipts/controllers/main.js</code> file:</p>
+
+<figure class='code'><figcaption><span>app/scripts/controllers/main.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">person</span> <span class="o">=</span> <span class="nx">Person</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And on our <code>app/views/main.html</code>, let&rsquo;s add this code:</p>
+
+<figure class='code'><figcaption><span>app/views/main.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;thead&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;th&gt;</span>First Name<span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;th&gt;</span>Last Name<span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;th&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;th&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/thead&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;tbody&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;tr</span> <span class="na">ng-repeat=</span><span class="s">&quot;(id, name) in pesron&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/t&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/tbody&gt;</span>
+</span><span class='line'><span class="nt">&lt;/table&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><small>Note: Inside the first <code>&lt;td&gt;</code> tag, add &#123;&#123; name.firstName &#125;&#125; inside. And on the second <code>&lt;td&gt;</code> tag, add &#123;&#123; name.lastName &#125;&#125; inside. It&rsquo;s not just showing on the codeblock plugin :)</small></p>
+
+<p>In here, we just used the <code>ng-repeat</code> directive to loop through the data from Firebase and display them using AngularJS&rsquo;s data binding. You should be seeing something like this:</p>
+
+<p><img src="/images/angularfirebase/firebaselist.png" style="width: 100%" /></p>
+
+<h3>Editing a Data</h3>
+
+<p>On editing a data, we will create a different controller. So, we will edit the <code>app/scripts/controllers/main.js</code> file and add this code</p>
+
+<figure class='code'><figcaption><span>app/scripts/controllers/main.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;EditCtrl&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$location</span><span class="p">,</span> <span class="nx">$routeParams</span><span class="p">,</span> <span class="nx">$firebase</span><span class="p">,</span> <span class="nx">fbURL</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">personURL</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Firebase</span><span class="p">(</span><span class="nx">fbURL</span> <span class="o">+</span> <span class="nx">$routeParams</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">person</span> <span class="o">=</span> <span class="nx">$firebase</span><span class="p">(</span><span class="nx">personURL</span><span class="p">).</span><span class="nx">$asObject</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$scope</span><span class="p">.</span><span class="nx">edit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$scope</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">$save</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">$location</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In here, we declared a variable containing the Firebase object using the URL of the person we will edit. Then we made a function called <code>edit()</code> which saves the changes from the form we will create.</p>
+
+<p>We don&rsquo;t have yet the view file for our edit page so we will create one.</p>
+
+<figure class='code'><figcaption><span>app/views/edit.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">ng-controller=</span><span class="s">&quot;EditCtrl&quot;</span> <span class="na">ng-submit=</span><span class="s">&quot;edit()&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label&gt;</span>First Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;person.firstName&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label&gt;</span>Last Name:<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;person.lastName&quot;</span> <span class="na">class=</span><span class="s">&quot;form-control&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-group&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Save&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On our view file, it&rsquo;s almost the same with the form we created for creating data except that we only changed the function called by the <code>ng-submit</code> directive and the controller we&rsquo;re using. Next, we will add the route for our <code>EditCtrl</code></p>
+
+<figure class='code'><figcaption><span>app/scripts/app.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="o">---</span>
+</span><span class='line'>  <span class="p">.</span><span class="nx">config</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$routeProvider</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$routeProvider</span>
+</span><span class='line'>      <span class="o">---</span>
+</span><span class='line'>      <span class="p">.</span><span class="nx">when</span><span class="p">(</span><span class="s1">&#39;/edit/:id&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;views/edit.html&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">controller</span><span class="o">:</span> <span class="s1">&#39;EditCtrl&#39;</span>
+</span><span class='line'>      <span class="p">})</span>
+</span><span class='line'>      <span class="o">---</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="o">---</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And now, we will add the link of our Edit page from the Edit link on our list of data</p>
+
+<figure class='code'><figcaption><span>app/views/main.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>---
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#/edit/&quot;</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>---
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><small>Note: The <code>href</code> value should be <i>#/edit/&#123;&#123; name.$id &#125;&#125;</i></small></p>
+
+<h3>Deleting Data</h3>
+
+<p>Deleting of data is just simple too, we&rsquo;ll just add this line to our <code>MainCtrl</code> in <code>app/scripts/controllers/main.js</code> file:</p>
+
+<figure class='code'><figcaption><span>app/scripts/controllers/main.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="nx">$scope</span><span class="p">.</span><span class="nx">remove</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">Person</span><span class="p">.</span><span class="nx">$remove</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here, we just created a function called <code>remove()</code> which accepts an ID parameter and used the <code>$remove</code> function to delete that specific ID from our Firebase. We can now use this function on our view by editing the Remove link in our `app/views/main.html&#8217; file.</p>
+
+<figure class='code'><figcaption><span>app/views/main.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">ng-click=</span><span class="s">&quot;remove(id)&quot;</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, if you&rsquo;ll click the Remove link beside the data, it should delete that specific data.</p>
+
+<h3>Conclusion</h3>
+
+<p>I like how AngularJS works well with Firebase. There&rsquo;s more than just creating a CRUD app with AngularJS and Firebase. And also, maximize the real-timeness of Firebase.</p>
+
+<p>If you wish to see a demo, just click <a href="http://junereycasuga.github.io/angularfirebase/">here</a>. You can also see the source code on <a href="https://github.com/junereycasuga/angularfirebase">Github</a>.</p>
+
+<p>Cheerio!</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2" id="disqus_thread">
+    </div>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'junereycasuga';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://junereycasuga.github.io/blog/2014/06/21/wiring-up-a-back-end-to-your-angularjs-app-using-firebase/';
+        var disqus_url = 'http://junereycasuga.github.io/blog/2014/06/21/wiring-up-a-back-end-to-your-angularjs-app-using-firebase/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = "true";
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      console.log(dsq);
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+  </div>
+</div>
+
+<br>
+<br>
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2014/05/15/developer-rants-git-commit-messages/" title="Previous Post: Developer Rants: Git commit messages">&laquo; Previous: Developer Rants: Git commit messages</a>
+        
+
+        
+          <a class="pull-right" href="/blog/2014/11/19/how-to-install-yeoman/" title="Next Post: How to install Yeoman">Next: How to install Yeoman &raquo;</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <a href="#">
+  <i class="topper hidden-phone hidden-tablet fa fa-angle-double-up"></i>
+</a>
+
+<footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/junereytionX"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+    <a href="https://github.com/junereycasuga"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+    <a href="mailto:junerey.casuga@gmail.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Copyright &copy; 2015 - Junerey Casuga</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+<div id="bookr" data-key="TpHquJviMhXZ0XWrGvb1"></div><script src="http://dweberb81jcpk.cloudfront.net/widget/widget.js"></script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://junereycasuga.github.io/sitemap.xml 

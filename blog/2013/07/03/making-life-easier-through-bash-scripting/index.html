@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Making Life Easier Through Bash Scripting - Junerey Casuga</title>
+  <meta name="author" content="Junerey Casuga">
+
+  
+  <meta name="description" content="Making Life Easier Through Bash Scripting Junerey Casuga in bash, linux, scripting In the past few days, some of my friends and colleagues saw my &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://junereycasuga.github.io/blog/2013/07/03/making-life-easier-through-bash-scripting">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Junerey Casuga" type="application/atom+xml">
+  <link href="/stylesheets/font-awesome.css" rel="stylesheet">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  <script src="/javascripts/custom.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36469018-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Making Life Easier Through Bash Scripting</h1>
+        <div class="meta">
+          Junerey Casuga
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bash/'>bash</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/scripting/'>scripting</a>
+  
+</span>
+
+
+        </div>
+        <p><img class="full-img" src="/images/bash_scripting/bash-fb.png" width="800">
+<img class="full-img" src="/images/bash_scripting/bash-google-plus.png" width="800"></p>
+
+<p>In the past few days, some of my friends and colleagues saw my cover photo from my <a href="https://facebook.com/kaj26kai">Facebook</a> and <a href="https://plus.google.com/105091722637731618991">Google+</a> and asked me, &ldquo;What is #!/bin/bash?&rdquo;. That&rsquo;s why I came up to an idea on writing about Bash or Shell scripting. This will talk about how bash will help a typical Linux user. I won&rsquo;t be tackling any programming using bash.</p>
+
+<!--more-->
+
+
+<p>Shell scripting or Bash scripting is commonly used by Linux users. It is actually useful for making your task easier. Well, not actually easier but faster. In this post, I will show you how bash scripting could help you on speeding up a task do you always do.</p>
+
+<h3>The Problem</h3>
+
+<p>Let&rsquo;s say you got a freshly installed Linux operating system on your machine. And in Linux, we(or is it only me?) usually install programs through the terminal. And since you have a freshly installed OS, there&rsquo;s a lot of command you want to run on your terminal to install softwares or programs. And sometimes, it is annoying that you have to type a specific command every after a software is installed.</p>
+
+<h3>The Solution</h3>
+
+<p>To make your life easier, we can use shell scripting to run all of those commands with just one command on your terminal.</p>
+
+<h3>Shebang</h3>
+
+<blockquote><p>A <b>Shebang</b> is the combination of hash and an exclamation mark : <b>#!</b>. The program loader will look for the shebang on the first line of script and use the interpreter specified in it.</p><footer><strong>NetTuts</strong> <cite><a href='http://net.tutsplus.com/tutorials/other/the-fundamentals-of-bash-scripting/'>net.tutsplus.com/tutorials/&hellip;</a></cite></footer></blockquote>
+
+
+<p>A shebang consists the following syntax:
+<code>#!interpreter [parameters]</code>
+The interpreter is the program used to interpret the language used. For bash scripting, we would use <code>#!/bin/bash</code>.</p>
+
+<h3>Examples</h3>
+
+<p>Let&rsquo;s take the problem above where you are tired of typing a lot of command one after another. So we will use shell scripting to make your task faster. Let&rsquo;s say I had a freshly installed Linux OS on my machine and I want to install programs I usally install on my machine like LAMP. Installing LAMP uses different commands because it will install Apache, MySQL and PHP. Now, let&rsquo;s use bash to run the commands used to install LAMP.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'>sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install apache2 <span class="o">&amp;&amp;</span> sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt <span class="o">&amp;&amp;</span> sudo apt-get install phpmyadmin <span class="o">&amp;&amp;</span> sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql <span class="o">&amp;&amp;</span> sudo mysql_install_db <span class="o">&amp;&amp;</span> sudo /usr/bin/mysql_secure_installation
+</span><span class='line'>
+</span><span class='line'><span class="nb">exit </span>0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And let&rsquo;s save it as <code>install-lamp.sh</code>.</p>
+
+<p>To run this specific shell script, open up your terminal and navigate to the directory where you saved <code>install-lamp.sh</code>. And run <code>bash install-lamp.sh</code>. As you hit enter key, all the commands you&rsquo;ve inserted inside the shell script will be run automatically without you typing everytime on software is done installing.</p>
+
+<h3>Very Short Explanation</h3>
+
+<p>As you can see, the script basically contains the shebang with the interpreter(bash) and a string of terminal commands linked together using <code>&amp;&amp;</code>. This means that we&rsquo;ll run this commands one after another.</p>
+
+<h3>Conclusion</h3>
+
+<p>In fact, you can do more than this. You can do a lot of things through shell scripting. Shell scripting is not only for programmers. In fact, even a typical Linux user can use it for speeding up some task. This could be a big help for finishing a task faster. So I would love to say that <b>I <3 #!/bin/bash</b>. :)</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2" id="disqus_thread">
+    </div>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'junereycasuga';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://junereycasuga.github.io/blog/2013/07/03/making-life-easier-through-bash-scripting/';
+        var disqus_url = 'http://junereycasuga.github.io/blog/2013/07/03/making-life-easier-through-bash-scripting/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = "true";
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      console.log(dsq);
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+  </div>
+</div>
+
+<br>
+<br>
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2013/06/02/getting-started-with-node-dot-js/" title="Previous Post: Getting started with Node.js">&laquo; Previous: Getting started with Node.js</a>
+        
+
+        
+          <a class="pull-right" href="/blog/2013/07/09/manila-dot-js-fridays-004/" title="Next Post: Manila.js Fridays 004">Next: Manila.js Fridays 004 &raquo;</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <a href="#">
+  <i class="topper hidden-phone hidden-tablet fa fa-angle-double-up"></i>
+</a>
+
+<footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/junereytionX"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+    <a href="https://github.com/junereycasuga"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+    <a href="mailto:junerey.casuga@gmail.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Copyright &copy; 2015 - Junerey Casuga</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+<div id="bookr" data-key="TpHquJviMhXZ0XWrGvb1"></div><script src="http://dweberb81jcpk.cloudfront.net/widget/widget.js"></script>
+  </body>
+</html>

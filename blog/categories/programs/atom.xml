@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Programs | Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/blog/categories/programs/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2015-04-03T11:48:55+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What Do I Install on My Machine?]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/04/28/what-do-i-install-on-my-machine/"/>
+    <updated>2013-04-28T18:36:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/04/28/what-do-i-install-on-my-machine</id>
+    <content type="html"><![CDATA[<p>This post is just something that I want to share to you. And this can be also as a reminder and guide for me when I have a freshly installed OS on my machine.</p>
+
+<!--more-->
+
+
+<p>I am a Linux user. I&rsquo;m currently running Ubuntu 14.04. I will give you my list of programs, tools, and some applications that I install after installing a fresh OS. I will also show you how to install them. So let&rsquo;s get started.</p>
+
+<h3>LAMP</h3>
+
+<p>As we all know, LAMP stands for Linux, Apache, MySQL, and PHP. These are open-source softwares used to make your web server running. Since I am running on Ubuntu, which is a Linux distro, we don&rsquo;t have to take care about it. What we should just install is just the Apache, MySQL, and PHP.</p>
+
+<h4>Apache</h4>
+
+<p>To install Apache, just run this line of command in your terminal:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install apache2</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>That&rsquo;s it. To check if it works, just open your browser and type in <a href="http://127.0.0.1">http://127.0.0.1</a> or <code>localhost</code>. It should display &ldquo;It works!&rdquo; on the page.</p>
+
+<h4>MySQL</h4>
+
+<p>MySQL is basically a database management system. It is where you store data from your web application and retrieve data that is being displayed on your web application.</p>
+
+<p>To install MySQL, run this line of command in your terminal:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>After install MySQL, activate it with this command:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mysql_install_db</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>To finalize the installation, run this command:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /usr/bin/mysql_secure_installation</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>A prompt message will ask you a lot of questions. Just answer all of them with Yes.</p>
+
+<h4>PHP</h4>
+
+<p>PHP is a server-side scripting language used to build dynamic websites.</p>
+
+<p>To install PHP, run this line of command in your terminal:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Installing LAMP won&rsquo;t install phpMyAdmin yet. To install phpMyAdmin, just run this on your terminal:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install phpmyadmin</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>That&rsquo;s it! As easy as 1-2-3!</p>
+
+<h3>Sublime Text</h3>
+
+<p>Text editors are very essential for all developers. Ubuntu has a pre-installed text editor, Gedit. But I don&rsquo;t like it. That&rsquo;s why I always use Sublime Text as my text text editor.</p>
+
+<p>To install Sublime Text 2, download the <code>.tar.bz2</code> file from Sublime Text&rsquo;s <a href="http://www.sublimetext.com/2">website</a> and extract it by running this command on your terminal:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar xf Sublime\ Text\ 2.0.1\ x64.tar.bz2</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If you got the 32-bit installer, just replace the x64 to x32 on the command.</p>
+
+<p>After extracting, you&rsquo;ll get a &ldquo;Sublime Text 2&rdquo; folder which contains all files that Sublime Text will need. We have to move that folder to &ldquo;/opt&rdquo; folder.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mv Sublime\ Text\ 2 /opt/</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If you want to be able to run Sublime Text through the terminal by just typing &ldquo;sublime&rdquo;, we must create a link in &ldquo;/usr/bin&rdquo;.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo ln -s /opt/Sublime\ Text\ 2/sublime_text /usr/bin/sublime</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now, we also need to have a launcher in Unity. So we will create a .desktop file in &ldquo;usr/share/applications&rdquo;.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo sublime /usr/share/applications/sublime.desktop</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>This will let Sublime Text 2 open up a blank document named as &ldquo;sublime.desktop&rdquo;. Paste these line of codes in the document:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[Desktop Entry]
+</span><span class='line'>Version=1.0
+</span><span class='line'>Name=Sublime Text 2&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>Only KDE 4 seems to use GenericName, so we reuse the KDE strings.&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>From Ubuntu&rsquo;s language-pack-kde-XX-base packages, version 9.04-20090413.&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>GenericName=Text Editor&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>Exec=sublime
+</span><span class='line'>Terminal=false
+</span><span class='line'>Icon=/opt/Sublime Text 2/Icon/48x48/sublime_text.png
+</span><span class='line'>Type=Application
+</span><span class='line'>Categories=TextEditor;IDE;Development
+</span><span class='line'>X-Ayatana-Desktop-Shortcuts=NewWindow&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>[NewWindow Shortcut Group]
+</span><span class='line'>Name=New Window
+</span><span class='line'>Exec=sublime -n
+</span><span class='line'>TargetEnvironment=Unity</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>There you go! You already have Sublime Text 2 on your machine. If you want to install Sublime Text 3, you can get a <code>.deb</code> installer from Sublime Text&rsquo;s <a href="http://www.sublimetext.com/3">website</a>.</p>
+
+<h3>Vim</h3>
+
+<p>Other than Subime Text 2, I also use Vim when I develop on Ruby on Rails. Installing Vim is pretty easy, just run <code>sudo apt-get install vim</code></p>
+
+<h3>Git</h3>
+
+<p>Git is a version control system used to track the changes of your file/code. It can also be used to collaborate with other developers.</p>
+
+<p>There are two ways of installing Git. It is by installing from source or through <code>apt-get</code>. I&rsquo;ll just show the easiest way to install Git, which is using <code>apt-get</code>. Just run this command on your terminal to install Git.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If you need a merge tool for Git, I am personally using Meld. You can install it by running:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install meld</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Node.js</h3>
+
+<p><blockquote><p>Node.js is a platform built on Chrome&rsquo;s JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.</p><footer><strong>Node.js <a href="http://nodejs.org/">http://nodejs.org/</a></strong></footer></blockquote></p>
+
+<p>I install node.js is not just for building powerful applications. But also because of <b>NPM (Node Packaged Modules)</b> which is a package manager for Node. I use NPM for installing tools like <b>Grunt</b> and <b>Bower</b> which I also use for developing applications.</p>
+
+<p>I use NVM (Node Version Manager) when installing Node.js because it provides you an easy way to switch between Node.js versions. To install Node.js using NVM, you must first install NVM itself. There two ways of installing NVM. To install NVM using cURL:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl &lt;a href="https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh">https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh&lt;/a> | sh</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>To install NVM using Wget:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -qO- &lt;a href="https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh">https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh&lt;/a> | sh</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>These scripts clones nvm repository to <code>~/.nvm</code> and adds the source line to your profile. (<code>~/.bash_profile</code> or <code>~/.profile</code>)</p>
+
+<p>Once you have installed NVM, you can now use it for installing Node.js. To download, compile and install the latest v0.10.x release of node, do this:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nvm install 0.10&lt;br/></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>And then you can now use the installed version:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nvm use 0.10</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Ruby</h3>
+
+<p>I install Ruby because it is required by Octopress which I use for this blog. And not just that, I&rsquo;m also a Ruby on Rails developer.  We will use RVM for installing Ruby. Before installing Ruby itself, we must first install RVM by running this command.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -L &lt;a href="https://get.rvm.io">https://get.rvm.io&lt;/a> | bash -s  stable &mdash;ruby</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>After installing RVM, we can now use it to install the latest ruby version.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm install 1.9.3
+</span><span class='line'>rvm use 1.9.3
+</span><span class='line'>rvm rubygems latest</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>MongoDB</h3>
+
+<p>MongoDB is just another database management system that I use for development. MongoDB is actually a relational database. Your data will be stored in a JSON format.</p>
+
+<p>Now, let&rsquo;s install MongoDB  with PHP support.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install mongodb mongodb-clients php5-dev</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>After installing MongoDB, we must also install the MongoDB-PHP driver. To do that, we must first clone the repository from GitHub
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone &lt;a href="https://github.com/mongodb/mongo-php-driver.git">https://github.com/mongodb/mongo-php-driver.git&lt;/a></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now, go inside the freshly cloned repo and runt these commands:
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd mongo-php-driver
+</span><span class='line'>phpize
+</span><span class='line'>./configure
+</span><span class='line'>sudo make install</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now, we need to copy the driver to php extension directory.
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// let&rsquo;s find first the extension directory
+</span><span class='line'>php -i | grep extension_dir&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>// copy the driver to extension directory
+</span><span class='line'>sudo cp modules/mongo.so /path/to/php/extesnion_dir/</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now, we have to create a mongo.ini file which will be stored in /etc/php5/conf.d/ with the line <code>extension=mongo.so</code>.</p>
+
+<p>Finally, restart apache by running <code>sudo service apache2 restart</code></p>
+
+<p>We may also need something like phpMyAdmin for our MongoDB. I use RockMongo. Just download RockMongo from there <a href="http://rockmongo.com/downloads">website</a> and extract the file to your web server.</p>
+
+<h3>That&rsquo;s it!</h3>
+
+<p>I think I&rsquo;ve already shared to you all of the important programs and tools that I can&rsquo;t live without :P How about you? What&rsquo;s yours?</p>
+]]></content>
+  </entry>
+  
+</feed>

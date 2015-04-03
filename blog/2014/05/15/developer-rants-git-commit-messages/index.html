@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Developer Rants: Git Commit Messages - Junerey Casuga</title>
+  <meta name="author" content="Junerey Casuga">
+
+  
+  <meta name="description" content="Git commit messages are important. Don't mess it around.">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://junereycasuga.github.io/blog/2014/05/15/developer-rants-git-commit-messages">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Junerey Casuga" type="application/atom+xml">
+  <link href="/stylesheets/font-awesome.css" rel="stylesheet">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  <script src="/javascripts/custom.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36469018-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Developer Rants: Git Commit Messages</h1>
+        <div class="meta">
+          Junerey Casuga
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/commit/'>commit</a>, <a class='category' href='/blog/categories/developer/'>developer</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/messages/'>messages</a>, <a class='category' href='/blog/categories/problems/'>problems</a>, <a class='category' href='/blog/categories/rant/'>rant</a>
+  
+</span>
+
+
+        </div>
+        <p>This will be my first post for my Developer Rants series. It will be a series of blog posts of me ranting about some issues or problems I encounter while developing some apps.</p>
+
+<!--more-->
+
+
+<p>Okay, obviously on this first post, I will be talking about Git commit messages.</p>
+
+<h3>It&rsquo;s not funny</h3>
+
+<p>My team is currently developing an app for our company. Being the team lead and head of my department, I always check the commits and pushes of my team on our repository. And I suddenly saw a non-sense commit message. And I&rsquo;m like, WTF was that!? When I check the changes on that specific commit, it was just a class added on an HTML element. I got really annoyed with what I saw. Some may see this as a funny commit message, but dude, it&rsquo;s a serious business, so it&rsquo;s not funny. Yea, I admit that I&rsquo;m also doing it before on my personal projects. But for maturity and professionalism&rsquo;s sake, please take commit messages seriously.</p>
+
+<h3>Proper commit message is important</h3>
+
+<p>Proper git commit messages are important. Why?</p>
+
+<ol>
+<li>It speeds up reviewing process.</li>
+<li>To help other developers to understand what changes has been made on a specific commit.</li>
+<li>It is helpful for documenting changes on your project.</li>
+</ol>
+
+
+<blockquote><p>Everybody has terrible commit messages in some point in their life.</p><p>Sometimes every single day.</p><footer><strong>Zac Holman</strong></footer></blockquote>
+
+
+<h3>Making a better Git commit</h3>
+
+<p>If you are reading this. And you feel like you&rsquo;re the one I&rsquo;m referring to, you still have the chance to change this bad habit.</p>
+
+<p>I am annoyed seeing a &lsquo;bug fix&rsquo; commit messages. It&rsquo;s too broad. And I don&rsquo;t even know what bug was fixed and where it was located.</p>
+
+<p>To make it better, try to limit using <code>git commit -m "Some crappy commit message here"</code>. Better to use <code>git commit</code> with no flags. By using a simpler git commit command, it will open up Vim (if it&rsquo;s your default editor) where you can construct a better commit message.</p>
+
+<p>Structure your commit message like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Short summary of changes (50 chars or less and don't put period at the end)
+</span><span class='line'>
+</span><span class='line'>More detailed description of the changes. This will be good place to
+</span><span class='line'>explain what has been changed and why it has been changed. The text
+</span><span class='line'>should be wrapped at 72 chars.</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Conclusion</h3>
+
+<p>Sorry for the rant. It just really annoys me. Anyways, Happy commiting!</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2" id="disqus_thread">
+    </div>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'junereycasuga';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://junereycasuga.github.io/blog/2014/05/15/developer-rants-git-commit-messages/';
+        var disqus_url = 'http://junereycasuga.github.io/blog/2014/05/15/developer-rants-git-commit-messages/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = "true";
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      console.log(dsq);
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+  </div>
+</div>
+
+<br>
+<br>
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2013/10/12/cloud-computing-services-saas/" title="Previous Post: Cloud Computing Services: SaaS, PaaS, IaaS">&laquo; Previous: Cloud Computing Services: SaaS, PaaS, IaaS</a>
+        
+
+        
+          <a class="pull-right" href="/blog/2014/06/21/wiring-up-a-back-end-to-your-angularjs-app-using-firebase/" title="Next Post: Wiring up a back-end to your AngularJS app using Firebase">Next: Wiring up a back-end to your AngularJS app using Firebase &raquo;</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <a href="#">
+  <i class="topper hidden-phone hidden-tablet fa fa-angle-double-up"></i>
+</a>
+
+<footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/junereytionX"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    
+    <a href="https://github.com/junereycasuga"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+    <a href="mailto:junerey.casuga@gmail.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Copyright &copy; 2015 - Junerey Casuga</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+<div id="bookr" data-key="TpHquJviMhXZ0XWrGvb1"></div><script src="http://dweberb81jcpk.cloudfront.net/widget/widget.js"></script>
+  </body>
+</html>

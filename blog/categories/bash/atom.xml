@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bash | Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/blog/categories/bash/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2015-04-03T11:48:55+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Making Life Easier Through Bash Scripting]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/07/03/making-life-easier-through-bash-scripting/"/>
+    <updated>2013-07-03T23:36:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/07/03/making-life-easier-through-bash-scripting</id>
+    <content type="html"><![CDATA[<p><img class="full-img" src="/images/bash_scripting/bash-fb.png" width="800">
+<img class="full-img" src="/images/bash_scripting/bash-google-plus.png" width="800"></p>
+
+<p>In the past few days, some of my friends and colleagues saw my cover photo from my <a href="https://facebook.com/kaj26kai">Facebook</a> and <a href="https://plus.google.com/105091722637731618991">Google+</a> and asked me, &ldquo;What is #!/bin/bash?&rdquo;. That&rsquo;s why I came up to an idea on writing about Bash or Shell scripting. This will talk about how bash will help a typical Linux user. I won&rsquo;t be tackling any programming using bash.</p>
+
+<!--more-->
+
+
+<p>Shell scripting or Bash scripting is commonly used by Linux users. It is actually useful for making your task easier. Well, not actually easier but faster. In this post, I will show you how bash scripting could help you on speeding up a task do you always do.</p>
+
+<h3>The Problem</h3>
+
+<p>Let&rsquo;s say you got a freshly installed Linux operating system on your machine. And in Linux, we(or is it only me?) usually install programs through the terminal. And since you have a freshly installed OS, there&rsquo;s a lot of command you want to run on your terminal to install softwares or programs. And sometimes, it is annoying that you have to type a specific command every after a software is installed.</p>
+
+<h3>The Solution</h3>
+
+<p>To make your life easier, we can use shell scripting to run all of those commands with just one command on your terminal.</p>
+
+<h3>Shebang</h3>
+
+<p><blockquote><p>A <b>Shebang</b> is the combination of hash and an exclamation mark : <b>#!</b>. The program loader will look for the shebang on the first line of script and use the interpreter specified in it.</p><footer><strong>NetTuts <a href="http://net.tutsplus.com/tutorials/other/the-fundamentals-of-bash-scripting/">http://net.tutsplus.com/tutorials/other/the-fundamentals-of-bash-scripting/</a></strong></footer></blockquote></p>
+
+<p>A shebang consists the following syntax:
+<code>#!interpreter [parameters]</code>
+The interpreter is the program used to interpret the language used. For bash scripting, we would use <code>#!/bin/bash</code>.</p>
+
+<h3>Examples</h3>
+
+<p>Let&rsquo;s take the problem above where you are tired of typing a lot of command one after another. So we will use shell scripting to make your task faster. Let&rsquo;s say I had a freshly installed Linux OS on my machine and I want to install programs I usally install on my machine like LAMP. Installing LAMP uses different commands because it will install Apache, MySQL and PHP. Now, let&rsquo;s use bash to run the commands used to install LAMP.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;!/bin/bash&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get install apache2 &amp;amp;&amp;amp; sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt &amp;amp;&amp;amp; sudo apt-get install phpmyadmin &amp;amp;&amp;amp; sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql &amp;amp;&amp;amp; sudo mysql_install_db &amp;amp;&amp;amp; sudo /usr/bin/mysql_secure_installation&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;exit 0
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>And let&rsquo;s save it as <code>install-lamp.sh</code>.</p>
+
+<p>To run this specific shell script, open up your terminal and navigate to the directory where you saved <code>install-lamp.sh</code>. And run <code>bash install-lamp.sh</code>. As you hit enter key, all the commands you&rsquo;ve inserted inside the shell script will be run automatically without you typing everytime on software is done installing.</p>
+
+<h3>Very Short Explanation</h3>
+
+<p>As you can see, the script basically contains the shebang with the interpreter(bash) and a string of terminal commands linked together using <code>&amp;&amp;</code>. This means that we&rsquo;ll run this commands one after another.</p>
+
+<h3>Conclusion</h3>
+
+<p>In fact, you can do more than this. You can do a lot of things through shell scripting. Shell scripting is not only for programmers. In fact, even a typical Linux user can use it for speeding up some task. This could be a big help for finishing a task faster. So I would love to say that <b>I <3 #!/bin/bash</b>. :)</p>
+]]></content>
+  </entry>
+  
+</feed>

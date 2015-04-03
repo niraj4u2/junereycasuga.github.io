@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Jquery | Junerey Casuga]]></title>
+  <link href="http://junereycasuga.github.io/blog/categories/jquery/atom.xml" rel="self"/>
+  <link href="http://junereycasuga.github.io/"/>
+  <updated>2015-04-03T11:48:55+08:00</updated>
+  <id>http://junereycasuga.github.io/</id>
+  <author>
+    <name><![CDATA[Junerey Casuga]]></name>
+    <email><![CDATA[junerey.casuga@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript Event Bubbling and Event Capturing]]></title>
+    <link href="http://junereycasuga.github.io/blog/2013/03/11/javascript-event-bubbling-and-event-capturing/"/>
+    <updated>2013-03-11T21:10:00+08:00</updated>
+    <id>http://junereycasuga.github.io/blog/2013/03/11/javascript-event-bubbling-and-event-capturing</id>
+    <content type="html"><![CDATA[<p>You might be surprised when you fire an <code>onClick</code> event on an element, something happens to another element with the same event. Let&rsquo;s site a clearer example. Suppose  you have an element inside an element with the same event handler which is <code>onClick</code>.</p>
+
+<!--more-->
+
+
+<p><img src="/images/event_bubbling/event_bubbling1.png" width="350" height="350"></p>
+
+<p>When you click on <code>element2</code>, it also cause a click event on <code>element1</code>. And that is because of <strong>event bubbling</strong> and <strong>event capturing</strong>.</p>
+
+<h3>Event Bubbling</h3>
+
+<p>In event bubbling, the event handler propagates to the outer DOM(Document Object Model).</p>
+
+<p><img src="/images/event_bubbling/event_bubbling.png" width="350" height="350"></p>
+
+<h3>Event Capturing</h3>
+
+<p>In event capturing, the event handler propagates to the inner DOM.</p>
+
+<p><img src="/images/event_bubbling/event_capturing.png" width="350" height="350"></p>
+
+<h3>How to stop Event  Bubbling?</h3>
+
+<p>Event bubbling is always happening when you trigger an event. But there is also a way to stop it. I know that you also don&rsquo;t want event bubbling cause an interference with each element on your DOM. So how can we stop event bubbling? You can stop it by using the <code>stopPropagation()</code> method.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">p</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+</span><span class='line'><span class="c1">// do something</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>This method allows you to stop the propagation of an event caused by event bubbling. You can also use the <code>.on()</code> function of jQuery to stop the propagation of the event.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">tbody</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;).</span><span class="nx">on</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">click</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">tr</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// do something</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The scripts simply means that by clicking the <code>tr</code> element, the propagation stops on the <code>tbody</code> element.</p>
+
+<p>That&rsquo;s it for this article. I hope you learned from this. Especially for those who are entering to the front-end development world. Cheers!</p>
+]]></content>
+  </entry>
+  
+</feed>
